@@ -188,3 +188,8 @@ test-results/
 # Hydra default output dir
 **/multirun
 **/outputs
+
+# Mine
+XML-DOM-1.46.tar.gz
+resources/
+results/

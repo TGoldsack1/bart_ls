@@ -36,8 +36,8 @@ from fairseq.dataclass import ChoiceEnum, FairseqDataclass
 from fairseq.tasks import FairseqTask, register_task
 from fairseq.data.encoders.gpt2_bpe import GPT2BPE, GPT2BPEConfig
 
-# from rouge_score import rouge_scorer
-from summ_eval import rouge_metric
+from rouge_score import rouge_scorer
+# from summ_eval import rouge_metric
 import stanza
 
 logger = logging.getLogger(__name__)
@@ -438,9 +438,14 @@ class SummarizationTask(FairseqTask):
         self.src_dict = src_dict
         self.tgt_dict = tgt_dict
 
+        # bpe_cfg = GPT2BPEConfig(
+        #     gpt2_encoder_json='/datasets01/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/121219/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/encoder.json',
+        #     gpt2_vocab_bpe='/datasets01/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/121219/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/vocab.bpe'
+        # )
+
         bpe_cfg = GPT2BPEConfig(
-            gpt2_encoder_json='/datasets01/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/121219/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/encoder.json',
-            gpt2_vocab_bpe='/datasets01/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/121219/bookwiki_CC-NEWS_openwebtext_stories-mmap2-bin/vocab.bpe'
+            gpt2_encoder_json='/home/acp20tg/bart_ls/fairseq-py/gpt2_bpe/encoder.json',
+            gpt2_vocab_bpe='/home/acp20tg/bart_ls/fairseq-py/gpt2_bpe/vocab.bpe'
         )
         self.bpe = GPT2BPE(bpe_cfg)
 
@@ -644,8 +649,8 @@ class SummarizationTask(FairseqTask):
                     for sentence in doc.sentences
             )
 
-        # scorer = rouge_scorer.RougeScorer(rouge_types=['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
-        scorer = rouge_metric.RougeMetric()
+        scorer = rouge_scorer.RougeScorer(rouge_types=['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)
+        # scorer = rouge_metric.RougeMetric()
         rouge1 = rouge2 = rougel = 0.0
 
         gen_out = self.inference_step(generator, [model], sample, prefix_tokens=None)
@@ -670,16 +675,16 @@ class SummarizationTask(FairseqTask):
         refs = [preprocess(ref) for ref in refs]
         hyps = [preprocess(hyp) for hyp in hyps]
 
-        results = scorer.evaluate_batch(hyps, refs, aggregate=True)
+        # results = scorer.evaluate_batch(hyps, refs, aggregate=True)
 
-        rouge1 += results['rouge']['rouge_1_f_score'] * 100 * len(refs)
-        rouge2 += results['rouge']['rouge_2_f_score'] * 100 * len(refs)
-        rougel += results['rouge']['rouge_l_f_score'] * 100 * len(refs)
+        # rouge1 += results['rouge']['rouge_1_f_score'] * 100 * len(refs)
+        # rouge2 += results['rouge']['rouge_2_f_score'] * 100 * len(refs)
+        # rougel += results['rouge']['rouge_l_f_score'] * 100 * len(refs)
 
-        # for ref, pred in zip(refs, hyps):
-        #     score = scorer.score(ref, pred)
-        #     rouge1 += score['rouge1'].fmeasure
-        #     rouge2 += score['rouge2'].fmeasure
-        #     rougel += score['rougeL'].fmeasure
+        for ref, pred in zip(refs, hyps):
+            score = scorer.score(ref, pred)
+            rouge1 += score['rouge1'].fmeasure
+            rouge2 += score['rouge2'].fmeasure
+            rougel += score['rougeL'].fmeasure
 
         return {'rougel': rougel, 'rouge1': rouge1, 'rouge2': rouge2}

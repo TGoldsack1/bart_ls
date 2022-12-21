@@ -33,6 +33,11 @@ def main(args):
     utils.import_user_module(args)
 
     os.makedirs(args.destdir, exist_ok=True)
+    # try:
+    #     original_umask = os.umask(0)
+    #     os.makedirs(args.destdir, 0o770, exist_ok=True)
+    # finally:
+    #     os.umask(original_umask)
 
     logger.addHandler(
         logging.FileHandler(

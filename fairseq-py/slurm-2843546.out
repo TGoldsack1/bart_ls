@@ -1,0 +1,1247 @@
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | distributed init (rank 0): tcp://localhost:10360
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | distributed init (rank 3): tcp://localhost:10360
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | distributed init (rank 1): tcp://localhost:10360
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | distributed init (rank 2): tcp://localhost:10360
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Added key: store_based_barrier_key:1 to store for rank: 3
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Added key: store_based_barrier_key:1 to store for rank: 1
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Added key: store_based_barrier_key:1 to store for rank: 2
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Added key: store_based_barrier_key:1 to store for rank: 0
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | initialized host gpu-node002.shef.ac.uk as rank 0
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | initialized host gpu-node002.shef.ac.uk as rank 3
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | initialized host gpu-node002.shef.ac.uk as rank 1
+2022-12-21 03:05:40 | INFO | torch.distributed.distributed_c10d | Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+2022-12-21 03:05:40 | INFO | fairseq.distributed.utils | initialized host gpu-node002.shef.ac.uk as rank 2
+2022-12-21 03:05:47 | INFO | fairseq_cli.train | {'_name': None, 'common': {'_name': None, 'no_progress_bar': False, 'log_interval': 10, 'log_format': 'json', 'log_file': None, 'tensorboard_logdir': None, 'wandb_project': None, 'azureml_logging': False, 'seed': 3, 'cpu': False, 'tpu': False, 'bf16': False, 'memory_efficient_bf16': False, 'fp16': True, 'memory_efficient_fp16': True, 'fp16_no_flatten_grads': False, 'fp16_init_scale': 128, 'fp16_scale_window': None, 'fp16_scale_tolerance': 0.0, 'on_cpu_convert_precision': False, 'min_loss_scale': 0.0001, 'threshold_loss_scale': None, 'amp': False, 'amp_batch_retries': 2, 'amp_init_scale': 128, 'amp_scale_window': None, 'user_dir': None, 'empty_cache_freq': 0, 'all_gather_list_size': 16384, 'model_parallel_size': 1, 'quantization_config_path': None, 'profile': False, 'reset_logging': False, 'suppress_crashes': False, 'use_plasma_view': False, 'plasma_path': '/tmp/plasma'}, 'common_eval': {'_name': None, 'path': None, 'post_process': None, 'quiet': False, 'model_overrides': '{}', 'results_path': None}, 'distributed_training': {'_name': None, 'distributed_world_size': 4, 'distributed_num_procs': 4, 'distributed_rank': 0, 'distributed_backend': 'nccl', 'distributed_init_method': 'tcp://localhost:10360', 'distributed_port': -1, 'device_id': 0, 'distributed_no_spawn': False, 'ddp_backend': 'pytorch_ddp', 'ddp_comm_hook': 'none', 'bucket_cap_mb': 25, 'fix_batches_to_gpus': False, 'find_unused_parameters': False, 'gradient_as_bucket_view': False, 'fast_stat_sync': True, 'heartbeat_timeout': -1, 'broadcast_buffers': False, 'slowmo_momentum': None, 'slowmo_algorithm': 'LocalSGD', 'localsgd_frequency': 3, 'nprocs_per_node': 4, 'pipeline_model_parallel': False, 'pipeline_balance': None, 'pipeline_devices': None, 'pipeline_chunks': 0, 'pipeline_encoder_balance': None, 'pipeline_encoder_devices': None, 'pipeline_decoder_balance': None, 'pipeline_decoder_devices': None, 'pipeline_checkpoint': 'never', 'zero_sharding': 'none', 'fp16': True, 'memory_efficient_fp16': True, 'tpu': False, 'no_reshard_after_forward': False, 'fp32_reduce_scatter': False, 'cpu_offload': False, 'use_sharded_state': False}, 'dataset': {'_name': None, 'num_workers': 4, 'skip_invalid_size_inputs_valid_test': True, 'max_tokens': None, 'batch_size': 2, 'required_batch_size_multiple': 8, 'required_seq_len_multiple': 1024, 'dataset_impl': None, 'data_buffer_size': 10, 'train_subset': 'train', 'valid_subset': 'valid', 'combine_valid_subsets': True, 'ignore_unused_valid_subsets': False, 'validate_interval': 1, 'validate_interval_updates': 0, 'validate_after_updates': 0, 'fixed_validation_seed': None, 'disable_validation': False, 'max_tokens_valid': None, 'batch_size_valid': 2, 'max_valid_steps': None, 'curriculum': 0, 'gen_subset': 'test', 'num_shards': 1, 'shard_id': 0}, 'optimization': {'_name': None, 'max_epoch': 50, 'max_update': 0, 'stop_time_hours': 0.0, 'clip_norm': 0.1, 'sentence_avg': False, 'update_freq': [4], 'lr': [0.0001], 'stop_min_lr': -1.0, 'use_bmuf': False}, 'checkpoint': {'_name': None, 'save_dir': 'checkpoints//graph_text', 'restore_file': '../checkpoints/model_100k.pt', 'finetune_from_model': None, 'reset_dataloader': False, 'reset_lr_scheduler': False, 'reset_meters': False, 'reset_optimizer': False, 'optimizer_overrides': '{}', 'save_interval': 1, 'save_interval_updates': 0, 'keep_interval_updates': -1, 'keep_interval_updates_pattern': -1, 'keep_last_epochs': -1, 'keep_best_checkpoints': -1, 'no_save': False, 'no_epoch_checkpoints': True, 'no_last_checkpoints': False, 'no_save_optimizer_state': False, 'best_checkpoint_metric': 'rouge_avg', 'maximize_best_checkpoint_metric': True, 'patience': -1, 'checkpoint_suffix': '', 'checkpoint_shard_count': 1, 'load_checkpoint_on_all_dp_ranks': False, 'write_checkpoints_asynchronously': False, 'model_parallel_size': 1}, 'bmuf': {'_name': None, 'block_lr': 1.0, 'block_momentum': 0.875, 'global_sync_iter': 50, 'warmup_iterations': 500, 'use_nbm': False, 'average_sync': False, 'distributed_world_size': 4}, 'generation': {'_name': None, 'beam': 5, 'nbest': 1, 'max_len_a': 0.0, 'max_len_b': 200, 'min_len': 1, 'match_source_len': False, 'unnormalized': False, 'no_early_stop': False, 'no_beamable_mm': False, 'lenpen': 1.0, 'unkpen': 0.0, 'replace_unk': None, 'sacrebleu': False, 'score_reference': False, 'prefix_size': 0, 'no_repeat_ngram_size': 0, 'sampling': False, 'sampling_topk': -1, 'sampling_topp': -1.0, 'constraints': None, 'temperature': 1.0, 'diverse_beam_groups': -1, 'diverse_beam_strength': 0.5, 'diversity_rate': -1.0, 'print_alignment': None, 'print_step': False, 'lm_path': None, 'lm_weight': 0.0, 'iter_decode_eos_penalty': 0.0, 'iter_decode_max_iter': 10, 'iter_decode_force_max_iter': False, 'iter_decode_with_beam': 1, 'iter_decode_with_external_reranker': False, 'retain_iter_history': False, 'retain_dropout': False, 'retain_dropout_modules': None, 'decoding_format': None, 'no_seed_provided': False}, 'eval_lm': {'_name': None, 'output_word_probs': False, 'output_word_stats': False, 'context_window': 0, 'softmax_batch': 9223372036854775807}, 'interactive': {'_name': None, 'buffer_size': 0, 'input': '-'}, 'model': Namespace(_name='bart_large', activation_fn='gelu', adam_betas='(0.9, 0.98)', adam_eps=1e-08, adaptive_softmax_cutoff=None, adaptive_softmax_dropout=0, all_gather_list_size=16384, amp=False, amp_batch_retries=2, amp_init_scale=128, amp_scale_window=None, arch='bart_large', attention_dropout=0.0, attention_name='block_noglobal', azureml_logging=False, batch_size=2, batch_size_valid=2, best_checkpoint_metric='rouge_avg', bf16=False, block_attention=False, block_size=1024, bpe=None, broadcast_buffers=False, bucket_cap_mb=25, checkpoint_activations=True, checkpoint_shard_count=1, checkpoint_suffix='', clip_norm=0.1, combine_valid_subsets=True, cpu=False, cpu_offload=False, criterion='label_smoothed_cross_entropy', curriculum=0, custom_dict='../checkpoints/dict.txt', data='/home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin', data_buffer_size=10, dataset_impl=None, ddp_backend='pytorch_ddp', ddp_comm_hook='none', decoder_attention_heads=16, decoder_embed_dim=1024, decoder_embed_path=None, decoder_ffn_embed_dim=4096, decoder_input_dim=1024, decoder_layers=12, decoder_learned_pos=True, decoder_normalize_before=False, decoder_output_dim=1024, device_id=0, disable_validation=False, distributed_backend='nccl', distributed_init_method=None, distributed_no_spawn=False, distributed_num_procs=4, distributed_port=-1, distributed_rank=0, distributed_world_size=4, dropout=0.1, dual_graph_encoder=False, ema_decay=0.9999, ema_fp32=False, ema_seed_model=None, ema_start_update=0, ema_update_freq=1, empty_cache_freq=0, encoder_attention_heads=16, encoder_embed_dim=1024, encoder_embed_path=None, encoder_ffn_embed_dim=4096, encoder_layers=12, encoder_learned_pos=True, encoder_normalize_before=False, end_learning_rate=0.0, eos=2, eval_rouge=True, eval_rouge_args='{"beam": 4, "max_len_b": 700, "lenpen": 2.0, "no_repeat_ngram_size": 3, "min_len": 20}', eval_rouge_detok='space', eval_rouge_detok_args='{}', eval_rouge_print_samples=False, eval_rouge_remove_bpe=None, fast_stat_sync=True, find_unused_parameters=False, finetune_from_model=None, fix_batches_to_gpus=False, fixed_validation_seed=None, force_anneal=None, fp16=True, fp16_adam_stats=False, fp16_init_scale=128, fp16_no_flatten_grads=False, fp16_scale_tolerance=0.0, fp16_scale_window=None, fp32_reduce_scatter=False, gen_subset='test', gradient_as_bucket_view=False, heartbeat_timeout=-1, ignore_prefix_size=0, ignore_unused_valid_subsets=False, input_pattern='concat', keep_best_checkpoints=-1, keep_interval_updates=-1, keep_interval_updates_pattern=-1, keep_last_epochs=-1, label_smoothing=0.0, layernorm_embedding=True, left_pad_source=False, left_pad_target=False, load_alignments=False, load_checkpoint_on_all_dp_ranks=False, localsgd_frequency=3, log_file=None, log_format='json', log_interval=10, lr=[0.0001], lr_scheduler='polynomial_decay', max_epoch=50, max_query_positions=50, max_source_positions=16384, max_target_positions=1024, max_tokens=None, max_tokens_valid=None, max_update=0, max_valid_steps=None, maximize_best_checkpoint_metric=True, memory_efficient_bf16=False, memory_efficient_fp16=True, min_loss_scale=0.0001, model_parallel_size=1, no_epoch_checkpoints=True, no_last_checkpoints=False, no_progress_bar=False, no_reshard_after_forward=False, no_save=False, no_save_optimizer_state=False, no_scale_embedding=True, no_seed_provided=False, nprocs_per_node=4, num_batch_buckets=0, num_shards=1, num_workers=4, on_cpu_convert_precision=False, optimizer='adam', optimizer_overrides='{}', pad=1, pad_query=0, patience=-1, pipeline_balance=None, pipeline_checkpoint='never', pipeline_chunks=0, pipeline_decoder_balance=None, pipeline_decoder_devices=None, pipeline_devices=None, pipeline_encoder_balance=None, pipeline_encoder_devices=None, pipeline_model_parallel=False, plasma_path='/tmp/plasma', pooler_activation_fn='tanh', pooler_dropout=0.0, pooling_layers=4, power=1.0, profile=False, quantization_config_path=None, query_based=False, relu_dropout=0.0, report_accuracy=False, required_batch_size_multiple=8, required_seq_len_multiple=1024, reset_dataloader=False, reset_logging=False, reset_lr_scheduler=False, reset_meters=False, reset_optimizer=False, restore_file='../checkpoints/model_100k.pt', restrict_position_embed=False, save_dir='checkpoints//graph_text', save_interval=1, save_interval_updates=0, scoring='bleu', seed=3, sentence_avg=False, shard_id=0, share_all_embeddings=True, share_decoder_input_output_embed=True, skip_invalid_size_inputs_valid_test=True, sliding_window=False, slowmo_algorithm='LocalSGD', slowmo_momentum=None, source_lang='src', stop_min_lr=-1.0, stop_time_hours=0, store_ema=False, suppress_crashes=False, target_lang='tgt', task='summarization', tensorboard_logdir=None, threshold_loss_scale=None, tokenizer=None, top_down=False, total_num_update='10000', tpu=False, train_subset='train', truncate_source=True, truncate_target=True, unk=3, update_freq=[4], upsample_primary=-1, use_bmuf=False, use_old_adam=False, use_plasma_view=False, use_sharded_state=False, use_xformers=True, user_dir=None, valid_subset='valid', validate_after_updates=0, validate_interval=1, validate_interval_updates=0, wandb_project=None, warmup_updates=500, weight_decay=0.0, write_checkpoints_asynchronously=False, zero_sharding='none'), 'task': {'_name': 'summarization', 'data': '/home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin', 'source_lang': 'src', 'target_lang': 'tgt', 'load_alignments': False, 'left_pad_source': False, 'left_pad_target': False, 'max_source_positions': 16384, 'max_target_positions': 1024, 'upsample_primary': -1, 'truncate_source': True, 'truncate_target': True, 'query_lang': 'query', 'query_based': False, 'max_query_positions': 50, 'pad_query': 0, 'input_pattern': 'concat', 'block_size': 1024, 'num_batch_buckets': 0, 'train_subset': 'train', 'dataset_impl': None, 'required_seq_len_multiple': 1024, 'eval_rouge': True, 'eval_rouge_args': '{"beam": 4, "max_len_b": 700, "lenpen": 2.0, "no_repeat_ngram_size": 3, "min_len": 20}', 'eval_rouge_detok': 'space', 'eval_rouge_detok_args': '{}', 'eval_rouge_remove_bpe': None, 'eval_rouge_print_samples': False, 'custom_dict': '../checkpoints/dict.txt'}, 'criterion': {'_name': 'label_smoothed_cross_entropy', 'label_smoothing': 0.0, 'report_accuracy': False, 'ignore_prefix_size': 0, 'sentence_avg': False}, 'optimizer': {'_name': 'adam', 'adam_betas': '(0.9, 0.98)', 'adam_eps': 1e-08, 'weight_decay': 0.0, 'use_old_adam': False, 'fp16_adam_stats': False, 'tpu': False, 'lr': [0.0001]}, 'lr_scheduler': {'_name': 'polynomial_decay', 'warmup_updates': 500, 'force_anneal': None, 'end_learning_rate': 0.0, 'power': 1.0, 'total_num_update': 10000.0, 'lr': [0.0001]}, 'scoring': {'_name': 'bleu', 'pad': 1, 'eos': 2, 'unk': 3}, 'bpe': None, 'tokenizer': None, 'ema': {'_name': None, 'store_ema': False, 'ema_decay': 0.9999, 'ema_start_update': 0, 'ema_seed_model': None, 'ema_update_freq': 1, 'ema_fp32': False}}
+2022-12-21 03:05:48 | INFO | fairseq.tasks.summarization | [src] dictionary: 50606 types
+2022-12-21 03:05:48 | INFO | fairseq.tasks.summarization | [tgt] dictionary: 50606 types
+2022-12-21 03:06:16 | INFO | fairseq_cli.train | BARTModel(
+  (encoder): TransformerEncoderBase(
+    (dropout_module): FairseqDropout()
+    (embed_tokens): Embedding(50606, 1024, padding_idx=1)
+    (embed_positions): LearnedPositionalEmbedding(16386, 1024, padding_idx=1)
+    (layernorm_embedding): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+    (layers): ModuleList(
+      (0): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (1): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (2): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (3): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (4): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (5): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (6): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (7): TransformerEncoderLayerBase(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (8): PoolEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (top_pool): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (top_pool_mask): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (pool_attn): MultiheadAttentionNoProj(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+      )
+      (9): PoolEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (top_pool): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (top_pool_mask): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (pool_attn): MultiheadAttentionNoProj(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+      )
+      (10): PoolEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (top_pool): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (top_pool_mask): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (pool_attn): MultiheadAttentionNoProj(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+      )
+      (11): PoolEncoderLayer(
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (attention): BlockNoglobalAttention(
+            (drop_attn): Dropout(p=0.0, inplace=False)
+          )
+        )
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (dropout_module): FairseqDropout()
+        (activation_dropout_module): FairseqDropout()
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (top_pool): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (top_pool_mask): AvgPool1d(kernel_size=(18,), stride=(12,), padding=(9,))
+        (pool_attn): MultiheadAttentionNoProj(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+      )
+    )
+  )
+  (decoder): TransformerDecoderBase(
+    (dropout_module): FairseqDropout()
+    (embed_tokens): Embedding(50606, 1024, padding_idx=1)
+    (embed_positions): LearnedPositionalEmbedding(1026, 1024, padding_idx=1)
+    (layernorm_embedding): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+    (layers): ModuleList(
+      (0): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (1): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (2): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (3): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (4): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (5): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (6): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (7): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (8): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (9): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (10): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+      (11): TransformerDecoderLayerBase(
+        (dropout_module): FairseqDropout()
+        (self_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (activation_dropout_module): FairseqDropout()
+        (self_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (encoder_attn): MultiheadAttention(
+          (dropout_module): FairseqDropout()
+          (k_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (v_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (q_proj): Linear(in_features=1024, out_features=1024, bias=True)
+          (out_proj): Linear(in_features=1024, out_features=1024, bias=True)
+        )
+        (encoder_attn_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+        (fc1): Linear(in_features=1024, out_features=4096, bias=True)
+        (fc2): Linear(in_features=4096, out_features=1024, bias=True)
+        (final_layer_norm): FusedLayerNorm(torch.Size([1024]), eps=1e-05, elementwise_affine=True)
+      )
+    )
+    (output_projection): Linear(in_features=1024, out_features=50606, bias=False)
+  )
+  (classification_heads): ModuleDict()
+)
+2022-12-21 03:06:16 | INFO | fairseq_cli.train | task: SummarizationTask
+2022-12-21 03:06:16 | INFO | fairseq_cli.train | model: BARTModel
+2022-12-21 03:06:16 | INFO | fairseq_cli.train | criterion: LabelSmoothedCrossEntropyCriterion
+2022-12-21 03:06:16 | INFO | fairseq_cli.train | num. shared model params: 439,162,880 (num. trained: 439,162,880)
+2022-12-21 03:06:16 | INFO | fairseq_cli.train | num. expert model params: 0 (num. trained: 0)
+2022-12-21 03:06:16 | INFO | fairseq.data.data_utils | loaded 1,376 examples from: /home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin/valid.src-tgt.src
+2022-12-21 03:06:16 | INFO | fairseq.data.data_utils | loaded 1,376 examples from: /home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin/valid.src-tgt.tgt
+2022-12-21 03:06:16 | INFO | fairseq.tasks.translation | /home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin valid src-tgt 1376 examples
+2022-12-21 03:06:17 | INFO | torch.distributed.distributed_c10d | Added key: store_based_barrier_key:2 to store for rank: 0
+2022-12-21 03:06:17 | INFO | torch.distributed.distributed_c10d | Rank 0: Completed store-based barrier for key:store_based_barrier_key:2 with 4 nodes.
+2022-12-21 03:06:17 | INFO | fairseq.trainer | detected shared parameter: encoder.embed_tokens.weight <- decoder.embed_tokens.weight
+2022-12-21 03:06:17 | INFO | fairseq.trainer | detected shared parameter: encoder.embed_tokens.weight <- decoder.output_projection.weight
+2022-12-21 03:06:19 | INFO | fairseq.utils | ***********************CUDA enviroments for all 4 workers***********************
+2022-12-21 03:06:19 | INFO | fairseq.utils | rank   0: capabilities =  8.0  ; total memory = 79.210 GB ; name = NVIDIA A100-SXM4-80GB                   
+2022-12-21 03:06:19 | INFO | fairseq.utils | rank   1: capabilities =  8.0  ; total memory = 79.210 GB ; name = NVIDIA A100-SXM4-80GB                   
+2022-12-21 03:06:19 | INFO | fairseq.utils | rank   2: capabilities =  8.0  ; total memory = 79.210 GB ; name = NVIDIA A100-SXM4-80GB                   
+2022-12-21 03:06:19 | INFO | fairseq.utils | rank   3: capabilities =  8.0  ; total memory = 79.210 GB ; name = NVIDIA A100-SXM4-80GB                   
+2022-12-21 03:06:19 | INFO | fairseq.utils | ***********************CUDA enviroments for all 4 workers***********************
+2022-12-21 03:06:19 | INFO | fairseq_cli.train | training on 4 devices (GPUs/TPUs)
+2022-12-21 03:06:19 | INFO | fairseq_cli.train | max tokens per device = None and max sentences per device = 2
+2022-12-21 03:06:19 | INFO | fairseq.trainer | Preparing to load checkpoint ../checkpoints/model_100k.pt
+2022-12-21 03:06:48 | INFO | fairseq.optim.adam | using FusedAdam
+2022-12-21 03:06:48 | INFO | fairseq.trainer | Loaded checkpoint ../checkpoints/model_100k.pt (epoch 1 @ 0 updates)
+2022-12-21 03:06:48 | INFO | fairseq.trainer | loading train data for epoch 1
+2022-12-21 03:06:51 | INFO | fairseq.data.data_utils | loaded 24,773 examples from: /home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin/train.src-tgt.src
+2022-12-21 03:06:51 | INFO | fairseq.data.data_utils | loaded 24,773 examples from: /home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin/train.src-tgt.tgt
+2022-12-21 03:06:51 | INFO | fairseq.tasks.translation | /home/acp20tg/bart_ls/resources/PLOS_fs-graph_text-bin train src-tgt 24773 examples
+2022-12-21 03:06:51 | INFO | fairseq.trainer | begin training epoch 1
+2022-12-21 03:06:51 | INFO | fairseq_cli.train | Start iterating over samples
+/home/acp20tg/.conda/envs/bart-ls/lib/python3.8/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+/home/acp20tg/.conda/envs/bart-ls/lib/python3.8/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+/home/acp20tg/.conda/envs/bart-ls/lib/python3.8/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+/home/acp20tg/.conda/envs/bart-ls/lib/python3.8/site-packages/torch/utils/data/dataloader.py:563: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(_create_warning_msg(
+2022-12-21 03:07:49 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 64.0
+2022-12-21 03:07:49 | INFO | torch.nn.parallel.distributed | Reducer buckets have been rebuilt in this iteration.
+2022-12-21 03:07:56 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 32.0
+2022-12-21 03:08:03 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 16.0
+2022-12-21 03:08:10 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 8.0
+2022-12-21 03:08:17 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 4.0
+2022-12-21 03:08:24 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 2.0
+2022-12-21 03:08:47 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 1.0
+2022-12-21 03:08:54 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 0.5
+2022-12-21 03:09:51 | INFO | train_inner | {"epoch": 1, "update": 0.023, "loss": "3.734", "nll_loss": "3.734", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "13.31", "wps": "856.7", "ups": "0.11", "wpb": "7523.3", "bsz": "32", "num_updates": "10", "lr": "2e-06", "gnorm": "22.353", "clip": "100", "loss_scale": "0.5", "train_wall": "128", "gb_free": "62.9", "wall": "212"}
+2022-12-21 03:11:01 | INFO | train_inner | {"epoch": 1, "update": 0.036, "loss": "3.633", "nll_loss": "3.633", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "12.4", "wps": "1077.9", "ups": "0.14", "wpb": "7556.6", "bsz": "32", "num_updates": "20", "lr": "4e-06", "gnorm": "18.393", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63.6", "wall": "282"}
+2022-12-21 03:12:10 | INFO | train_inner | {"epoch": 1, "update": 0.049, "loss": "3.357", "nll_loss": "3.357", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "10.24", "wps": "1105.8", "ups": "0.14", "wpb": "7680.6", "bsz": "32", "num_updates": "30", "lr": "6e-06", "gnorm": "8.262", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.9", "wall": "351"}
+2022-12-21 03:13:19 | INFO | train_inner | {"epoch": 1, "update": 0.062, "loss": "3.229", "nll_loss": "3.229", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "9.38", "wps": "1109.2", "ups": "0.15", "wpb": "7610.3", "bsz": "32", "num_updates": "40", "lr": "8e-06", "gnorm": "4.185", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "65", "wall": "420"}
+2022-12-21 03:14:30 | INFO | train_inner | {"epoch": 1, "update": 0.075, "loss": "3.058", "nll_loss": "3.058", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "8.33", "wps": "1095.2", "ups": "0.14", "wpb": "7724.1", "bsz": "32", "num_updates": "50", "lr": "1e-05", "gnorm": "3.503", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "490"}
+2022-12-21 03:15:40 | INFO | train_inner | {"epoch": 1, "update": 0.088, "loss": "3.01", "nll_loss": "3.01", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "8.05", "wps": "1046.9", "ups": "0.14", "wpb": "7393.1", "bsz": "32", "num_updates": "60", "lr": "1.2e-05", "gnorm": "2.907", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "561"}
+2022-12-21 03:15:54 | INFO | fairseq.trainer | NOTE: gradient overflow detected, ignoring gradient, setting loss scale to: 0.25
+2022-12-21 03:16:59 | INFO | train_inner | {"epoch": 1, "update": 0.102, "loss": "2.977", "nll_loss": "2.977", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.87", "wps": "985.2", "ups": "0.13", "wpb": "7789", "bsz": "32", "num_updates": "70", "lr": "1.4e-05", "gnorm": "2.944", "clip": "100", "loss_scale": "0.25", "train_wall": "79", "gb_free": "62.9", "wall": "640"}
+2022-12-21 03:18:12 | INFO | train_inner | {"epoch": 1, "update": 0.115, "loss": "2.958", "nll_loss": "2.958", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.77", "wps": "1043.8", "ups": "0.14", "wpb": "7551.4", "bsz": "32", "num_updates": "80", "lr": "1.6e-05", "gnorm": "2.285", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "65", "wall": "712"}
+2022-12-21 03:19:23 | INFO | train_inner | {"epoch": 1, "update": 0.128, "loss": "2.931", "nll_loss": "2.931", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.62", "wps": "1042.4", "ups": "0.14", "wpb": "7415", "bsz": "32", "num_updates": "90", "lr": "1.8e-05", "gnorm": "2.213", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "65", "wall": "784"}
+2022-12-21 03:20:33 | INFO | train_inner | {"epoch": 1, "update": 0.141, "loss": "2.927", "nll_loss": "2.927", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.6", "wps": "1078.3", "ups": "0.14", "wpb": "7623", "bsz": "32", "num_updates": "100", "lr": "2e-05", "gnorm": "2.845", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "854"}
+2022-12-21 03:21:44 | INFO | train_inner | {"epoch": 1, "update": 0.154, "loss": "2.943", "nll_loss": "2.943", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.69", "wps": "1084.5", "ups": "0.14", "wpb": "7616.3", "bsz": "32", "num_updates": "110", "lr": "2.2e-05", "gnorm": "2.322", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "63.6", "wall": "925"}
+2022-12-21 03:22:55 | INFO | train_inner | {"epoch": 1, "update": 0.166, "loss": "2.916", "nll_loss": "2.916", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.55", "wps": "1052.9", "ups": "0.14", "wpb": "7544", "bsz": "32", "num_updates": "120", "lr": "2.4e-05", "gnorm": "2.27", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.2", "wall": "996"}
+2022-12-21 03:24:06 | INFO | train_inner | {"epoch": 1, "update": 0.179, "loss": "2.896", "nll_loss": "2.896", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.44", "wps": "1089.2", "ups": "0.14", "wpb": "7654.6", "bsz": "32", "num_updates": "130", "lr": "2.6e-05", "gnorm": "2.097", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "1066"}
+2022-12-21 03:25:16 | INFO | train_inner | {"epoch": 1, "update": 0.192, "loss": "2.873", "nll_loss": "2.873", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.32", "wps": "1070.2", "ups": "0.14", "wpb": "7536.7", "bsz": "32", "num_updates": "140", "lr": "2.8e-05", "gnorm": "2.257", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "63.6", "wall": "1137"}
+2022-12-21 03:26:26 | INFO | train_inner | {"epoch": 1, "update": 0.205, "loss": "2.858", "nll_loss": "2.858", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.25", "wps": "1092", "ups": "0.14", "wpb": "7592.3", "bsz": "32", "num_updates": "150", "lr": "3e-05", "gnorm": "2.555", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63.6", "wall": "1206"}
+2022-12-21 03:27:35 | INFO | train_inner | {"epoch": 1, "update": 0.218, "loss": "2.952", "nll_loss": "2.952", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.74", "wps": "1097.2", "ups": "0.14", "wpb": "7648", "bsz": "32", "num_updates": "160", "lr": "3.2e-05", "gnorm": "2.164", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "1276"}
+2022-12-21 03:28:45 | INFO | train_inner | {"epoch": 1, "update": 0.231, "loss": "2.862", "nll_loss": "2.862", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.27", "wps": "1126.9", "ups": "0.14", "wpb": "7842.5", "bsz": "32", "num_updates": "170", "lr": "3.4e-05", "gnorm": "1.929", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63.6", "wall": "1346"}
+2022-12-21 03:29:56 | INFO | train_inner | {"epoch": 1, "update": 0.244, "loss": "2.793", "nll_loss": "2.793", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.93", "wps": "1087.7", "ups": "0.14", "wpb": "7679.3", "bsz": "32", "num_updates": "180", "lr": "3.6e-05", "gnorm": "1.91", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.9", "wall": "1416"}
+2022-12-21 03:31:07 | INFO | train_inner | {"epoch": 1, "update": 0.257, "loss": "2.881", "nll_loss": "2.881", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.37", "wps": "1054.3", "ups": "0.14", "wpb": "7572.8", "bsz": "32", "num_updates": "190", "lr": "3.8e-05", "gnorm": "2.014", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "62.2", "wall": "1488"}
+2022-12-21 03:32:20 | INFO | train_inner | {"epoch": 1, "update": 0.27, "loss": "2.786", "nll_loss": "2.786", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.9", "wps": "1052.4", "ups": "0.14", "wpb": "7598.7", "bsz": "32", "num_updates": "200", "lr": "4e-05", "gnorm": "2.004", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "64.4", "wall": "1560"}
+2022-12-21 03:33:30 | INFO | train_inner | {"epoch": 1, "update": 0.283, "loss": "2.924", "nll_loss": "2.924", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.59", "wps": "1074.3", "ups": "0.14", "wpb": "7510.2", "bsz": "32", "num_updates": "210", "lr": "4.2e-05", "gnorm": "2.814", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "65", "wall": "1630"}
+2022-12-21 03:34:41 | INFO | train_inner | {"epoch": 1, "update": 0.295, "loss": "2.906", "nll_loss": "2.906", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.49", "wps": "1062.4", "ups": "0.14", "wpb": "7563.3", "bsz": "32", "num_updates": "220", "lr": "4.4e-05", "gnorm": "2.243", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.9", "wall": "1702"}
+2022-12-21 03:35:51 | INFO | train_inner | {"epoch": 1, "update": 0.308, "loss": "2.809", "nll_loss": "2.809", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.01", "wps": "1076.2", "ups": "0.14", "wpb": "7585", "bsz": "32", "num_updates": "230", "lr": "4.6e-05", "gnorm": "2.127", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "63", "wall": "1772"}
+2022-12-21 03:37:03 | INFO | train_inner | {"epoch": 1, "update": 0.321, "loss": "2.856", "nll_loss": "2.856", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.24", "wps": "1077.1", "ups": "0.14", "wpb": "7726.2", "bsz": "31.9", "num_updates": "240", "lr": "4.8e-05", "gnorm": "2.475", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.2", "wall": "1844"}
+2022-12-21 03:38:12 | INFO | train_inner | {"epoch": 1, "update": 0.334, "loss": "2.874", "nll_loss": "2.874", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.33", "wps": "1107.3", "ups": "0.15", "wpb": "7618.4", "bsz": "32", "num_updates": "250", "lr": "5e-05", "gnorm": "2.401", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "1913"}
+2022-12-21 03:39:21 | INFO | train_inner | {"epoch": 1, "update": 0.347, "loss": "2.83", "nll_loss": "2.83", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.11", "wps": "1099.4", "ups": "0.14", "wpb": "7596.6", "bsz": "32", "num_updates": "260", "lr": "5.2e-05", "gnorm": "1.872", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "1982"}
+2022-12-21 03:40:32 | INFO | train_inner | {"epoch": 1, "update": 0.36, "loss": "2.837", "nll_loss": "2.837", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.15", "wps": "1069.3", "ups": "0.14", "wpb": "7563.3", "bsz": "32", "num_updates": "270", "lr": "5.4e-05", "gnorm": "2.74", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "2053"}
+2022-12-21 03:41:44 | INFO | train_inner | {"epoch": 1, "update": 0.373, "loss": "2.894", "nll_loss": "2.894", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.43", "wps": "1069.7", "ups": "0.14", "wpb": "7690.5", "bsz": "32", "num_updates": "280", "lr": "5.6e-05", "gnorm": "1.93", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "63", "wall": "2124"}
+2022-12-21 03:42:56 | INFO | train_inner | {"epoch": 1, "update": 0.386, "loss": "2.859", "nll_loss": "2.859", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.26", "wps": "1053.2", "ups": "0.14", "wpb": "7575.5", "bsz": "32", "num_updates": "290", "lr": "5.8e-05", "gnorm": "1.918", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "66.3", "wall": "2196"}
+2022-12-21 03:44:06 | INFO | train_inner | {"epoch": 1, "update": 0.399, "loss": "2.837", "nll_loss": "2.837", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.15", "wps": "1100.4", "ups": "0.14", "wpb": "7729.2", "bsz": "32", "num_updates": "300", "lr": "6e-05", "gnorm": "1.721", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "64.3", "wall": "2267"}
+2022-12-21 03:45:15 | INFO | train_inner | {"epoch": 1, "update": 0.412, "loss": "2.817", "nll_loss": "2.817", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.05", "wps": "1086.4", "ups": "0.14", "wpb": "7497.3", "bsz": "32", "num_updates": "310", "lr": "6.2e-05", "gnorm": "1.791", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "2336"}
+2022-12-21 03:46:24 | INFO | train_inner | {"epoch": 1, "update": 0.425, "loss": "2.862", "nll_loss": "2.862", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.27", "wps": "1096.4", "ups": "0.14", "wpb": "7589.9", "bsz": "32", "num_updates": "320", "lr": "6.4e-05", "gnorm": "1.829", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "2405"}
+2022-12-21 03:47:32 | INFO | train_inner | {"epoch": 1, "update": 0.437, "loss": "2.797", "nll_loss": "2.797", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.95", "wps": "1123.1", "ups": "0.15", "wpb": "7651.1", "bsz": "32", "num_updates": "330", "lr": "6.6e-05", "gnorm": "1.795", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "63.6", "wall": "2473"}
+2022-12-21 03:48:41 | INFO | train_inner | {"epoch": 1, "update": 0.45, "loss": "2.853", "nll_loss": "2.853", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.23", "wps": "1118.7", "ups": "0.15", "wpb": "7655", "bsz": "32", "num_updates": "340", "lr": "6.8e-05", "gnorm": "1.739", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "62.2", "wall": "2542"}
+2022-12-21 03:49:48 | INFO | train_inner | {"epoch": 1, "update": 0.463, "loss": "2.837", "nll_loss": "2.837", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.14", "wps": "1142.7", "ups": "0.15", "wpb": "7726.4", "bsz": "32", "num_updates": "350", "lr": "7e-05", "gnorm": "1.685", "clip": "100", "loss_scale": "0.25", "train_wall": "67", "gb_free": "64.4", "wall": "2609"}
+2022-12-21 03:51:00 | INFO | train_inner | {"epoch": 1, "update": 0.476, "loss": "2.929", "nll_loss": "2.929", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.62", "wps": "1055.8", "ups": "0.14", "wpb": "7516", "bsz": "32", "num_updates": "360", "lr": "7.2e-05", "gnorm": "1.747", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.2", "wall": "2680"}
+2022-12-21 03:52:09 | INFO | train_inner | {"epoch": 1, "update": 0.489, "loss": "2.891", "nll_loss": "2.891", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.42", "wps": "1102.1", "ups": "0.14", "wpb": "7636.9", "bsz": "32", "num_updates": "370", "lr": "7.4e-05", "gnorm": "1.838", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63.6", "wall": "2750"}
+2022-12-21 03:53:17 | INFO | train_inner | {"epoch": 1, "update": 0.502, "loss": "2.802", "nll_loss": "2.802", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.97", "wps": "1125.1", "ups": "0.15", "wpb": "7647.7", "bsz": "32", "num_updates": "380", "lr": "7.6e-05", "gnorm": "1.861", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "62.2", "wall": "2818"}
+2022-12-21 03:54:28 | INFO | train_inner | {"epoch": 1, "update": 0.515, "loss": "2.858", "nll_loss": "2.858", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.25", "wps": "1079.4", "ups": "0.14", "wpb": "7655", "bsz": "32", "num_updates": "390", "lr": "7.8e-05", "gnorm": "1.768", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "63.6", "wall": "2889"}
+2022-12-21 03:55:37 | INFO | train_inner | {"epoch": 1, "update": 0.528, "loss": "2.848", "nll_loss": "2.848", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.2", "wps": "1120.2", "ups": "0.15", "wpb": "7708.4", "bsz": "32", "num_updates": "400", "lr": "8e-05", "gnorm": "1.953", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "62.2", "wall": "2957"}
+2022-12-21 03:56:43 | INFO | train_inner | {"epoch": 1, "update": 0.541, "loss": "2.851", "nll_loss": "2.851", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.22", "wps": "1110", "ups": "0.15", "wpb": "7408.5", "bsz": "32", "num_updates": "410", "lr": "8.2e-05", "gnorm": "1.844", "clip": "100", "loss_scale": "0.25", "train_wall": "66", "gb_free": "64.3", "wall": "3024"}
+2022-12-21 03:57:54 | INFO | train_inner | {"epoch": 1, "update": 0.554, "loss": "2.804", "nll_loss": "2.804", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.99", "wps": "1080.6", "ups": "0.14", "wpb": "7578.1", "bsz": "32", "num_updates": "420", "lr": "8.4e-05", "gnorm": "1.705", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "3094"}
+2022-12-21 03:59:06 | INFO | train_inner | {"epoch": 1, "update": 0.566, "loss": "2.833", "nll_loss": "2.833", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.12", "wps": "1058.8", "ups": "0.14", "wpb": "7650.6", "bsz": "32", "num_updates": "430", "lr": "8.6e-05", "gnorm": "1.766", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "65.6", "wall": "3167"}
+2022-12-21 04:00:15 | INFO | train_inner | {"epoch": 1, "update": 0.579, "loss": "2.84", "nll_loss": "2.84", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.16", "wps": "1090.2", "ups": "0.14", "wpb": "7556.8", "bsz": "32", "num_updates": "440", "lr": "8.8e-05", "gnorm": "1.738", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "3236"}
+2022-12-21 04:01:27 | INFO | train_inner | {"epoch": 1, "update": 0.592, "loss": "2.877", "nll_loss": "2.877", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.34", "wps": "1051.1", "ups": "0.14", "wpb": "7587.2", "bsz": "32", "num_updates": "450", "lr": "9e-05", "gnorm": "1.777", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "65.6", "wall": "3308"}
+2022-12-21 04:02:37 | INFO | train_inner | {"epoch": 1, "update": 0.605, "loss": "2.867", "nll_loss": "2.867", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.29", "wps": "1102.3", "ups": "0.14", "wpb": "7680.1", "bsz": "32", "num_updates": "460", "lr": "9.2e-05", "gnorm": "1.959", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.9", "wall": "3378"}
+2022-12-21 04:03:47 | INFO | train_inner | {"epoch": 1, "update": 0.618, "loss": "2.87", "nll_loss": "2.87", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.31", "wps": "1118.6", "ups": "0.14", "wpb": "7795.5", "bsz": "32", "num_updates": "470", "lr": "9.4e-05", "gnorm": "1.732", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "65", "wall": "3448"}
+2022-12-21 04:04:57 | INFO | train_inner | {"epoch": 1, "update": 0.631, "loss": "2.853", "nll_loss": "2.853", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.23", "wps": "1103.3", "ups": "0.14", "wpb": "7723.1", "bsz": "32", "num_updates": "480", "lr": "9.6e-05", "gnorm": "1.804", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "65", "wall": "3518"}
+2022-12-21 04:06:06 | INFO | train_inner | {"epoch": 1, "update": 0.644, "loss": "2.862", "nll_loss": "2.862", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.27", "wps": "1101.2", "ups": "0.14", "wpb": "7668", "bsz": "32", "num_updates": "490", "lr": "9.8e-05", "gnorm": "1.672", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "64.3", "wall": "3587"}
+2022-12-21 04:07:18 | INFO | train_inner | {"epoch": 1, "update": 0.657, "loss": "2.928", "nll_loss": "2.928", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.61", "wps": "1090.8", "ups": "0.14", "wpb": "7791.9", "bsz": "32", "num_updates": "500", "lr": "0.0001", "gnorm": "1.737", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.9", "wall": "3659"}
+2022-12-21 04:08:26 | INFO | train_inner | {"epoch": 1, "update": 0.67, "loss": "2.875", "nll_loss": "2.875", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.34", "wps": "1106.4", "ups": "0.15", "wpb": "7509.8", "bsz": "32", "num_updates": "510", "lr": "9.98947e-05", "gnorm": "1.679", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "62.2", "wall": "3727"}
+2022-12-21 04:09:36 | INFO | train_inner | {"epoch": 1, "update": 0.683, "loss": "2.905", "nll_loss": "2.905", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.49", "wps": "1087.2", "ups": "0.14", "wpb": "7646.7", "bsz": "32", "num_updates": "520", "lr": "9.97895e-05", "gnorm": "3.217", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "63", "wall": "3797"}
+2022-12-21 04:10:48 | INFO | train_inner | {"epoch": 1, "update": 0.695, "loss": "2.883", "nll_loss": "2.883", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.38", "wps": "1059", "ups": "0.14", "wpb": "7614", "bsz": "32", "num_updates": "530", "lr": "9.96842e-05", "gnorm": "1.683", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "63.6", "wall": "3869"}
+2022-12-21 04:11:55 | INFO | train_inner | {"epoch": 1, "update": 0.708, "loss": "2.92", "nll_loss": "2.92", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.57", "wps": "1123.6", "ups": "0.15", "wpb": "7560", "bsz": "32", "num_updates": "540", "lr": "9.95789e-05", "gnorm": "1.702", "clip": "100", "loss_scale": "0.25", "train_wall": "67", "gb_free": "62.2", "wall": "3936"}
+2022-12-21 04:13:06 | INFO | train_inner | {"epoch": 1, "update": 0.721, "loss": "2.867", "nll_loss": "2.867", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.29", "wps": "1069.5", "ups": "0.14", "wpb": "7581.7", "bsz": "32", "num_updates": "550", "lr": "9.94737e-05", "gnorm": "1.678", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "4007"}
+2022-12-21 04:14:19 | INFO | train_inner | {"epoch": 1, "update": 0.734, "loss": "2.88", "nll_loss": "2.88", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.36", "wps": "1059.2", "ups": "0.14", "wpb": "7735.9", "bsz": "32", "num_updates": "560", "lr": "9.93684e-05", "gnorm": "1.642", "clip": "100", "loss_scale": "0.25", "train_wall": "73", "gb_free": "64.3", "wall": "4080"}
+2022-12-21 04:15:29 | INFO | train_inner | {"epoch": 1, "update": 0.747, "loss": "2.893", "nll_loss": "2.893", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.43", "wps": "1081.6", "ups": "0.14", "wpb": "7559.6", "bsz": "32", "num_updates": "570", "lr": "9.92632e-05", "gnorm": "1.694", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "63", "wall": "4150"}
+2022-12-21 04:16:41 | INFO | train_inner | {"epoch": 1, "update": 0.76, "loss": "2.836", "nll_loss": "2.836", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.14", "wps": "1053.4", "ups": "0.14", "wpb": "7587.2", "bsz": "32", "num_updates": "580", "lr": "9.91579e-05", "gnorm": "1.76", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "62.2", "wall": "4222"}
+2022-12-21 04:17:51 | INFO | train_inner | {"epoch": 1, "update": 0.773, "loss": "2.841", "nll_loss": "2.841", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.17", "wps": "1100.4", "ups": "0.14", "wpb": "7656.4", "bsz": "32", "num_updates": "590", "lr": "9.90526e-05", "gnorm": "1.549", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.9", "wall": "4292"}
+2022-12-21 04:18:57 | INFO | train_inner | {"epoch": 1, "update": 0.786, "loss": "2.878", "nll_loss": "2.878", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.35", "wps": "1133.5", "ups": "0.15", "wpb": "7542.4", "bsz": "32", "num_updates": "600", "lr": "9.89474e-05", "gnorm": "1.653", "clip": "100", "loss_scale": "0.25", "train_wall": "66", "gb_free": "66.3", "wall": "4358"}
+2022-12-21 04:20:07 | INFO | train_inner | {"epoch": 1, "update": 0.799, "loss": "2.848", "nll_loss": "2.848", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.2", "wps": "1102.1", "ups": "0.14", "wpb": "7718.3", "bsz": "32", "num_updates": "610", "lr": "9.88421e-05", "gnorm": "1.655", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "4428"}
+2022-12-21 04:21:20 | INFO | train_inner | {"epoch": 1, "update": 0.812, "loss": "2.932", "nll_loss": "2.932", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.63", "wps": "1049.8", "ups": "0.14", "wpb": "7584.1", "bsz": "32", "num_updates": "620", "lr": "9.87368e-05", "gnorm": "1.606", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "64.4", "wall": "4501"}
+2022-12-21 04:22:29 | INFO | train_inner | {"epoch": 1, "update": 0.825, "loss": "2.906", "nll_loss": "2.906", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.5", "wps": "1086.4", "ups": "0.15", "wpb": "7485.2", "bsz": "32", "num_updates": "630", "lr": "9.86316e-05", "gnorm": "1.593", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.9", "wall": "4569"}
+2022-12-21 04:23:40 | INFO | train_inner | {"epoch": 1, "update": 0.837, "loss": "2.894", "nll_loss": "2.894", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.43", "wps": "1057.8", "ups": "0.14", "wpb": "7595.1", "bsz": "32", "num_updates": "640", "lr": "9.85263e-05", "gnorm": "1.58", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.2", "wall": "4641"}
+2022-12-21 04:24:56 | INFO | train_inner | {"epoch": 1, "update": 0.85, "loss": "2.906", "nll_loss": "2.906", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.5", "wps": "1010", "ups": "0.13", "wpb": "7614", "bsz": "32", "num_updates": "650", "lr": "9.84211e-05", "gnorm": "1.563", "clip": "100", "loss_scale": "0.25", "train_wall": "75", "gb_free": "62.9", "wall": "4717"}
+2022-12-21 04:26:06 | INFO | train_inner | {"epoch": 1, "update": 0.863, "loss": "2.81", "nll_loss": "2.81", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.01", "wps": "1083.7", "ups": "0.14", "wpb": "7584.4", "bsz": "32", "num_updates": "660", "lr": "9.83158e-05", "gnorm": "1.525", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "4787"}
+2022-12-21 04:27:17 | INFO | train_inner | {"epoch": 1, "update": 0.876, "loss": "2.802", "nll_loss": "2.802", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.97", "wps": "1065.5", "ups": "0.14", "wpb": "7567.6", "bsz": "32", "num_updates": "670", "lr": "9.82105e-05", "gnorm": "1.548", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.9", "wall": "4858"}
+2022-12-21 04:28:26 | INFO | train_inner | {"epoch": 1, "update": 0.889, "loss": "2.864", "nll_loss": "2.864", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.28", "wps": "1118.4", "ups": "0.15", "wpb": "7699.3", "bsz": "32", "num_updates": "680", "lr": "9.81053e-05", "gnorm": "1.535", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "4927"}
+2022-12-21 04:29:38 | INFO | train_inner | {"epoch": 1, "update": 0.902, "loss": "2.8", "nll_loss": "2.8", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.97", "wps": "1085", "ups": "0.14", "wpb": "7802.4", "bsz": "32", "num_updates": "690", "lr": "9.8e-05", "gnorm": "1.554", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "63", "wall": "4998"}
+2022-12-21 04:30:48 | INFO | train_inner | {"epoch": 1, "update": 0.915, "loss": "2.924", "nll_loss": "2.924", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.59", "wps": "1090.4", "ups": "0.14", "wpb": "7662.4", "bsz": "32", "num_updates": "700", "lr": "9.78947e-05", "gnorm": "1.627", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.9", "wall": "5069"}
+2022-12-21 04:31:57 | INFO | train_inner | {"epoch": 1, "update": 0.928, "loss": "2.875", "nll_loss": "2.875", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.34", "wps": "1116.8", "ups": "0.15", "wpb": "7662.4", "bsz": "32", "num_updates": "710", "lr": "9.77895e-05", "gnorm": "1.636", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "63.7", "wall": "5137"}
+2022-12-21 04:33:06 | INFO | train_inner | {"epoch": 1, "update": 0.941, "loss": "2.851", "nll_loss": "2.851", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.22", "wps": "1085.3", "ups": "0.15", "wpb": "7480.3", "bsz": "32", "num_updates": "720", "lr": "9.76842e-05", "gnorm": "1.636", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "5206"}
+2022-12-21 04:34:15 | INFO | train_inner | {"epoch": 1, "update": 0.954, "loss": "2.862", "nll_loss": "2.862", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.27", "wps": "1111.7", "ups": "0.14", "wpb": "7689.3", "bsz": "32", "num_updates": "730", "lr": "9.75789e-05", "gnorm": "2.01", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.9", "wall": "5276"}
+2022-12-21 04:35:26 | INFO | train_inner | {"epoch": 1, "update": 0.966, "loss": "2.821", "nll_loss": "2.821", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.07", "wps": "1071.9", "ups": "0.14", "wpb": "7658.3", "bsz": "32", "num_updates": "740", "lr": "9.74737e-05", "gnorm": "2.135", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.2", "wall": "5347"}
+2022-12-21 04:36:38 | INFO | train_inner | {"epoch": 1, "update": 0.979, "loss": "2.909", "nll_loss": "2.909", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.51", "wps": "1077", "ups": "0.14", "wpb": "7762.4", "bsz": "32", "num_updates": "750", "lr": "9.73684e-05", "gnorm": "2.244", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "62.2", "wall": "5419"}
+2022-12-21 04:37:48 | INFO | train_inner | {"epoch": 1, "update": 0.992, "loss": "2.86", "nll_loss": "2.86", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.26", "wps": "1092.8", "ups": "0.14", "wpb": "7651.4", "bsz": "32", "num_updates": "760", "lr": "9.72632e-05", "gnorm": "3.967", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "63.6", "wall": "5489"}
+2022-12-21 04:38:29 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2022-12-21 04:39:14 | INFO | absl | Using default tokenizer.
+2022-12-21 04:39:41 | INFO | absl | Using default tokenizer.
+2022-12-21 04:40:05 | INFO | absl | Using default tokenizer.
+2022-12-21 04:40:21 | INFO | absl | Using default tokenizer.
+2022-12-21 04:40:43 | INFO | absl | Using default tokenizer.
+2022-12-21 04:41:12 | INFO | absl | Using default tokenizer.
+2022-12-21 04:41:39 | INFO | absl | Using default tokenizer.
+2022-12-21 04:42:04 | INFO | absl | Using default tokenizer.
+2022-12-21 04:42:36 | INFO | absl | Using default tokenizer.
+2022-12-21 04:43:16 | INFO | absl | Using default tokenizer.
+2022-12-21 04:43:46 | INFO | absl | Using default tokenizer.
+2022-12-21 04:44:15 | INFO | absl | Using default tokenizer.
+2022-12-21 04:44:44 | INFO | absl | Using default tokenizer.
+2022-12-21 04:45:14 | INFO | absl | Using default tokenizer.
+2022-12-21 04:45:35 | INFO | absl | Using default tokenizer.
+2022-12-21 04:46:15 | INFO | absl | Using default tokenizer.
+2022-12-21 04:46:40 | INFO | absl | Using default tokenizer.
+2022-12-21 04:47:04 | INFO | absl | Using default tokenizer.
+2022-12-21 04:47:36 | INFO | absl | Using default tokenizer.
+2022-12-21 04:48:01 | INFO | absl | Using default tokenizer.
+2022-12-21 04:48:29 | INFO | absl | Using default tokenizer.
+2022-12-21 04:48:57 | INFO | absl | Using default tokenizer.
+2022-12-21 04:49:26 | INFO | absl | Using default tokenizer.
+2022-12-21 04:49:56 | INFO | absl | Using default tokenizer.
+2022-12-21 04:50:25 | INFO | absl | Using default tokenizer.
+2022-12-21 04:50:59 | INFO | absl | Using default tokenizer.
+2022-12-21 04:51:25 | INFO | absl | Using default tokenizer.
+2022-12-21 04:51:45 | INFO | absl | Using default tokenizer.
+2022-12-21 04:52:14 | INFO | absl | Using default tokenizer.
+2022-12-21 04:52:38 | INFO | absl | Using default tokenizer.
+2022-12-21 04:53:06 | INFO | absl | Using default tokenizer.
+2022-12-21 04:53:32 | INFO | absl | Using default tokenizer.
+2022-12-21 04:54:06 | INFO | absl | Using default tokenizer.
+2022-12-21 04:54:28 | INFO | absl | Using default tokenizer.
+2022-12-21 04:54:54 | INFO | absl | Using default tokenizer.
+2022-12-21 04:55:21 | INFO | absl | Using default tokenizer.
+2022-12-21 04:55:51 | INFO | absl | Using default tokenizer.
+2022-12-21 04:56:20 | INFO | absl | Using default tokenizer.
+2022-12-21 04:57:01 | INFO | absl | Using default tokenizer.
+2022-12-21 04:57:22 | INFO | absl | Using default tokenizer.
+2022-12-21 04:57:55 | INFO | absl | Using default tokenizer.
+2022-12-21 04:58:21 | INFO | absl | Using default tokenizer.
+2022-12-21 04:58:53 | INFO | absl | Using default tokenizer.
+2022-12-21 04:59:15 | INFO | absl | Using default tokenizer.
+2022-12-21 04:59:46 | INFO | absl | Using default tokenizer.
+2022-12-21 05:00:27 | INFO | absl | Using default tokenizer.
+2022-12-21 05:00:58 | INFO | absl | Using default tokenizer.
+2022-12-21 05:01:28 | INFO | absl | Using default tokenizer.
+2022-12-21 05:01:58 | INFO | absl | Using default tokenizer.
+2022-12-21 05:02:31 | INFO | absl | Using default tokenizer.
+2022-12-21 05:02:59 | INFO | absl | Using default tokenizer.
+2022-12-21 05:03:33 | INFO | absl | Using default tokenizer.
+2022-12-21 05:03:59 | INFO | absl | Using default tokenizer.
+2022-12-21 05:04:29 | INFO | absl | Using default tokenizer.
+2022-12-21 05:04:58 | INFO | absl | Using default tokenizer.
+2022-12-21 05:05:24 | INFO | absl | Using default tokenizer.
+2022-12-21 05:05:47 | INFO | absl | Using default tokenizer.
+2022-12-21 05:06:16 | INFO | absl | Using default tokenizer.
+2022-12-21 05:06:54 | INFO | absl | Using default tokenizer.
+2022-12-21 05:07:23 | INFO | absl | Using default tokenizer.
+2022-12-21 05:07:51 | INFO | absl | Using default tokenizer.
+2022-12-21 05:08:20 | INFO | absl | Using default tokenizer.
+2022-12-21 05:08:50 | INFO | absl | Using default tokenizer.
+2022-12-21 05:09:26 | INFO | absl | Using default tokenizer.
+2022-12-21 05:09:52 | INFO | absl | Using default tokenizer.
+2022-12-21 05:10:20 | INFO | absl | Using default tokenizer.
+2022-12-21 05:10:44 | INFO | absl | Using default tokenizer.
+2022-12-21 05:11:12 | INFO | absl | Using default tokenizer.
+2022-12-21 05:11:42 | INFO | absl | Using default tokenizer.
+2022-12-21 05:12:11 | INFO | absl | Using default tokenizer.
+2022-12-21 05:12:40 | INFO | absl | Using default tokenizer.
+2022-12-21 05:13:21 | INFO | absl | Using default tokenizer.
+2022-12-21 05:13:45 | INFO | absl | Using default tokenizer.
+2022-12-21 05:14:08 | INFO | absl | Using default tokenizer.
+2022-12-21 05:14:37 | INFO | absl | Using default tokenizer.
+2022-12-21 05:15:04 | INFO | absl | Using default tokenizer.
+2022-12-21 05:15:34 | INFO | absl | Using default tokenizer.
+2022-12-21 05:16:00 | INFO | absl | Using default tokenizer.
+2022-12-21 05:16:22 | INFO | absl | Using default tokenizer.
+2022-12-21 05:16:56 | INFO | absl | Using default tokenizer.
+2022-12-21 05:17:28 | INFO | absl | Using default tokenizer.
+2022-12-21 05:17:53 | INFO | absl | Using default tokenizer.
+2022-12-21 05:18:23 | INFO | absl | Using default tokenizer.
+2022-12-21 05:18:49 | INFO | absl | Using default tokenizer.
+2022-12-21 05:19:19 | INFO | absl | Using default tokenizer.
+2022-12-21 05:19:43 | INFO | absl | Using default tokenizer.
+2022-12-21 05:20:12 | INFO | absl | Using default tokenizer.
+2022-12-21 05:20:37 | INFO | absl | Using default tokenizer.
+2022-12-21 05:21:08 | INFO | absl | Using default tokenizer.
+2022-12-21 05:21:34 | INFO | absl | Using default tokenizer.
+2022-12-21 05:22:05 | INFO | absl | Using default tokenizer.
+2022-12-21 05:22:40 | INFO | absl | Using default tokenizer.
+2022-12-21 05:23:22 | INFO | absl | Using default tokenizer.
+2022-12-21 05:23:58 | INFO | absl | Using default tokenizer.
+2022-12-21 05:24:30 | INFO | absl | Using default tokenizer.
+2022-12-21 05:24:57 | INFO | absl | Using default tokenizer.
+2022-12-21 05:25:23 | INFO | absl | Using default tokenizer.
+2022-12-21 05:25:51 | INFO | absl | Using default tokenizer.
+2022-12-21 05:26:18 | INFO | absl | Using default tokenizer.
+2022-12-21 05:26:49 | INFO | absl | Using default tokenizer.
+2022-12-21 05:27:30 | INFO | absl | Using default tokenizer.
+2022-12-21 05:27:59 | INFO | absl | Using default tokenizer.
+2022-12-21 05:28:29 | INFO | absl | Using default tokenizer.
+2022-12-21 05:29:00 | INFO | absl | Using default tokenizer.
+2022-12-21 05:29:27 | INFO | absl | Using default tokenizer.
+2022-12-21 05:29:54 | INFO | absl | Using default tokenizer.
+2022-12-21 05:30:26 | INFO | absl | Using default tokenizer.
+2022-12-21 05:30:59 | INFO | absl | Using default tokenizer.
+2022-12-21 05:31:26 | INFO | absl | Using default tokenizer.
+2022-12-21 05:31:50 | INFO | absl | Using default tokenizer.
+2022-12-21 05:32:33 | INFO | absl | Using default tokenizer.
+2022-12-21 05:33:01 | INFO | absl | Using default tokenizer.
+2022-12-21 05:33:37 | INFO | absl | Using default tokenizer.
+2022-12-21 05:34:05 | INFO | absl | Using default tokenizer.
+2022-12-21 05:34:38 | INFO | absl | Using default tokenizer.
+2022-12-21 05:35:04 | INFO | absl | Using default tokenizer.
+2022-12-21 05:35:32 | INFO | absl | Using default tokenizer.
+2022-12-21 05:36:16 | INFO | absl | Using default tokenizer.
+2022-12-21 05:36:43 | INFO | absl | Using default tokenizer.
+2022-12-21 05:37:09 | INFO | absl | Using default tokenizer.
+2022-12-21 05:37:42 | INFO | absl | Using default tokenizer.
+2022-12-21 05:38:11 | INFO | absl | Using default tokenizer.
+2022-12-21 05:38:38 | INFO | absl | Using default tokenizer.
+2022-12-21 05:39:09 | INFO | absl | Using default tokenizer.
+2022-12-21 05:39:36 | INFO | absl | Using default tokenizer.
+2022-12-21 05:40:06 | INFO | absl | Using default tokenizer.
+2022-12-21 05:40:36 | INFO | absl | Using default tokenizer.
+2022-12-21 05:40:58 | INFO | absl | Using default tokenizer.
+2022-12-21 05:41:24 | INFO | absl | Using default tokenizer.
+2022-12-21 05:41:51 | INFO | absl | Using default tokenizer.
+2022-12-21 05:42:21 | INFO | absl | Using default tokenizer.
+2022-12-21 05:43:05 | INFO | absl | Using default tokenizer.
+2022-12-21 05:43:43 | INFO | absl | Using default tokenizer.
+2022-12-21 05:44:10 | INFO | absl | Using default tokenizer.
+2022-12-21 05:44:39 | INFO | absl | Using default tokenizer.
+2022-12-21 05:45:10 | INFO | absl | Using default tokenizer.
+2022-12-21 05:45:42 | INFO | absl | Using default tokenizer.
+2022-12-21 05:46:08 | INFO | absl | Using default tokenizer.
+2022-12-21 05:46:39 | INFO | absl | Using default tokenizer.
+2022-12-21 05:47:08 | INFO | absl | Using default tokenizer.
+2022-12-21 05:47:40 | INFO | absl | Using default tokenizer.
+2022-12-21 05:48:12 | INFO | absl | Using default tokenizer.
+2022-12-21 05:48:37 | INFO | absl | Using default tokenizer.
+2022-12-21 05:49:00 | INFO | absl | Using default tokenizer.
+2022-12-21 05:49:28 | INFO | absl | Using default tokenizer.
+2022-12-21 05:49:55 | INFO | absl | Using default tokenizer.
+2022-12-21 05:50:28 | INFO | absl | Using default tokenizer.
+2022-12-21 05:50:54 | INFO | absl | Using default tokenizer.
+2022-12-21 05:51:27 | INFO | absl | Using default tokenizer.
+2022-12-21 05:52:00 | INFO | absl | Using default tokenizer.
+2022-12-21 05:52:29 | INFO | absl | Using default tokenizer.
+2022-12-21 05:53:03 | INFO | absl | Using default tokenizer.
+2022-12-21 05:53:38 | INFO | absl | Using default tokenizer.
+2022-12-21 05:54:07 | INFO | absl | Using default tokenizer.
+2022-12-21 05:54:37 | INFO | absl | Using default tokenizer.
+2022-12-21 05:55:05 | INFO | absl | Using default tokenizer.
+2022-12-21 05:55:38 | INFO | absl | Using default tokenizer.
+2022-12-21 05:56:10 | INFO | absl | Using default tokenizer.
+2022-12-21 05:56:50 | INFO | absl | Using default tokenizer.
+2022-12-21 05:57:13 | INFO | absl | Using default tokenizer.
+2022-12-21 05:57:45 | INFO | absl | Using default tokenizer.
+2022-12-21 05:58:26 | INFO | absl | Using default tokenizer.
+2022-12-21 05:59:04 | INFO | absl | Using default tokenizer.
+2022-12-21 05:59:41 | INFO | absl | Using default tokenizer.
+2022-12-21 06:00:14 | INFO | absl | Using default tokenizer.
+2022-12-21 06:00:42 | INFO | absl | Using default tokenizer.
+2022-12-21 06:01:23 | INFO | absl | Using default tokenizer.
+2022-12-21 06:01:55 | INFO | absl | Using default tokenizer.
+2022-12-21 06:02:35 | INFO | absl | Using default tokenizer.
+2022-12-21 06:03:10 | INFO | absl | Using default tokenizer.
+2022-12-21 06:03:47 | INFO | absl | Using default tokenizer.
+2022-12-21 06:04:20 | INFO | absl | Using default tokenizer.
+2022-12-21 06:04:52 | INFO | valid | {"epoch": 1, "valid_loss": "2.791", "valid_nll_loss": "2.791", "valid_rouge1": 0.4918037802661674, "valid_rouge2": 0.18482278590991047, "valid_rougel": 0.2666913408940627, "valid_rouge_avg": 0.33831328308803893, "valid_ppl": "6.92", "valid_wps": "63.8", "valid_wpb": "1907.8", "valid_bsz": "8", "valid_num_updates": "766"}
+2022-12-21 06:04:52 | INFO | fairseq.checkpoint_utils | Preparing to save checkpoint for epoch 1 @ 766 updates
+2022-12-21 06:04:52 | INFO | fairseq.trainer | Saving checkpoint to checkpoints//graph_text/checkpoint_best.pt
+2022-12-21 06:05:16 | INFO | fairseq.trainer | Finished saving checkpoint to checkpoints//graph_text/checkpoint_best.pt
+2022-12-21 06:05:49 | INFO | fairseq.checkpoint_utils | Saved checkpoint checkpoints//graph_text/checkpoint_best.pt (epoch 1 @ 766 updates, score 0.33831328308803893) (writing took 56.58597280899994 seconds)
+2022-12-21 06:05:49 | INFO | fairseq_cli.train | end of epoch 1 (average epoch stats below)
+2022-12-21 06:05:49 | INFO | train | {"epoch": 1, "train_loss": "2.905", "train_nll_loss": "2.905", "train_rouge1": 0.0, "train_rouge2": 0.0, "train_rougel": 0.0, "train_rouge_avg": 0.0, "train_ppl": "7.49", "train_wps": "547.7", "train_ups": "0.07", "train_wpb": "7615.2", "train_bsz": "32", "train_num_updates": "766", "train_lr": "9.72e-05", "train_gnorm": "2.587", "train_clip": "100", "train_loss_scale": "0.25", "train_train_wall": "5419", "train_gb_free": "63.7", "train_wall": "10769"}
+2022-12-21 06:05:49 | INFO | fairseq.trainer | begin training epoch 2
+2022-12-21 06:05:49 | INFO | fairseq_cli.train | Start iterating over samples
+2022-12-21 06:06:52 | INFO | train_inner | {"epoch": 2, "update": 1.005, "loss": "2.718", "nll_loss": "2.718", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.58", "wps": "13.5", "ups": "0", "wpb": "7191.8", "bsz": "29.4", "num_updates": "770", "lr": "9.71579e-05", "gnorm": "1.741", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63.7", "wall": "10833"}
+2022-12-21 06:08:03 | INFO | train_inner | {"epoch": 2, "update": 1.018, "loss": "2.738", "nll_loss": "2.738", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.67", "wps": "1096", "ups": "0.14", "wpb": "7692.8", "bsz": "32", "num_updates": "780", "lr": "9.70526e-05", "gnorm": "1.637", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "65.6", "wall": "10903"}
+2022-12-21 06:09:13 | INFO | train_inner | {"epoch": 2, "update": 1.031, "loss": "2.729", "nll_loss": "2.729", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.63", "wps": "1075.4", "ups": "0.14", "wpb": "7551.3", "bsz": "32", "num_updates": "790", "lr": "9.69474e-05", "gnorm": "1.883", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.2", "wall": "10974"}
+2022-12-21 06:10:22 | INFO | train_inner | {"epoch": 2, "update": 1.044, "loss": "2.718", "nll_loss": "2.718", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.58", "wps": "1110.6", "ups": "0.14", "wpb": "7724.3", "bsz": "32", "num_updates": "800", "lr": "9.68421e-05", "gnorm": "1.833", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "66.3", "wall": "11043"}
+2022-12-21 06:11:32 | INFO | train_inner | {"epoch": 2, "update": 1.057, "loss": "2.619", "nll_loss": "2.619", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.14", "wps": "1125.5", "ups": "0.14", "wpb": "7790.7", "bsz": "32", "num_updates": "810", "lr": "9.67368e-05", "gnorm": "2.964", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "11112"}
+2022-12-21 06:12:40 | INFO | train_inner | {"epoch": 2, "update": 1.07, "loss": "2.848", "nll_loss": "2.848", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "7.2", "wps": "1124.2", "ups": "0.15", "wpb": "7674.9", "bsz": "32", "num_updates": "820", "lr": "9.66316e-05", "gnorm": "12.588", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "62.9", "wall": "11181"}
+2022-12-21 06:13:49 | INFO | train_inner | {"epoch": 2, "update": 1.083, "loss": "2.658", "nll_loss": "2.658", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.31", "wps": "1104.3", "ups": "0.14", "wpb": "7655.7", "bsz": "32", "num_updates": "830", "lr": "9.65263e-05", "gnorm": "3.991", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "65.6", "wall": "11250"}
+2022-12-21 06:15:00 | INFO | train_inner | {"epoch": 2, "update": 1.095, "loss": "2.693", "nll_loss": "2.693", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.47", "wps": "1055.2", "ups": "0.14", "wpb": "7476.8", "bsz": "32", "num_updates": "840", "lr": "9.64211e-05", "gnorm": "2.715", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "63", "wall": "11321"}
+2022-12-21 06:16:10 | INFO | train_inner | {"epoch": 2, "update": 1.108, "loss": "2.645", "nll_loss": "2.645", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.25", "wps": "1093.3", "ups": "0.14", "wpb": "7669.1", "bsz": "32", "num_updates": "850", "lr": "9.63158e-05", "gnorm": "2.041", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "64.3", "wall": "11391"}
+2022-12-21 06:17:19 | INFO | train_inner | {"epoch": 2, "update": 1.121, "loss": "2.672", "nll_loss": "2.672", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.38", "wps": "1092.3", "ups": "0.14", "wpb": "7541.2", "bsz": "32", "num_updates": "860", "lr": "9.62105e-05", "gnorm": "1.851", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "11460"}
+2022-12-21 06:18:29 | INFO | train_inner | {"epoch": 2, "update": 1.134, "loss": "2.633", "nll_loss": "2.633", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.2", "wps": "1082.3", "ups": "0.14", "wpb": "7516.1", "bsz": "32", "num_updates": "870", "lr": "9.61053e-05", "gnorm": "2.237", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.9", "wall": "11530"}
+2022-12-21 06:19:41 | INFO | train_inner | {"epoch": 2, "update": 1.147, "loss": "2.668", "nll_loss": "2.668", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.35", "wps": "1043.9", "ups": "0.14", "wpb": "7506.1", "bsz": "32", "num_updates": "880", "lr": "9.6e-05", "gnorm": "3.114", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "65.6", "wall": "11602"}
+2022-12-21 06:20:52 | INFO | train_inner | {"epoch": 2, "update": 1.16, "loss": "2.686", "nll_loss": "2.686", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.43", "wps": "1067.6", "ups": "0.14", "wpb": "7546", "bsz": "32", "num_updates": "890", "lr": "9.58947e-05", "gnorm": "2.572", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "62.9", "wall": "11672"}
+2022-12-21 06:22:01 | INFO | train_inner | {"epoch": 2, "update": 1.173, "loss": "2.666", "nll_loss": "2.666", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.34", "wps": "1107.8", "ups": "0.14", "wpb": "7706.9", "bsz": "32", "num_updates": "900", "lr": "9.57895e-05", "gnorm": "2.738", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63", "wall": "11742"}
+2022-12-21 06:23:09 | INFO | train_inner | {"epoch": 2, "update": 1.186, "loss": "2.723", "nll_loss": "2.723", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.6", "wps": "1112.6", "ups": "0.15", "wpb": "7541.9", "bsz": "32", "num_updates": "910", "lr": "9.56842e-05", "gnorm": "1.732", "clip": "100", "loss_scale": "0.25", "train_wall": "67", "gb_free": "65.6", "wall": "11810"}
+2022-12-21 06:24:19 | INFO | train_inner | {"epoch": 2, "update": 1.199, "loss": "2.725", "nll_loss": "2.725", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.61", "wps": "1088.6", "ups": "0.14", "wpb": "7570.1", "bsz": "32", "num_updates": "920", "lr": "9.55789e-05", "gnorm": "1.651", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "65", "wall": "11879"}
+2022-12-21 06:25:28 | INFO | train_inner | {"epoch": 2, "update": 1.212, "loss": "2.622", "nll_loss": "2.622", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.16", "wps": "1110.8", "ups": "0.14", "wpb": "7731.3", "bsz": "32", "num_updates": "930", "lr": "9.54737e-05", "gnorm": "1.862", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.9", "wall": "11949"}
+2022-12-21 06:26:37 | INFO | train_inner | {"epoch": 2, "update": 1.225, "loss": "2.697", "nll_loss": "2.697", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.49", "wps": "1095.3", "ups": "0.14", "wpb": "7590.4", "bsz": "32", "num_updates": "940", "lr": "9.53684e-05", "gnorm": "1.744", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63.6", "wall": "12018"}
+2022-12-21 06:27:49 | INFO | train_inner | {"epoch": 2, "update": 1.237, "loss": "2.652", "nll_loss": "2.652", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.29", "wps": "1081.2", "ups": "0.14", "wpb": "7739.4", "bsz": "32", "num_updates": "950", "lr": "9.52632e-05", "gnorm": "1.642", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.9", "wall": "12090"}
+2022-12-21 06:28:58 | INFO | train_inner | {"epoch": 2, "update": 1.25, "loss": "2.682", "nll_loss": "2.682", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.42", "wps": "1118.6", "ups": "0.14", "wpb": "7762.7", "bsz": "32", "num_updates": "960", "lr": "9.51579e-05", "gnorm": "1.625", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63", "wall": "12159"}
+2022-12-21 06:30:07 | INFO | train_inner | {"epoch": 2, "update": 1.263, "loss": "2.702", "nll_loss": "2.702", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.51", "wps": "1119.9", "ups": "0.15", "wpb": "7714.9", "bsz": "32", "num_updates": "970", "lr": "9.50526e-05", "gnorm": "1.623", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "12228"}
+2022-12-21 06:31:16 | INFO | train_inner | {"epoch": 2, "update": 1.276, "loss": "2.689", "nll_loss": "2.689", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.45", "wps": "1093.3", "ups": "0.15", "wpb": "7489.3", "bsz": "32", "num_updates": "980", "lr": "9.49474e-05", "gnorm": "2.546", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "63.6", "wall": "12297"}
+2022-12-21 06:32:28 | INFO | train_inner | {"epoch": 2, "update": 1.289, "loss": "2.628", "nll_loss": "2.628", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.18", "wps": "1044.6", "ups": "0.14", "wpb": "7545.3", "bsz": "32", "num_updates": "990", "lr": "9.48421e-05", "gnorm": "1.583", "clip": "100", "loss_scale": "0.25", "train_wall": "72", "gb_free": "62.9", "wall": "12369"}
+2022-12-21 06:33:39 | INFO | train_inner | {"epoch": 2, "update": 1.302, "loss": "2.686", "nll_loss": "2.686", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.44", "wps": "1102.6", "ups": "0.14", "wpb": "7828.2", "bsz": "32", "num_updates": "1000", "lr": "9.47368e-05", "gnorm": "1.606", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "62.2", "wall": "12440"}
+2022-12-21 06:34:48 | INFO | train_inner | {"epoch": 2, "update": 1.315, "loss": "2.643", "nll_loss": "2.643", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.25", "wps": "1095.9", "ups": "0.15", "wpb": "7526.7", "bsz": "32", "num_updates": "1010", "lr": "9.46316e-05", "gnorm": "1.945", "clip": "100", "loss_scale": "0.25", "train_wall": "68", "gb_free": "62.2", "wall": "12509"}
+2022-12-21 06:35:57 | INFO | train_inner | {"epoch": 2, "update": 1.328, "loss": "2.594", "nll_loss": "2.594", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.04", "wps": "1076.1", "ups": "0.14", "wpb": "7471.6", "bsz": "32", "num_updates": "1020", "lr": "9.45263e-05", "gnorm": "1.788", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "63", "wall": "12578"}
+2022-12-21 06:37:10 | INFO | train_inner | {"epoch": 2, "update": 1.341, "loss": "2.658", "nll_loss": "2.658", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.31", "wps": "1042.8", "ups": "0.14", "wpb": "7617.9", "bsz": "32", "num_updates": "1030", "lr": "9.44211e-05", "gnorm": "1.973", "clip": "100", "loss_scale": "0.25", "train_wall": "73", "gb_free": "64.3", "wall": "12651"}
+2022-12-21 06:38:21 | INFO | train_inner | {"epoch": 2, "update": 1.354, "loss": "2.629", "nll_loss": "2.629", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.18", "wps": "1083.7", "ups": "0.14", "wpb": "7696.9", "bsz": "32", "num_updates": "1040", "lr": "9.43158e-05", "gnorm": "1.467", "clip": "100", "loss_scale": "0.25", "train_wall": "71", "gb_free": "63.6", "wall": "12722"}
+2022-12-21 06:39:30 | INFO | train_inner | {"epoch": 2, "update": 1.366, "loss": "2.668", "nll_loss": "2.668", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.35", "wps": "1104.8", "ups": "0.15", "wpb": "7605.1", "bsz": "32", "num_updates": "1050", "lr": "9.42105e-05", "gnorm": "2.381", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.2", "wall": "12791"}
+2022-12-21 06:40:38 | INFO | train_inner | {"epoch": 2, "update": 1.379, "loss": "2.678", "nll_loss": "2.678", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.4", "wps": "1121.4", "ups": "0.15", "wpb": "7555.9", "bsz": "32", "num_updates": "1060", "lr": "9.41053e-05", "gnorm": "1.508", "clip": "100", "loss_scale": "0.25", "train_wall": "67", "gb_free": "64.3", "wall": "12859"}
+2022-12-21 06:41:48 | INFO | train_inner | {"epoch": 2, "update": 1.392, "loss": "2.675", "nll_loss": "2.675", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.38", "wps": "1088.9", "ups": "0.14", "wpb": "7658", "bsz": "32", "num_updates": "1070", "lr": "9.4e-05", "gnorm": "1.456", "clip": "100", "loss_scale": "0.25", "train_wall": "70", "gb_free": "64.3", "wall": "12929"}
+2022-12-21 06:42:57 | INFO | train_inner | {"epoch": 2, "update": 1.405, "loss": "2.664", "nll_loss": "2.664", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.34", "wps": "1104", "ups": "0.15", "wpb": "7609.3", "bsz": "32", "num_updates": "1080", "lr": "9.38947e-05", "gnorm": "1.712", "clip": "100", "loss_scale": "0.25", "train_wall": "69", "gb_free": "62.9", "wall": "12998"}
+2022-12-21 06:44:08 | INFO | train_inner | {"epoch": 2, "update": 1.418, "loss": "2.688", "nll_loss": "2.688", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.44", "wps": "1065.9", "ups": "0.14", "wpb": "7565.7", "bsz": "32", "num_updates": "1090", "lr": "9.37895e-05", "gnorm": "1.472", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "66.3", "wall": "13069"}
+2022-12-21 06:45:20 | INFO | train_inner | {"epoch": 2, "update": 1.431, "loss": "2.652", "nll_loss": "2.652", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.29", "wps": "1071.1", "ups": "0.14", "wpb": "7709.3", "bsz": "32", "num_updates": "1100", "lr": "9.36842e-05", "gnorm": "1.567", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "62.9", "wall": "13141"}
+2022-12-21 06:46:30 | INFO | train_inner | {"epoch": 2, "update": 1.444, "loss": "2.718", "nll_loss": "2.718", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.58", "wps": "1080.8", "ups": "0.14", "wpb": "7589.8", "bsz": "32", "num_updates": "1110", "lr": "9.35789e-05", "gnorm": "1.501", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "13211"}
+2022-12-21 06:47:44 | INFO | train_inner | {"epoch": 2, "update": 1.457, "loss": "2.643", "nll_loss": "2.643", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.25", "wps": "1065.5", "ups": "0.14", "wpb": "7844.6", "bsz": "32", "num_updates": "1120", "lr": "9.34737e-05", "gnorm": "2.613", "clip": "100", "loss_scale": "0.5", "train_wall": "73", "gb_free": "64.3", "wall": "13285"}
+2022-12-21 06:48:53 | INFO | train_inner | {"epoch": 2, "update": 1.47, "loss": "2.653", "nll_loss": "2.653", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.29", "wps": "1109.7", "ups": "0.14", "wpb": "7683.5", "bsz": "32", "num_updates": "1130", "lr": "9.33684e-05", "gnorm": "1.47", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "64.3", "wall": "13354"}
+2022-12-21 06:50:02 | INFO | train_inner | {"epoch": 2, "update": 1.483, "loss": "2.652", "nll_loss": "2.652", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.29", "wps": "1099.5", "ups": "0.14", "wpb": "7596.7", "bsz": "32", "num_updates": "1140", "lr": "9.32632e-05", "gnorm": "1.445", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "66.4", "wall": "13423"}
+2022-12-21 06:51:12 | INFO | train_inner | {"epoch": 2, "update": 1.495, "loss": "2.731", "nll_loss": "2.731", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.64", "wps": "1076.8", "ups": "0.14", "wpb": "7547.3", "bsz": "32", "num_updates": "1150", "lr": "9.31579e-05", "gnorm": "1.55", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63.6", "wall": "13493"}
+2022-12-21 06:52:23 | INFO | train_inner | {"epoch": 2, "update": 1.508, "loss": "2.701", "nll_loss": "2.701", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.5", "wps": "1057.4", "ups": "0.14", "wpb": "7476.3", "bsz": "32", "num_updates": "1160", "lr": "9.30526e-05", "gnorm": "1.464", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "64.3", "wall": "13564"}
+2022-12-21 06:53:34 | INFO | train_inner | {"epoch": 2, "update": 1.521, "loss": "2.678", "nll_loss": "2.678", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.4", "wps": "1073.8", "ups": "0.14", "wpb": "7567.3", "bsz": "32", "num_updates": "1170", "lr": "9.29474e-05", "gnorm": "1.576", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63.6", "wall": "13634"}
+2022-12-21 06:54:48 | INFO | train_inner | {"epoch": 2, "update": 1.534, "loss": "2.701", "nll_loss": "2.701", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.5", "wps": "1019.3", "ups": "0.13", "wpb": "7563.6", "bsz": "32", "num_updates": "1180", "lr": "9.28421e-05", "gnorm": "1.61", "clip": "100", "loss_scale": "0.5", "train_wall": "74", "gb_free": "63", "wall": "13709"}
+2022-12-21 06:55:59 | INFO | train_inner | {"epoch": 2, "update": 1.547, "loss": "2.72", "nll_loss": "2.72", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.59", "wps": "1065.2", "ups": "0.14", "wpb": "7591.5", "bsz": "32", "num_updates": "1190", "lr": "9.27368e-05", "gnorm": "1.501", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "63.7", "wall": "13780"}
+2022-12-21 06:57:10 | INFO | train_inner | {"epoch": 2, "update": 1.56, "loss": "2.701", "nll_loss": "2.701", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.5", "wps": "1073.3", "ups": "0.14", "wpb": "7587.3", "bsz": "32", "num_updates": "1200", "lr": "9.26316e-05", "gnorm": "1.441", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "13851"}
+2022-12-21 06:58:20 | INFO | train_inner | {"epoch": 2, "update": 1.573, "loss": "2.685", "nll_loss": "2.685", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.43", "wps": "1097", "ups": "0.14", "wpb": "7747.1", "bsz": "32", "num_updates": "1210", "lr": "9.25263e-05", "gnorm": "1.462", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "67", "wall": "13921"}
+2022-12-21 06:59:31 | INFO | train_inner | {"epoch": 2, "update": 1.586, "loss": "2.674", "nll_loss": "2.674", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.38", "wps": "1095.2", "ups": "0.14", "wpb": "7701.9", "bsz": "32", "num_updates": "1220", "lr": "9.24211e-05", "gnorm": "1.433", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "64.3", "wall": "13992"}
+2022-12-21 07:00:42 | INFO | train_inner | {"epoch": 2, "update": 1.599, "loss": "2.672", "nll_loss": "2.672", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.37", "wps": "1101.3", "ups": "0.14", "wpb": "7783.9", "bsz": "32", "num_updates": "1230", "lr": "9.23158e-05", "gnorm": "1.373", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.9", "wall": "14062"}
+2022-12-21 07:01:52 | INFO | train_inner | {"epoch": 2, "update": 1.612, "loss": "2.692", "nll_loss": "2.692", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.46", "wps": "1072.2", "ups": "0.14", "wpb": "7590.7", "bsz": "32", "num_updates": "1240", "lr": "9.22105e-05", "gnorm": "1.401", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "64.3", "wall": "14133"}
+2022-12-21 07:03:05 | INFO | train_inner | {"epoch": 2, "update": 1.625, "loss": "2.615", "nll_loss": "2.615", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.12", "wps": "1073.2", "ups": "0.14", "wpb": "7819.2", "bsz": "32", "num_updates": "1250", "lr": "9.21053e-05", "gnorm": "1.381", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "62.2", "wall": "14206"}
+2022-12-21 07:04:15 | INFO | train_inner | {"epoch": 2, "update": 1.637, "loss": "2.623", "nll_loss": "2.623", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.16", "wps": "1115.2", "ups": "0.14", "wpb": "7765.1", "bsz": "32", "num_updates": "1260", "lr": "9.2e-05", "gnorm": "1.437", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "63", "wall": "14276"}
+2022-12-21 07:05:26 | INFO | train_inner | {"epoch": 2, "update": 1.65, "loss": "2.668", "nll_loss": "2.668", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.36", "wps": "1073.2", "ups": "0.14", "wpb": "7641.5", "bsz": "32", "num_updates": "1270", "lr": "9.18947e-05", "gnorm": "1.419", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "62.2", "wall": "14347"}
+2022-12-21 07:06:35 | INFO | train_inner | {"epoch": 2, "update": 1.663, "loss": "2.604", "nll_loss": "2.604", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.08", "wps": "1094.6", "ups": "0.14", "wpb": "7569.4", "bsz": "32", "num_updates": "1280", "lr": "9.17895e-05", "gnorm": "1.397", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.2", "wall": "14416"}
+2022-12-21 07:07:46 | INFO | train_inner | {"epoch": 2, "update": 1.676, "loss": "2.673", "nll_loss": "2.673", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.38", "wps": "1063.1", "ups": "0.14", "wpb": "7473.7", "bsz": "32", "num_updates": "1290", "lr": "9.16842e-05", "gnorm": "1.503", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63", "wall": "14486"}
+2022-12-21 07:08:54 | INFO | train_inner | {"epoch": 2, "update": 1.689, "loss": "2.601", "nll_loss": "2.601", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.06", "wps": "1114.7", "ups": "0.15", "wpb": "7675.8", "bsz": "32", "num_updates": "1300", "lr": "9.15789e-05", "gnorm": "1.673", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "65", "wall": "14555"}
+2022-12-21 07:10:05 | INFO | train_inner | {"epoch": 2, "update": 1.702, "loss": "2.615", "nll_loss": "2.615", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.13", "wps": "1069.4", "ups": "0.14", "wpb": "7577.1", "bsz": "32", "num_updates": "1310", "lr": "9.14737e-05", "gnorm": "1.48", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "64.3", "wall": "14626"}
+2022-12-21 07:11:18 | INFO | train_inner | {"epoch": 2, "update": 1.715, "loss": "2.65", "nll_loss": "2.65", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.28", "wps": "1059", "ups": "0.14", "wpb": "7681.4", "bsz": "31.9", "num_updates": "1320", "lr": "9.13684e-05", "gnorm": "1.41", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "64.3", "wall": "14699"}
+2022-12-21 07:12:29 | INFO | train_inner | {"epoch": 2, "update": 1.728, "loss": "2.696", "nll_loss": "2.696", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.48", "wps": "1070.9", "ups": "0.14", "wpb": "7572.3", "bsz": "32", "num_updates": "1330", "lr": "9.12632e-05", "gnorm": "1.506", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63", "wall": "14769"}
+2022-12-21 07:13:38 | INFO | train_inner | {"epoch": 2, "update": 1.741, "loss": "2.622", "nll_loss": "2.622", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.16", "wps": "1106.6", "ups": "0.14", "wpb": "7722.9", "bsz": "32", "num_updates": "1340", "lr": "9.11579e-05", "gnorm": "1.408", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "64.3", "wall": "14839"}
+2022-12-21 07:14:49 | INFO | train_inner | {"epoch": 2, "update": 1.754, "loss": "2.642", "nll_loss": "2.642", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.24", "wps": "1072.1", "ups": "0.14", "wpb": "7561.2", "bsz": "32", "num_updates": "1350", "lr": "9.10526e-05", "gnorm": "1.381", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63", "wall": "14910"}
+2022-12-21 07:15:56 | INFO | train_inner | {"epoch": 2, "update": 1.766, "loss": "2.656", "nll_loss": "2.656", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.3", "wps": "1125.3", "ups": "0.15", "wpb": "7493", "bsz": "32", "num_updates": "1360", "lr": "9.09474e-05", "gnorm": "1.407", "clip": "100", "loss_scale": "0.5", "train_wall": "66", "gb_free": "63.6", "wall": "14976"}
+2022-12-21 07:17:06 | INFO | train_inner | {"epoch": 2, "update": 1.779, "loss": "2.648", "nll_loss": "2.648", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.27", "wps": "1087.2", "ups": "0.14", "wpb": "7655", "bsz": "32", "num_updates": "1370", "lr": "9.08421e-05", "gnorm": "1.397", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "15047"}
+2022-12-21 07:18:17 | INFO | train_inner | {"epoch": 2, "update": 1.792, "loss": "2.662", "nll_loss": "2.662", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.33", "wps": "1063.3", "ups": "0.14", "wpb": "7523.4", "bsz": "32", "num_updates": "1380", "lr": "9.07368e-05", "gnorm": "1.394", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "15118"}
+2022-12-21 07:19:28 | INFO | train_inner | {"epoch": 2, "update": 1.805, "loss": "2.631", "nll_loss": "2.631", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.2", "wps": "1073.1", "ups": "0.14", "wpb": "7673.9", "bsz": "32", "num_updates": "1390", "lr": "9.06316e-05", "gnorm": "1.679", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "63", "wall": "15189"}
+2022-12-21 07:20:39 | INFO | train_inner | {"epoch": 2, "update": 1.818, "loss": "2.683", "nll_loss": "2.683", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.42", "wps": "1089.9", "ups": "0.14", "wpb": "7677.4", "bsz": "32", "num_updates": "1400", "lr": "9.05263e-05", "gnorm": "1.419", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63.6", "wall": "15260"}
+2022-12-21 07:21:49 | INFO | train_inner | {"epoch": 2, "update": 1.831, "loss": "2.598", "nll_loss": "2.598", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.05", "wps": "1088.8", "ups": "0.14", "wpb": "7659.9", "bsz": "32", "num_updates": "1410", "lr": "9.04211e-05", "gnorm": "1.382", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "15330"}
+2022-12-21 07:23:00 | INFO | train_inner | {"epoch": 2, "update": 1.844, "loss": "2.634", "nll_loss": "2.634", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.21", "wps": "1065.1", "ups": "0.14", "wpb": "7529.4", "bsz": "32", "num_updates": "1420", "lr": "9.03158e-05", "gnorm": "1.487", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "65.6", "wall": "15401"}
+2022-12-21 07:24:10 | INFO | train_inner | {"epoch": 2, "update": 1.857, "loss": "2.722", "nll_loss": "2.722", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.6", "wps": "1094.8", "ups": "0.14", "wpb": "7679.8", "bsz": "32", "num_updates": "1430", "lr": "9.02105e-05", "gnorm": "1.506", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "66.3", "wall": "15471"}
+2022-12-21 07:25:21 | INFO | train_inner | {"epoch": 2, "update": 1.87, "loss": "2.625", "nll_loss": "2.625", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.17", "wps": "1067.8", "ups": "0.14", "wpb": "7541.2", "bsz": "32", "num_updates": "1440", "lr": "9.01053e-05", "gnorm": "1.5", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63.6", "wall": "15541"}
+2022-12-21 07:26:30 | INFO | train_inner | {"epoch": 2, "update": 1.883, "loss": "2.631", "nll_loss": "2.631", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.19", "wps": "1108.5", "ups": "0.14", "wpb": "7679.5", "bsz": "32", "num_updates": "1450", "lr": "9e-05", "gnorm": "1.429", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.2", "wall": "15611"}
+2022-12-21 07:27:39 | INFO | train_inner | {"epoch": 2, "update": 1.895, "loss": "2.643", "nll_loss": "2.643", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.25", "wps": "1113.4", "ups": "0.15", "wpb": "7632.5", "bsz": "32", "num_updates": "1460", "lr": "8.98947e-05", "gnorm": "1.451", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.2", "wall": "15679"}
+2022-12-21 07:28:50 | INFO | train_inner | {"epoch": 2, "update": 1.908, "loss": "2.603", "nll_loss": "2.603", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.08", "wps": "1038.3", "ups": "0.14", "wpb": "7446.8", "bsz": "32", "num_updates": "1470", "lr": "8.97895e-05", "gnorm": "1.488", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "62.9", "wall": "15751"}
+2022-12-21 07:30:01 | INFO | train_inner | {"epoch": 2, "update": 1.921, "loss": "2.651", "nll_loss": "2.651", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.28", "wps": "1084.2", "ups": "0.14", "wpb": "7643.2", "bsz": "32", "num_updates": "1480", "lr": "8.96842e-05", "gnorm": "1.405", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "64.3", "wall": "15822"}
+2022-12-21 07:31:12 | INFO | train_inner | {"epoch": 2, "update": 1.934, "loss": "2.607", "nll_loss": "2.607", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.09", "wps": "1068.9", "ups": "0.14", "wpb": "7601.3", "bsz": "32", "num_updates": "1490", "lr": "8.95789e-05", "gnorm": "1.656", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "63.6", "wall": "15893"}
+2022-12-21 07:32:21 | INFO | train_inner | {"epoch": 2, "update": 1.947, "loss": "2.615", "nll_loss": "2.615", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.13", "wps": "1107.3", "ups": "0.14", "wpb": "7670.1", "bsz": "32", "num_updates": "1500", "lr": "8.94737e-05", "gnorm": "1.36", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "63", "wall": "15962"}
+2022-12-21 07:33:35 | INFO | train_inner | {"epoch": 2, "update": 1.96, "loss": "2.679", "nll_loss": "2.679", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.4", "wps": "1037.1", "ups": "0.14", "wpb": "7626.2", "bsz": "32", "num_updates": "1510", "lr": "8.93684e-05", "gnorm": "1.405", "clip": "100", "loss_scale": "0.5", "train_wall": "73", "gb_free": "63", "wall": "16036"}
+2022-12-21 07:34:44 | INFO | train_inner | {"epoch": 2, "update": 1.973, "loss": "2.654", "nll_loss": "2.654", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.29", "wps": "1087.8", "ups": "0.15", "wpb": "7481.8", "bsz": "32", "num_updates": "1520", "lr": "8.92632e-05", "gnorm": "1.422", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "63.6", "wall": "16104"}
+2022-12-21 07:35:51 | INFO | train_inner | {"epoch": 2, "update": 1.986, "loss": "2.645", "nll_loss": "2.645", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.25", "wps": "1144.1", "ups": "0.15", "wpb": "7703.5", "bsz": "32", "num_updates": "1530", "lr": "8.91579e-05", "gnorm": "1.403", "clip": "100", "loss_scale": "0.5", "train_wall": "67", "gb_free": "65", "wall": "16172"}
+2022-12-21 07:37:06 | INFO | train_inner | {"epoch": 2, "update": 1.999, "loss": "2.615", "nll_loss": "2.615", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "6.13", "wps": "1033.1", "ups": "0.13", "wpb": "7766.3", "bsz": "32", "num_updates": "1540", "lr": "8.90526e-05", "gnorm": "1.427", "clip": "100", "loss_scale": "0.5", "train_wall": "75", "gb_free": "63", "wall": "16247"}
+2022-12-21 07:37:08 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2022-12-21 07:37:52 | INFO | absl | Using default tokenizer.
+2022-12-21 07:38:19 | INFO | absl | Using default tokenizer.
+2022-12-21 07:38:39 | INFO | absl | Using default tokenizer.
+2022-12-21 07:38:59 | INFO | absl | Using default tokenizer.
+2022-12-21 07:39:21 | INFO | absl | Using default tokenizer.
+2022-12-21 07:39:49 | INFO | absl | Using default tokenizer.
+2022-12-21 07:40:19 | INFO | absl | Using default tokenizer.
+2022-12-21 07:40:46 | INFO | absl | Using default tokenizer.
+2022-12-21 07:41:17 | INFO | absl | Using default tokenizer.
+2022-12-21 07:41:46 | INFO | absl | Using default tokenizer.
+2022-12-21 07:42:13 | INFO | absl | Using default tokenizer.
+2022-12-21 07:42:42 | INFO | absl | Using default tokenizer.
+2022-12-21 07:43:12 | INFO | absl | Using default tokenizer.
+2022-12-21 07:43:50 | INFO | absl | Using default tokenizer.
+2022-12-21 07:44:18 | INFO | absl | Using default tokenizer.
+2022-12-21 07:44:44 | INFO | absl | Using default tokenizer.
+2022-12-21 07:45:11 | INFO | absl | Using default tokenizer.
+2022-12-21 07:45:39 | INFO | absl | Using default tokenizer.
+2022-12-21 07:46:08 | INFO | absl | Using default tokenizer.
+2022-12-21 07:46:30 | INFO | absl | Using default tokenizer.
+2022-12-21 07:47:09 | INFO | absl | Using default tokenizer.
+2022-12-21 07:47:53 | INFO | absl | Using default tokenizer.
+2022-12-21 07:48:21 | INFO | absl | Using default tokenizer.
+2022-12-21 07:48:47 | INFO | absl | Using default tokenizer.
+2022-12-21 07:49:18 | INFO | absl | Using default tokenizer.
+2022-12-21 07:49:43 | INFO | absl | Using default tokenizer.
+2022-12-21 07:50:10 | INFO | absl | Using default tokenizer.
+2022-12-21 07:50:42 | INFO | absl | Using default tokenizer.
+2022-12-21 07:51:09 | INFO | absl | Using default tokenizer.
+2022-12-21 07:51:40 | INFO | absl | Using default tokenizer.
+2022-12-21 07:52:03 | INFO | absl | Using default tokenizer.
+2022-12-21 07:52:35 | INFO | absl | Using default tokenizer.
+2022-12-21 07:52:57 | INFO | absl | Using default tokenizer.
+2022-12-21 07:53:27 | INFO | absl | Using default tokenizer.
+2022-12-21 07:53:55 | INFO | absl | Using default tokenizer.
+2022-12-21 07:54:27 | INFO | absl | Using default tokenizer.
+2022-12-21 07:55:01 | INFO | absl | Using default tokenizer.
+2022-12-21 07:55:30 | INFO | absl | Using default tokenizer.
+2022-12-21 07:56:11 | INFO | absl | Using default tokenizer.
+2022-12-21 07:56:34 | INFO | absl | Using default tokenizer.
+2022-12-21 07:57:00 | INFO | absl | Using default tokenizer.
+2022-12-21 07:57:29 | INFO | absl | Using default tokenizer.
+2022-12-21 07:57:53 | INFO | absl | Using default tokenizer.
+2022-12-21 07:58:17 | INFO | absl | Using default tokenizer.
+2022-12-21 07:58:53 | INFO | absl | Using default tokenizer.
+2022-12-21 07:59:23 | INFO | absl | Using default tokenizer.
+2022-12-21 07:59:48 | INFO | absl | Using default tokenizer.
+2022-12-21 08:00:25 | INFO | absl | Using default tokenizer.
+2022-12-21 08:01:02 | INFO | absl | Using default tokenizer.
+2022-12-21 08:01:34 | INFO | absl | Using default tokenizer.
+2022-12-21 08:01:58 | INFO | absl | Using default tokenizer.
+2022-12-21 08:02:25 | INFO | absl | Using default tokenizer.
+2022-12-21 08:02:53 | INFO | absl | Using default tokenizer.
+2022-12-21 08:03:20 | INFO | absl | Using default tokenizer.
+2022-12-21 08:03:50 | INFO | absl | Using default tokenizer.
+2022-12-21 08:04:21 | INFO | absl | Using default tokenizer.
+2022-12-21 08:04:55 | INFO | absl | Using default tokenizer.
+2022-12-21 08:05:25 | INFO | absl | Using default tokenizer.
+2022-12-21 08:05:57 | INFO | absl | Using default tokenizer.
+2022-12-21 08:06:20 | INFO | absl | Using default tokenizer.
+2022-12-21 08:06:53 | INFO | absl | Using default tokenizer.
+2022-12-21 08:07:24 | INFO | absl | Using default tokenizer.
+2022-12-21 08:07:56 | INFO | absl | Using default tokenizer.
+2022-12-21 08:08:22 | INFO | absl | Using default tokenizer.
+2022-12-21 08:08:51 | INFO | absl | Using default tokenizer.
+2022-12-21 08:09:22 | INFO | absl | Using default tokenizer.
+2022-12-21 08:09:43 | INFO | absl | Using default tokenizer.
+2022-12-21 08:10:11 | INFO | absl | Using default tokenizer.
+2022-12-21 08:10:39 | INFO | absl | Using default tokenizer.
+2022-12-21 08:11:18 | INFO | absl | Using default tokenizer.
+2022-12-21 08:11:45 | INFO | absl | Using default tokenizer.
+2022-12-21 08:12:11 | INFO | absl | Using default tokenizer.
+2022-12-21 08:12:42 | INFO | absl | Using default tokenizer.
+2022-12-21 08:13:17 | INFO | absl | Using default tokenizer.
+2022-12-21 08:13:48 | INFO | absl | Using default tokenizer.
+2022-12-21 08:14:15 | INFO | absl | Using default tokenizer.
+2022-12-21 08:14:50 | INFO | absl | Using default tokenizer.
+2022-12-21 08:15:20 | INFO | absl | Using default tokenizer.
+2022-12-21 08:15:45 | INFO | absl | Using default tokenizer.
+2022-12-21 08:16:14 | INFO | absl | Using default tokenizer.
+2022-12-21 08:16:49 | INFO | absl | Using default tokenizer.
+2022-12-21 08:17:21 | INFO | absl | Using default tokenizer.
+2022-12-21 08:17:55 | INFO | absl | Using default tokenizer.
+2022-12-21 08:18:22 | INFO | absl | Using default tokenizer.
+2022-12-21 08:18:49 | INFO | absl | Using default tokenizer.
+2022-12-21 08:19:15 | INFO | absl | Using default tokenizer.
+2022-12-21 08:19:41 | INFO | absl | Using default tokenizer.
+2022-12-21 08:20:10 | INFO | absl | Using default tokenizer.
+2022-12-21 08:20:40 | INFO | absl | Using default tokenizer.
+2022-12-21 08:21:07 | INFO | absl | Using default tokenizer.
+2022-12-21 08:21:40 | INFO | absl | Using default tokenizer.
+2022-12-21 08:22:16 | INFO | absl | Using default tokenizer.
+2022-12-21 08:22:42 | INFO | absl | Using default tokenizer.
+2022-12-21 08:23:06 | INFO | absl | Using default tokenizer.
+2022-12-21 08:23:41 | INFO | absl | Using default tokenizer.
+2022-12-21 08:24:10 | INFO | absl | Using default tokenizer.
+2022-12-21 08:24:37 | INFO | absl | Using default tokenizer.
+2022-12-21 08:25:06 | INFO | absl | Using default tokenizer.
+2022-12-21 08:25:36 | INFO | absl | Using default tokenizer.
+2022-12-21 08:26:04 | INFO | absl | Using default tokenizer.
+2022-12-21 08:26:40 | INFO | absl | Using default tokenizer.
+2022-12-21 08:27:21 | INFO | absl | Using default tokenizer.
+2022-12-21 08:27:59 | INFO | absl | Using default tokenizer.
+2022-12-21 08:28:32 | INFO | absl | Using default tokenizer.
+2022-12-21 08:29:07 | INFO | absl | Using default tokenizer.
+2022-12-21 08:29:41 | INFO | absl | Using default tokenizer.
+2022-12-21 08:30:13 | INFO | absl | Using default tokenizer.
+2022-12-21 08:30:55 | INFO | absl | Using default tokenizer.
+2022-12-21 08:31:22 | INFO | absl | Using default tokenizer.
+2022-12-21 08:31:53 | INFO | absl | Using default tokenizer.
+2022-12-21 08:32:24 | INFO | absl | Using default tokenizer.
+2022-12-21 08:32:52 | INFO | absl | Using default tokenizer.
+2022-12-21 08:33:30 | INFO | absl | Using default tokenizer.
+2022-12-21 08:34:01 | INFO | absl | Using default tokenizer.
+2022-12-21 08:34:32 | INFO | absl | Using default tokenizer.
+2022-12-21 08:34:59 | INFO | absl | Using default tokenizer.
+2022-12-21 08:35:24 | INFO | absl | Using default tokenizer.
+2022-12-21 08:35:53 | INFO | absl | Using default tokenizer.
+2022-12-21 08:36:22 | INFO | absl | Using default tokenizer.
+2022-12-21 08:36:48 | INFO | absl | Using default tokenizer.
+2022-12-21 08:37:17 | INFO | absl | Using default tokenizer.
+2022-12-21 08:37:49 | INFO | absl | Using default tokenizer.
+2022-12-21 08:38:20 | INFO | absl | Using default tokenizer.
+2022-12-21 08:38:50 | INFO | absl | Using default tokenizer.
+2022-12-21 08:39:25 | INFO | absl | Using default tokenizer.
+2022-12-21 08:40:00 | INFO | absl | Using default tokenizer.
+2022-12-21 08:40:43 | INFO | absl | Using default tokenizer.
+2022-12-21 08:41:07 | INFO | absl | Using default tokenizer.
+2022-12-21 08:41:35 | INFO | absl | Using default tokenizer.
+2022-12-21 08:42:02 | INFO | absl | Using default tokenizer.
+2022-12-21 08:42:41 | INFO | absl | Using default tokenizer.
+2022-12-21 08:43:23 | INFO | absl | Using default tokenizer.
+2022-12-21 08:43:57 | INFO | absl | Using default tokenizer.
+2022-12-21 08:44:34 | INFO | absl | Using default tokenizer.
+2022-12-21 08:45:05 | INFO | absl | Using default tokenizer.
+2022-12-21 08:45:33 | INFO | absl | Using default tokenizer.
+2022-12-21 08:46:03 | INFO | absl | Using default tokenizer.
+2022-12-21 08:46:31 | INFO | absl | Using default tokenizer.
+2022-12-21 08:47:05 | INFO | absl | Using default tokenizer.
+2022-12-21 08:47:40 | INFO | absl | Using default tokenizer.
+2022-12-21 08:48:12 | INFO | absl | Using default tokenizer.
+2022-12-21 08:48:36 | INFO | absl | Using default tokenizer.
+2022-12-21 08:49:01 | INFO | absl | Using default tokenizer.
+2022-12-21 08:49:26 | INFO | absl | Using default tokenizer.
+2022-12-21 08:49:59 | INFO | absl | Using default tokenizer.
+2022-12-21 08:50:24 | INFO | absl | Using default tokenizer.
+2022-12-21 08:50:50 | INFO | absl | Using default tokenizer.
+2022-12-21 08:51:20 | INFO | absl | Using default tokenizer.
+2022-12-21 08:51:50 | INFO | absl | Using default tokenizer.
+2022-12-21 08:52:25 | INFO | absl | Using default tokenizer.
+2022-12-21 08:52:55 | INFO | absl | Using default tokenizer.
+2022-12-21 08:53:34 | INFO | absl | Using default tokenizer.
+2022-12-21 08:54:05 | INFO | absl | Using default tokenizer.
+2022-12-21 08:54:38 | INFO | absl | Using default tokenizer.
+2022-12-21 08:55:21 | INFO | absl | Using default tokenizer.
+2022-12-21 08:55:53 | INFO | absl | Using default tokenizer.
+2022-12-21 08:56:27 | INFO | absl | Using default tokenizer.
+2022-12-21 08:57:12 | INFO | absl | Using default tokenizer.
+2022-12-21 08:57:45 | INFO | absl | Using default tokenizer.
+2022-12-21 08:58:11 | INFO | absl | Using default tokenizer.
+2022-12-21 08:58:42 | INFO | absl | Using default tokenizer.
+2022-12-21 08:59:14 | INFO | absl | Using default tokenizer.
+2022-12-21 08:59:51 | INFO | absl | Using default tokenizer.
+2022-12-21 09:00:24 | INFO | absl | Using default tokenizer.
+2022-12-21 09:00:57 | INFO | absl | Using default tokenizer.
+2022-12-21 09:01:29 | INFO | absl | Using default tokenizer.
+2022-12-21 09:02:04 | INFO | absl | Using default tokenizer.
+2022-12-21 09:02:36 | INFO | absl | Using default tokenizer.
+2022-12-21 09:03:15 | INFO | absl | Using default tokenizer.
+2022-12-21 09:03:48 | INFO | absl | Using default tokenizer.
+2022-12-21 09:04:34 | INFO | absl | Using default tokenizer.
+2022-12-21 09:05:07 | INFO | absl | Using default tokenizer.
+2022-12-21 09:05:47 | INFO | valid | {"epoch": 2, "valid_loss": "2.718", "valid_nll_loss": "2.718", "valid_rouge1": 0.4977840797787323, "valid_rouge2": 0.19118486235932058, "valid_rougel": 0.2724753409776423, "valid_rouge_avg": 0.3444844710690267, "valid_ppl": "6.58", "valid_wps": "62.1", "valid_wpb": "1907.8", "valid_bsz": "8", "valid_num_updates": "1541", "valid_best_rouge_avg": 0.3444844710690267}
+2022-12-21 09:05:47 | INFO | fairseq.checkpoint_utils | Preparing to save checkpoint for epoch 2 @ 1541 updates
+2022-12-21 09:05:47 | INFO | fairseq.trainer | Saving checkpoint to checkpoints//graph_text/checkpoint_best.pt
+2022-12-21 09:06:08 | INFO | fairseq.trainer | Finished saving checkpoint to checkpoints//graph_text/checkpoint_best.pt
+2022-12-21 09:06:34 | INFO | fairseq.checkpoint_utils | Saved checkpoint checkpoints//graph_text/checkpoint_best.pt (epoch 2 @ 1541 updates, score 0.3444844710690267) (writing took 46.39857016992755 seconds)
+2022-12-21 09:06:34 | INFO | fairseq_cli.train | end of epoch 2 (average epoch stats below)
+2022-12-21 09:06:34 | INFO | train | {"epoch": 2, "train_loss": "2.665", "train_nll_loss": "2.665", "train_rouge1": 0.0, "train_rouge2": 0.0, "train_rougel": 0.0, "train_rouge_avg": 0.0, "train_ppl": "6.34", "train_wps": "544.5", "train_ups": "0.07", "train_wpb": "7618.9", "train_bsz": "32", "train_num_updates": "1541", "train_lr": "8.90421e-05", "train_gnorm": "1.851", "train_clip": "100", "train_loss_scale": "0.5", "train_train_wall": "5415", "train_gb_free": "67.1", "train_wall": "21614"}
+2022-12-21 09:06:34 | INFO | fairseq.trainer | begin training epoch 3
+2022-12-21 09:06:34 | INFO | fairseq_cli.train | Start iterating over samples
+2022-12-21 09:08:15 | INFO | train_inner | {"epoch": 3, "update": 2.012, "loss": "2.417", "nll_loss": "2.417", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.34", "wps": "12.9", "ups": "0", "wpb": "7074.9", "bsz": "29.4", "num_updates": "1550", "lr": "8.89474e-05", "gnorm": "1.608", "clip": "100", "loss_scale": "0.5", "train_wall": "63", "gb_free": "63", "wall": "21716"}
+2022-12-21 09:09:23 | INFO | train_inner | {"epoch": 3, "update": 2.025, "loss": "2.373", "nll_loss": "2.373", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.18", "wps": "1118.1", "ups": "0.15", "wpb": "7606.9", "bsz": "32", "num_updates": "1560", "lr": "8.88421e-05", "gnorm": "1.413", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.9", "wall": "21784"}
+2022-12-21 09:10:35 | INFO | train_inner | {"epoch": 3, "update": 2.037, "loss": "2.311", "nll_loss": "2.311", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "4.96", "wps": "1072.9", "ups": "0.14", "wpb": "7707.8", "bsz": "32", "num_updates": "1570", "lr": "8.87368e-05", "gnorm": "1.33", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "62.2", "wall": "21856"}
+2022-12-21 09:11:44 | INFO | train_inner | {"epoch": 3, "update": 2.05, "loss": "2.311", "nll_loss": "2.311", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "4.96", "wps": "1107.1", "ups": "0.14", "wpb": "7657.4", "bsz": "32", "num_updates": "1580", "lr": "8.86316e-05", "gnorm": "1.379", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.2", "wall": "21925"}
+2022-12-21 09:12:54 | INFO | train_inner | {"epoch": 3, "update": 2.063, "loss": "2.378", "nll_loss": "2.378", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.2", "wps": "1073.9", "ups": "0.14", "wpb": "7437.8", "bsz": "32", "num_updates": "1590", "lr": "8.85263e-05", "gnorm": "1.396", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "65", "wall": "21994"}
+2022-12-21 09:14:02 | INFO | train_inner | {"epoch": 3, "update": 2.076, "loss": "2.356", "nll_loss": "2.356", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.12", "wps": "1111.5", "ups": "0.15", "wpb": "7643.3", "bsz": "32", "num_updates": "1600", "lr": "8.84211e-05", "gnorm": "1.37", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.2", "wall": "22063"}
+2022-12-21 09:15:12 | INFO | train_inner | {"epoch": 3, "update": 2.089, "loss": "2.405", "nll_loss": "2.405", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.3", "wps": "1116.3", "ups": "0.14", "wpb": "7744.5", "bsz": "32", "num_updates": "1610", "lr": "8.83158e-05", "gnorm": "1.36", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "64.3", "wall": "22133"}
+2022-12-21 09:16:21 | INFO | train_inner | {"epoch": 3, "update": 2.102, "loss": "2.353", "nll_loss": "2.353", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.11", "wps": "1091.5", "ups": "0.14", "wpb": "7598.3", "bsz": "32", "num_updates": "1620", "lr": "8.82105e-05", "gnorm": "1.43", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.2", "wall": "22202"}
+2022-12-21 09:17:30 | INFO | train_inner | {"epoch": 3, "update": 2.115, "loss": "2.404", "nll_loss": "2.404", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.29", "wps": "1088.5", "ups": "0.15", "wpb": "7465.5", "bsz": "32", "num_updates": "1630", "lr": "8.81053e-05", "gnorm": "1.564", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.2", "wall": "22271"}
+2022-12-21 09:18:39 | INFO | train_inner | {"epoch": 3, "update": 2.128, "loss": "2.326", "nll_loss": "2.326", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.02", "wps": "1113", "ups": "0.15", "wpb": "7632.5", "bsz": "32", "num_updates": "1640", "lr": "8.8e-05", "gnorm": "1.363", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.2", "wall": "22339"}
+2022-12-21 09:19:48 | INFO | train_inner | {"epoch": 3, "update": 2.141, "loss": "2.415", "nll_loss": "2.415", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.33", "wps": "1083.8", "ups": "0.14", "wpb": "7534.2", "bsz": "32", "num_updates": "1650", "lr": "8.78947e-05", "gnorm": "1.383", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.2", "wall": "22409"}
+2022-12-21 09:20:57 | INFO | train_inner | {"epoch": 3, "update": 2.154, "loss": "2.329", "nll_loss": "2.329", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.02", "wps": "1128.4", "ups": "0.15", "wpb": "7757", "bsz": "32", "num_updates": "1660", "lr": "8.77895e-05", "gnorm": "1.403", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.9", "wall": "22478"}
+2022-12-21 09:22:06 | INFO | train_inner | {"epoch": 3, "update": 2.166, "loss": "2.311", "nll_loss": "2.311", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "4.96", "wps": "1089.6", "ups": "0.14", "wpb": "7566.1", "bsz": "32", "num_updates": "1670", "lr": "8.76842e-05", "gnorm": "1.4", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.2", "wall": "22547"}
+2022-12-21 09:23:16 | INFO | train_inner | {"epoch": 3, "update": 2.179, "loss": "2.329", "nll_loss": "2.329", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.02", "wps": "1111.1", "ups": "0.14", "wpb": "7728.1", "bsz": "32", "num_updates": "1680", "lr": "8.75789e-05", "gnorm": "1.383", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "64.4", "wall": "22617"}
+2022-12-21 09:24:26 | INFO | train_inner | {"epoch": 3, "update": 2.192, "loss": "2.337", "nll_loss": "2.337", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.05", "wps": "1080.7", "ups": "0.14", "wpb": "7578.7", "bsz": "32", "num_updates": "1690", "lr": "8.74737e-05", "gnorm": "1.386", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63", "wall": "22687"}
+2022-12-21 09:25:37 | INFO | train_inner | {"epoch": 3, "update": 2.205, "loss": "2.404", "nll_loss": "2.404", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.29", "wps": "1076.3", "ups": "0.14", "wpb": "7633.9", "bsz": "31.9", "num_updates": "1700", "lr": "8.73684e-05", "gnorm": "1.593", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "64.3", "wall": "22758"}
+2022-12-21 09:26:47 | INFO | train_inner | {"epoch": 3, "update": 2.218, "loss": "2.404", "nll_loss": "2.404", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.29", "wps": "1109.2", "ups": "0.14", "wpb": "7742", "bsz": "32", "num_updates": "1710", "lr": "8.72632e-05", "gnorm": "1.389", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.9", "wall": "22828"}
+2022-12-21 09:27:59 | INFO | train_inner | {"epoch": 3, "update": 2.231, "loss": "2.387", "nll_loss": "2.387", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.23", "wps": "1036.7", "ups": "0.14", "wpb": "7519.7", "bsz": "32", "num_updates": "1720", "lr": "8.71579e-05", "gnorm": "1.441", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "65", "wall": "22900"}
+2022-12-21 09:29:06 | INFO | train_inner | {"epoch": 3, "update": 2.244, "loss": "2.409", "nll_loss": "2.409", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.31", "wps": "1105.1", "ups": "0.15", "wpb": "7407.7", "bsz": "32", "num_updates": "1730", "lr": "8.70526e-05", "gnorm": "1.425", "clip": "100", "loss_scale": "0.5", "train_wall": "67", "gb_free": "62.9", "wall": "22967"}
+2022-12-21 09:30:18 | INFO | train_inner | {"epoch": 3, "update": 2.257, "loss": "2.406", "nll_loss": "2.406", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.3", "wps": "1040.2", "ups": "0.14", "wpb": "7494.6", "bsz": "32", "num_updates": "1740", "lr": "8.69474e-05", "gnorm": "1.398", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "63.6", "wall": "23039"}
+2022-12-21 09:31:24 | INFO | train_inner | {"epoch": 3, "update": 2.27, "loss": "2.364", "nll_loss": "2.364", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.15", "wps": "1159.2", "ups": "0.15", "wpb": "7541.2", "bsz": "32", "num_updates": "1750", "lr": "8.68421e-05", "gnorm": "1.4", "clip": "100", "loss_scale": "0.5", "train_wall": "65", "gb_free": "62.2", "wall": "23104"}
+2022-12-21 09:32:35 | INFO | train_inner | {"epoch": 3, "update": 2.283, "loss": "2.436", "nll_loss": "2.436", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.41", "wps": "1079.8", "ups": "0.14", "wpb": "7689.3", "bsz": "32", "num_updates": "1760", "lr": "8.67368e-05", "gnorm": "1.387", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "62.9", "wall": "23176"}
+2022-12-21 09:33:49 | INFO | train_inner | {"epoch": 3, "update": 2.295, "loss": "2.416", "nll_loss": "2.416", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.34", "wps": "1033.5", "ups": "0.13", "wpb": "7666.9", "bsz": "32", "num_updates": "1770", "lr": "8.66316e-05", "gnorm": "1.365", "clip": "100", "loss_scale": "0.5", "train_wall": "74", "gb_free": "62.2", "wall": "23250"}
+2022-12-21 09:35:02 | INFO | train_inner | {"epoch": 3, "update": 2.308, "loss": "2.441", "nll_loss": "2.441", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.43", "wps": "1071.3", "ups": "0.14", "wpb": "7809", "bsz": "32", "num_updates": "1780", "lr": "8.65263e-05", "gnorm": "1.357", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "62.9", "wall": "23323"}
+2022-12-21 09:36:11 | INFO | train_inner | {"epoch": 3, "update": 2.321, "loss": "2.431", "nll_loss": "2.431", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.39", "wps": "1091.7", "ups": "0.14", "wpb": "7582.3", "bsz": "32", "num_updates": "1790", "lr": "8.64211e-05", "gnorm": "1.381", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "65", "wall": "23392"}
+2022-12-21 09:37:23 | INFO | train_inner | {"epoch": 3, "update": 2.334, "loss": "2.382", "nll_loss": "2.382", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.21", "wps": "1082.3", "ups": "0.14", "wpb": "7710.1", "bsz": "32", "num_updates": "1800", "lr": "8.63158e-05", "gnorm": "1.385", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "62.2", "wall": "23464"}
+2022-12-21 09:38:35 | INFO | train_inner | {"epoch": 3, "update": 2.347, "loss": "2.498", "nll_loss": "2.498", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.65", "wps": "1093", "ups": "0.14", "wpb": "7861.1", "bsz": "32", "num_updates": "1810", "lr": "8.62105e-05", "gnorm": "4.546", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "63.6", "wall": "23535"}
+2022-12-21 09:39:44 | INFO | train_inner | {"epoch": 3, "update": 2.36, "loss": "2.377", "nll_loss": "2.377", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.19", "wps": "1083", "ups": "0.14", "wpb": "7499.4", "bsz": "32", "num_updates": "1820", "lr": "8.61053e-05", "gnorm": "1.473", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "65.6", "wall": "23605"}
+2022-12-21 09:40:55 | INFO | train_inner | {"epoch": 3, "update": 2.373, "loss": "2.442", "nll_loss": "2.442", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.44", "wps": "1091.4", "ups": "0.14", "wpb": "7771.2", "bsz": "32", "num_updates": "1830", "lr": "8.6e-05", "gnorm": "1.479", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "63.6", "wall": "23676"}
+2022-12-21 09:42:08 | INFO | train_inner | {"epoch": 3, "update": 2.386, "loss": "2.454", "nll_loss": "2.454", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.48", "wps": "1044", "ups": "0.14", "wpb": "7552.4", "bsz": "32", "num_updates": "1840", "lr": "8.58947e-05", "gnorm": "1.404", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "64.3", "wall": "23748"}
+2022-12-21 09:43:15 | INFO | train_inner | {"epoch": 3, "update": 2.399, "loss": "2.395", "nll_loss": "2.395", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.26", "wps": "1138.6", "ups": "0.15", "wpb": "7706.9", "bsz": "32", "num_updates": "1850", "lr": "8.57895e-05", "gnorm": "1.392", "clip": "100", "loss_scale": "0.5", "train_wall": "67", "gb_free": "62.9", "wall": "23816"}
+2022-12-21 09:44:27 | INFO | train_inner | {"epoch": 3, "update": 2.412, "loss": "2.334", "nll_loss": "2.334", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.04", "wps": "1072.1", "ups": "0.14", "wpb": "7654", "bsz": "32", "num_updates": "1860", "lr": "8.56842e-05", "gnorm": "1.413", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "65", "wall": "23887"}
+2022-12-21 09:45:38 | INFO | train_inner | {"epoch": 3, "update": 2.425, "loss": "2.436", "nll_loss": "2.436", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.41", "wps": "1043.5", "ups": "0.14", "wpb": "7483.8", "bsz": "32", "num_updates": "1870", "lr": "8.55789e-05", "gnorm": "1.404", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "63.6", "wall": "23959"}
+2022-12-21 09:46:50 | INFO | train_inner | {"epoch": 3, "update": 2.437, "loss": "2.401", "nll_loss": "2.401", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.28", "wps": "1061.2", "ups": "0.14", "wpb": "7597.7", "bsz": "32", "num_updates": "1880", "lr": "8.54737e-05", "gnorm": "1.506", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "62.2", "wall": "24031"}
+2022-12-21 09:48:01 | INFO | train_inner | {"epoch": 3, "update": 2.45, "loss": "2.392", "nll_loss": "2.392", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.25", "wps": "1094.5", "ups": "0.14", "wpb": "7744.5", "bsz": "32", "num_updates": "1890", "lr": "8.53684e-05", "gnorm": "1.328", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "24102"}
+2022-12-21 09:49:13 | INFO | train_inner | {"epoch": 3, "update": 2.463, "loss": "2.403", "nll_loss": "2.403", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.29", "wps": "1049.5", "ups": "0.14", "wpb": "7586.2", "bsz": "32", "num_updates": "1900", "lr": "8.52632e-05", "gnorm": "1.377", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "63.6", "wall": "24174"}
+2022-12-21 09:50:25 | INFO | train_inner | {"epoch": 3, "update": 2.476, "loss": "2.372", "nll_loss": "2.372", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.18", "wps": "1082.2", "ups": "0.14", "wpb": "7760.5", "bsz": "32", "num_updates": "1910", "lr": "8.51579e-05", "gnorm": "1.307", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "64.3", "wall": "24246"}
+2022-12-21 09:51:36 | INFO | train_inner | {"epoch": 3, "update": 2.489, "loss": "2.41", "nll_loss": "2.41", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.31", "wps": "1052.7", "ups": "0.14", "wpb": "7489.2", "bsz": "32", "num_updates": "1920", "lr": "8.50526e-05", "gnorm": "1.484", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "62.2", "wall": "24317"}
+2022-12-21 09:52:47 | INFO | train_inner | {"epoch": 3, "update": 2.502, "loss": "2.386", "nll_loss": "2.386", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.23", "wps": "1047.2", "ups": "0.14", "wpb": "7447.9", "bsz": "32", "num_updates": "1930", "lr": "8.49474e-05", "gnorm": "1.342", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "65.6", "wall": "24388"}
+2022-12-21 09:53:56 | INFO | train_inner | {"epoch": 3, "update": 2.515, "loss": "2.36", "nll_loss": "2.36", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.13", "wps": "1098.7", "ups": "0.15", "wpb": "7558.5", "bsz": "32", "num_updates": "1940", "lr": "8.48421e-05", "gnorm": "1.425", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.2", "wall": "24457"}
+2022-12-21 09:55:07 | INFO | train_inner | {"epoch": 3, "update": 2.528, "loss": "2.34", "nll_loss": "2.34", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.06", "wps": "1085.9", "ups": "0.14", "wpb": "7682.9", "bsz": "32", "num_updates": "1950", "lr": "8.47368e-05", "gnorm": "1.452", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.2", "wall": "24528"}
+2022-12-21 09:56:16 | INFO | train_inner | {"epoch": 3, "update": 2.541, "loss": "2.414", "nll_loss": "2.414", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.33", "wps": "1097.6", "ups": "0.14", "wpb": "7614.6", "bsz": "32", "num_updates": "1960", "lr": "8.46316e-05", "gnorm": "1.344", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "63.6", "wall": "24597"}
+2022-12-21 09:57:25 | INFO | train_inner | {"epoch": 3, "update": 2.554, "loss": "2.458", "nll_loss": "2.458", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.49", "wps": "1130.3", "ups": "0.15", "wpb": "7741.3", "bsz": "32", "num_updates": "1970", "lr": "8.45263e-05", "gnorm": "1.341", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "62.2", "wall": "24665"}
+2022-12-21 09:58:37 | INFO | train_inner | {"epoch": 3, "update": 2.566, "loss": "2.455", "nll_loss": "2.455", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.48", "wps": "1038.2", "ups": "0.14", "wpb": "7522.3", "bsz": "32", "num_updates": "1980", "lr": "8.44211e-05", "gnorm": "1.356", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "63.7", "wall": "24738"}
+2022-12-21 09:59:51 | INFO | train_inner | {"epoch": 3, "update": 2.579, "loss": "2.445", "nll_loss": "2.445", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.45", "wps": "1016.7", "ups": "0.14", "wpb": "7486.8", "bsz": "32", "num_updates": "1990", "lr": "8.43158e-05", "gnorm": "1.401", "clip": "100", "loss_scale": "0.5", "train_wall": "73", "gb_free": "62.9", "wall": "24812"}
+2022-12-21 10:01:00 | INFO | train_inner | {"epoch": 3, "update": 2.592, "loss": "2.414", "nll_loss": "2.414", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.33", "wps": "1074.4", "ups": "0.14", "wpb": "7465.2", "bsz": "32", "num_updates": "2000", "lr": "8.42105e-05", "gnorm": "1.353", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "63.6", "wall": "24881"}
+2022-12-21 10:02:12 | INFO | train_inner | {"epoch": 3, "update": 2.605, "loss": "2.482", "nll_loss": "2.482", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.59", "wps": "1055.8", "ups": "0.14", "wpb": "7537.3", "bsz": "32", "num_updates": "2010", "lr": "8.41053e-05", "gnorm": "1.379", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "62.2", "wall": "24952"}
+2022-12-21 10:03:22 | INFO | train_inner | {"epoch": 3, "update": 2.618, "loss": "2.439", "nll_loss": "2.439", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.42", "wps": "1078.3", "ups": "0.14", "wpb": "7609", "bsz": "32", "num_updates": "2020", "lr": "8.4e-05", "gnorm": "1.388", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63.6", "wall": "25023"}
+2022-12-21 10:04:32 | INFO | train_inner | {"epoch": 3, "update": 2.631, "loss": "2.382", "nll_loss": "2.382", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.21", "wps": "1093.9", "ups": "0.14", "wpb": "7660.7", "bsz": "32", "num_updates": "2030", "lr": "8.38947e-05", "gnorm": "2.028", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "63.6", "wall": "25093"}
+2022-12-21 10:05:44 | INFO | train_inner | {"epoch": 3, "update": 2.644, "loss": "2.402", "nll_loss": "2.402", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.29", "wps": "1084", "ups": "0.14", "wpb": "7769.9", "bsz": "32", "num_updates": "2040", "lr": "8.37895e-05", "gnorm": "1.414", "clip": "100", "loss_scale": "0.5", "train_wall": "71", "gb_free": "64.3", "wall": "25165"}
+2022-12-21 10:06:53 | INFO | train_inner | {"epoch": 3, "update": 2.657, "loss": "2.368", "nll_loss": "2.368", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.16", "wps": "1091.3", "ups": "0.15", "wpb": "7505.9", "bsz": "32", "num_updates": "2050", "lr": "8.36842e-05", "gnorm": "1.326", "clip": "100", "loss_scale": "0.5", "train_wall": "68", "gb_free": "64.3", "wall": "25234"}
+2022-12-21 10:08:03 | INFO | train_inner | {"epoch": 3, "update": 2.67, "loss": "2.4", "nll_loss": "2.4", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.28", "wps": "1110.3", "ups": "0.14", "wpb": "7791.7", "bsz": "32", "num_updates": "2060", "lr": "8.35789e-05", "gnorm": "1.335", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "62.9", "wall": "25304"}
+2022-12-21 10:09:12 | INFO | train_inner | {"epoch": 3, "update": 2.683, "loss": "2.412", "nll_loss": "2.412", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.32", "wps": "1080.2", "ups": "0.14", "wpb": "7487.5", "bsz": "32", "num_updates": "2070", "lr": "8.34737e-05", "gnorm": "1.405", "clip": "100", "loss_scale": "0.5", "train_wall": "69", "gb_free": "62.2", "wall": "25373"}
+2022-12-21 10:10:23 | INFO | train_inner | {"epoch": 3, "update": 2.695, "loss": "2.47", "nll_loss": "2.47", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.54", "wps": "1082.8", "ups": "0.14", "wpb": "7618.1", "bsz": "32", "num_updates": "2080", "lr": "8.33684e-05", "gnorm": "1.409", "clip": "100", "loss_scale": "0.5", "train_wall": "70", "gb_free": "64.3", "wall": "25443"}
+2022-12-21 10:11:35 | INFO | train_inner | {"epoch": 3, "update": 2.708, "loss": "2.49", "nll_loss": "2.49", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.62", "wps": "1075.6", "ups": "0.14", "wpb": "7726", "bsz": "32", "num_updates": "2090", "lr": "8.32632e-05", "gnorm": "1.385", "clip": "100", "loss_scale": "0.5", "train_wall": "72", "gb_free": "62.2", "wall": "25515"}
+2022-12-21 10:12:42 | INFO | train_inner | {"epoch": 3, "update": 2.721, "loss": "2.456", "nll_loss": "2.456", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.49", "wps": "1127", "ups": "0.15", "wpb": "7543.8", "bsz": "32", "num_updates": "2100", "lr": "8.31579e-05", "gnorm": "1.934", "clip": "100", "loss_scale": "0.5", "train_wall": "67", "gb_free": "65.1", "wall": "25582"}
+2022-12-21 10:13:53 | INFO | train_inner | {"epoch": 3, "update": 2.734, "loss": "2.479", "nll_loss": "2.479", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.57", "wps": "1050.2", "ups": "0.14", "wpb": "7501.7", "bsz": "32", "num_updates": "2110", "lr": "8.30526e-05", "gnorm": "2.229", "clip": "100", "loss_scale": "1", "train_wall": "71", "gb_free": "63.6", "wall": "25654"}
+2022-12-21 10:15:01 | INFO | train_inner | {"epoch": 3, "update": 2.747, "loss": "2.447", "nll_loss": "2.447", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.45", "wps": "1107.3", "ups": "0.15", "wpb": "7550.8", "bsz": "32", "num_updates": "2120", "lr": "8.29474e-05", "gnorm": "3.209", "clip": "100", "loss_scale": "1", "train_wall": "68", "gb_free": "64.3", "wall": "25722"}
+2022-12-21 10:16:12 | INFO | train_inner | {"epoch": 3, "update": 2.76, "loss": "2.457", "nll_loss": "2.457", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.49", "wps": "1070.2", "ups": "0.14", "wpb": "7597.1", "bsz": "32", "num_updates": "2130", "lr": "8.28421e-05", "gnorm": "2.556", "clip": "100", "loss_scale": "1", "train_wall": "71", "gb_free": "65", "wall": "25793"}
+2022-12-21 10:17:23 | INFO | train_inner | {"epoch": 3, "update": 2.773, "loss": "2.427", "nll_loss": "2.427", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.38", "wps": "1067.9", "ups": "0.14", "wpb": "7603.6", "bsz": "32", "num_updates": "2140", "lr": "8.27368e-05", "gnorm": "2.252", "clip": "100", "loss_scale": "1", "train_wall": "71", "gb_free": "62.2", "wall": "25864"}
+2022-12-21 10:18:33 | INFO | train_inner | {"epoch": 3, "update": 2.786, "loss": "2.432", "nll_loss": "2.432", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.4", "wps": "1080.5", "ups": "0.14", "wpb": "7492.7", "bsz": "32", "num_updates": "2150", "lr": "8.26316e-05", "gnorm": "2.146", "clip": "100", "loss_scale": "1", "train_wall": "69", "gb_free": "64.3", "wall": "25934"}
+2022-12-21 10:19:43 | INFO | train_inner | {"epoch": 3, "update": 2.799, "loss": "2.42", "nll_loss": "2.42", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.35", "wps": "1097.5", "ups": "0.14", "wpb": "7678.5", "bsz": "32", "num_updates": "2160", "lr": "8.25263e-05", "gnorm": "2.115", "clip": "100", "loss_scale": "1", "train_wall": "70", "gb_free": "62.2", "wall": "26004"}
+2022-12-21 10:20:53 | INFO | train_inner | {"epoch": 3, "update": 2.812, "loss": "2.432", "nll_loss": "2.432", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.4", "wps": "1106.6", "ups": "0.14", "wpb": "7762", "bsz": "32", "num_updates": "2170", "lr": "8.24211e-05", "gnorm": "2.956", "clip": "100", "loss_scale": "1", "train_wall": "70", "gb_free": "62.2", "wall": "26074"}
+2022-12-21 10:22:02 | INFO | train_inner | {"epoch": 3, "update": 2.825, "loss": "2.46", "nll_loss": "2.46", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.5", "wps": "1108.1", "ups": "0.15", "wpb": "7624.7", "bsz": "32", "num_updates": "2180", "lr": "8.23158e-05", "gnorm": "2.434", "clip": "100", "loss_scale": "1", "train_wall": "69", "gb_free": "62.9", "wall": "26143"}
+2022-12-21 10:23:13 | INFO | train_inner | {"epoch": 3, "update": 2.837, "loss": "2.459", "nll_loss": "2.459", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.5", "wps": "1074.5", "ups": "0.14", "wpb": "7692.8", "bsz": "32", "num_updates": "2190", "lr": "8.22105e-05", "gnorm": "1.475", "clip": "100", "loss_scale": "1", "train_wall": "71", "gb_free": "65", "wall": "26214"}
+2022-12-21 10:24:23 | INFO | train_inner | {"epoch": 3, "update": 2.85, "loss": "2.484", "nll_loss": "2.484", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.6", "wps": "1103.3", "ups": "0.14", "wpb": "7648.3", "bsz": "32", "num_updates": "2200", "lr": "8.21053e-05", "gnorm": "1.996", "clip": "100", "loss_scale": "1", "train_wall": "69", "gb_free": "63.6", "wall": "26284"}
+2022-12-21 10:25:34 | INFO | train_inner | {"epoch": 3, "update": 2.863, "loss": "2.468", "nll_loss": "2.468", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.53", "wps": "1071.7", "ups": "0.14", "wpb": "7687.1", "bsz": "32", "num_updates": "2210", "lr": "8.2e-05", "gnorm": "2.358", "clip": "100", "loss_scale": "1", "train_wall": "71", "gb_free": "63.6", "wall": "26355"}
+2022-12-21 10:26:42 | INFO | train_inner | {"epoch": 3, "update": 2.876, "loss": "2.379", "nll_loss": "2.379", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.2", "wps": "1141.6", "ups": "0.15", "wpb": "7653.6", "bsz": "32", "num_updates": "2220", "lr": "8.18947e-05", "gnorm": "3.023", "clip": "100", "loss_scale": "1", "train_wall": "67", "gb_free": "63.6", "wall": "26422"}
+2022-12-21 10:27:49 | INFO | train_inner | {"epoch": 3, "update": 2.889, "loss": "2.48", "nll_loss": "2.48", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.58", "wps": "1151.9", "ups": "0.15", "wpb": "7736.5", "bsz": "32", "num_updates": "2230", "lr": "8.17895e-05", "gnorm": "5.57", "clip": "100", "loss_scale": "1", "train_wall": "67", "gb_free": "63.6", "wall": "26489"}
+2022-12-21 10:28:55 | INFO | train_inner | {"epoch": 3, "update": 2.902, "loss": "2.541", "nll_loss": "2.541", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.82", "wps": "1160.9", "ups": "0.15", "wpb": "7723.8", "bsz": "32", "num_updates": "2240", "lr": "8.16842e-05", "gnorm": "12.04", "clip": "100", "loss_scale": "1", "train_wall": "66", "gb_free": "64.3", "wall": "26556"}
+2022-12-21 10:30:07 | INFO | train_inner | {"epoch": 3, "update": 2.915, "loss": "2.46", "nll_loss": "2.46", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.5", "wps": "1075", "ups": "0.14", "wpb": "7713", "bsz": "32", "num_updates": "2250", "lr": "8.15789e-05", "gnorm": "6.961", "clip": "100", "loss_scale": "1", "train_wall": "71", "gb_free": "64.3", "wall": "26628"}
+2022-12-21 10:31:20 | INFO | train_inner | {"epoch": 3, "update": 2.928, "loss": "2.365", "nll_loss": "2.365", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.15", "wps": "1024", "ups": "0.14", "wpb": "7498.8", "bsz": "32", "num_updates": "2260", "lr": "8.14737e-05", "gnorm": "2.359", "clip": "100", "loss_scale": "1", "train_wall": "73", "gb_free": "64.3", "wall": "26701"}
+2022-12-21 10:32:30 | INFO | train_inner | {"epoch": 3, "update": 2.941, "loss": "2.448", "nll_loss": "2.448", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.46", "wps": "1102.3", "ups": "0.14", "wpb": "7637.8", "bsz": "32", "num_updates": "2270", "lr": "8.13684e-05", "gnorm": "1.709", "clip": "100", "loss_scale": "1", "train_wall": "69", "gb_free": "62.9", "wall": "26770"}
+2022-12-21 10:33:41 | INFO | train_inner | {"epoch": 3, "update": 2.954, "loss": "2.444", "nll_loss": "2.444", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.44", "wps": "1082.8", "ups": "0.14", "wpb": "7781.1", "bsz": "32", "num_updates": "2280", "lr": "8.12632e-05", "gnorm": "2.432", "clip": "100", "loss_scale": "1", "train_wall": "72", "gb_free": "65.6", "wall": "26842"}
+2022-12-21 10:34:51 | INFO | train_inner | {"epoch": 3, "update": 2.966, "loss": "2.415", "nll_loss": "2.415", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.33", "wps": "1094.7", "ups": "0.14", "wpb": "7665.7", "bsz": "32", "num_updates": "2290", "lr": "8.11579e-05", "gnorm": "2.847", "clip": "100", "loss_scale": "1", "train_wall": "70", "gb_free": "62.9", "wall": "26912"}
+2022-12-21 10:36:00 | INFO | train_inner | {"epoch": 3, "update": 2.979, "loss": "2.414", "nll_loss": "2.414", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.33", "wps": "1131.3", "ups": "0.15", "wpb": "7753.6", "bsz": "32", "num_updates": "2300", "lr": "8.10526e-05", "gnorm": "4.545", "clip": "100", "loss_scale": "1", "train_wall": "68", "gb_free": "63.6", "wall": "26981"}
+2022-12-21 10:37:11 | INFO | train_inner | {"epoch": 3, "update": 2.992, "loss": "2.379", "nll_loss": "2.379", "rouge1": 0.0, "rouge2": 0.0, "rougel": 0.0, "rouge_avg": 0.0, "ppl": "5.2", "wps": "1079.1", "ups": "0.14", "wpb": "7647.1", "bsz": "32", "num_updates": "2310", "lr": "8.09474e-05", "gnorm": "2.681", "clip": "100", "loss_scale": "1", "train_wall": "71", "gb_free": "64.3", "wall": "27052"}
+2022-12-21 10:37:53 | INFO | fairseq_cli.train | begin validation on "valid" subset
+2022-12-21 10:38:37 | INFO | absl | Using default tokenizer.
+2022-12-21 10:38:57 | INFO | absl | Using default tokenizer.
+2022-12-21 10:39:17 | INFO | absl | Using default tokenizer.
+2022-12-21 10:39:35 | INFO | absl | Using default tokenizer.
+2022-12-21 10:39:56 | INFO | absl | Using default tokenizer.
+2022-12-21 10:40:26 | INFO | absl | Using default tokenizer.
+2022-12-21 10:41:00 | INFO | absl | Using default tokenizer.
+2022-12-21 10:41:22 | INFO | absl | Using default tokenizer.
+2022-12-21 10:41:52 | INFO | absl | Using default tokenizer.
+2022-12-21 10:42:18 | INFO | absl | Using default tokenizer.
+2022-12-21 10:42:42 | INFO | absl | Using default tokenizer.
+2022-12-21 10:43:15 | INFO | absl | Using default tokenizer.
+2022-12-21 10:43:42 | INFO | absl | Using default tokenizer.
+2022-12-21 10:44:15 | INFO | absl | Using default tokenizer.
+2022-12-21 10:44:37 | INFO | absl | Using default tokenizer.
+2022-12-21 10:45:02 | INFO | absl | Using default tokenizer.
+2022-12-21 10:45:25 | INFO | absl | Using default tokenizer.
+2022-12-21 10:45:51 | INFO | absl | Using default tokenizer.
+2022-12-21 10:46:23 | INFO | absl | Using default tokenizer.
+2022-12-21 10:46:43 | INFO | absl | Using default tokenizer.
+2022-12-21 10:47:15 | INFO | absl | Using default tokenizer.
+2022-12-21 10:47:37 | INFO | absl | Using default tokenizer.
+2022-12-21 10:48:15 | INFO | absl | Using default tokenizer.
+2022-12-21 10:48:47 | INFO | absl | Using default tokenizer.
+2022-12-21 10:49:12 | INFO | absl | Using default tokenizer.
+2022-12-21 10:49:36 | INFO | absl | Using default tokenizer.
+2022-12-21 10:49:59 | INFO | absl | Using default tokenizer.
+2022-12-21 10:50:31 | INFO | absl | Using default tokenizer.
+2022-12-21 10:50:55 | INFO | absl | Using default tokenizer.
+2022-12-21 10:51:20 | INFO | absl | Using default tokenizer.
+2022-12-21 10:51:46 | INFO | absl | Using default tokenizer.
+2022-12-21 10:52:11 | INFO | absl | Using default tokenizer.
+2022-12-21 10:52:35 | INFO | absl | Using default tokenizer.
+2022-12-21 10:52:59 | INFO | absl | Using default tokenizer.
+2022-12-21 10:53:25 | INFO | absl | Using default tokenizer.
+2022-12-21 10:53:52 | INFO | absl | Using default tokenizer.
+slurmstepd: error: *** JOB 2843546 ON gpu-node002 CANCELLED AT 2022-12-21T10:54:08 ***

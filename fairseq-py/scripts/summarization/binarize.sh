@@ -6,7 +6,8 @@
 # LICENSE file in the root directory of this source tree.
 
 
-TASK=${YOUR_DATADIR}
+# TASK=${YOUR_DATADIR}
+TASK="/home/acp20tg/bart_ls/resources/PLOS_fs-graph_text"
 
 for SPLIT in train val test
 do

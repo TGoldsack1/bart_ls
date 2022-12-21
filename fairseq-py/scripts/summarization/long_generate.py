@@ -12,6 +12,7 @@ from fairseq.models.bart.hub_interface import BARTHubInterface
 from fairseq.data.encoders.gpt2_bpe import GPT2BPE, GPT2BPEConfig
 import nltk
 
+nltk.download('punkt')
 
 def main():
     parser = argparse.ArgumentParser()
@@ -75,6 +76,8 @@ def main():
         generate_args = dict(beam=4, max_len_b=350, lenpen=2.0, no_repeat_ngram_size=3, min_len=50)
     elif 'booksum' in args.data_dir:
         generate_args = dict(beam=4, max_len_b=320, lenpen=2.0, no_repeat_ngram_size=4, min_len=20)
+    elif "eLife" in args.data_dir or "controllable" in arg.data_dir: ## set this for controllable experiemtns as we try control length indirectly 
+        generate_args = dict(beam=4, max_len_b=450, lenpen=2.0, no_repeat_ngram_size=4, min_len=50)
     else:
         generate_args = dict(beam=4, max_len_b=256, lenpen=2.0, no_repeat_ngram_size=4, min_len=50)
 
