@@ -27,6 +27,6 @@ module load Anaconda3/5.3.0
 
 source activate bart-ls
 
-pip freeze
+# pip freeze
 
 bash scripts/summarization/my_ft_summ_v100.sh

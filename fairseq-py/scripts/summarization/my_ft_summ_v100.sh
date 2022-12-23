@@ -5,17 +5,19 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-DATSET="eLife"
+DATSET="PLOS"
 # DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-bin"
 # DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-graph_text-bin"
-DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-controllable_all-bin"
+# DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-controllable_all-bin"
+DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-graph_text-bin"
+
 
 # TRY ADDDING --save-dir checkpoints/...
-OUT_FILE="checkpoints/${DATASET}/controllable/all"
+# OUT_FILE="checkpoints/${DATASET}/controllable/all"
+OUT_FILE="checkpoints/${DATASET}/graph_text"
 
 
-
-python train.py $DATA_BIN \
+CUDA_LAUNCH_BLOCKING=1 python train.py $DATA_BIN \
   --task summarization \
   --max-epoch 50 \
   --arch "bart_large" \

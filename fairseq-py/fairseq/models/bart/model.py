@@ -350,32 +350,131 @@ logger = logging.getLogger(__name__)
 #                     logger.info("Overwriting " + prefix + "classification_heads." + k)
 #                     state_dict[prefix + "classification_heads." + k] = v
 
-class GATModel(nn.Module):
-    def __init__(self, in_size, hid_size, heads):
-        super().__init__()
-        self.gat_layers = nn.ModuleList()
-        # three-layer GAT
-        self.gat_layers.append(dgl.nn.GATConv(in_size, hid_size, heads[0], activation=F.elu))
-        self.gat_layers.append(dgl.nn.GATConv(hid_size*heads[0], hid_size, heads[1], residual=True, activation=F.elu))
-        # self.gat_layers.append(dglnn.GATConv(hid_size*heads[1], out_size, heads[2], residual=True, activation=None))
+# class GATModel(nn.Module):
+#     def __init__(self, in_size, hid_size, heads):
+#         super().__init__()
+#         self.gat_layers = nn.ModuleList()
+#         # three-layer GAT
+#         self.gat_layers.append(dgl.nn.GATConv(in_size, hid_size, heads[0], activation=F.elu))
+#         self.gat_layers.append(dgl.nn.GATConv(hid_size*heads[0], hid_size, heads[1], residual=True, activation=F.elu))
+#         # self.gat_layers.append(dglnn.GATConv(hid_size*heads[1], out_size, heads[2], residual=True, activation=None))
 
-    def forward(self, g, inputs):
-        h = inputs
-        for i, layer in enumerate(self.gat_layers):
+#     def forward(self, g, inputs):
+#         h = inputs
+#         for i, layer in enumerate(self.gat_layers):
             
-            h = layer(g, h)
-            # if i == 2:  # last layer 
-            #     h = h.mean(1)
-            # else:       # other layer(s)
-            h = h.flatten(1)
-        return h
+#             h = layer(g, h)
+#             # if i == 2:  # last layer 
+#             #     h = h.mean(1)
+#             # else:       # other layer(s)
+#             h = h.flatten(1)
+#         return h
 
-class GraphEncoder():
-    def __init__(self):
-        self.GM = GATModel(50, 256, heads=[4,4]).to(device)
+# from transformers import AutoTokenizer, AutoModel
+# import pickle
+# import dgl
+# import json
+# import pickle
+# import torch
+# import torch.nn as nn
+# import torch.nn.functional as F
+# import torch.optim as optim
+# import numpy as np
+# import random
+# import re
+
+
+## CHECK ALL "SELF" references
+# class GraphEncoder():
+#     def __init__(self):
+            # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+
+            # self.scibert = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased').to(device)
+            # self.scibert_tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
+            #self.cui2embs = ..
+            #self.tui2embs = 
+        #         self.GM = GATModel(50, 256, heads=[4,4]).to(device)
+
+#     def forward(self, article_id):
+#         return
+
+#     def get_initial_embeddings(self, article_id):
+#         return 
+
+#     def get_graph(self, nodes, edges):
+
+    # # Build DGL graph
+    # graph_data = {}
+
+    # # Process edges
+    # edgetype2tensor1, edgetype2tensor2, edge_types = {}, {}, set()
+    # for n1, edge_type, n2 in edges:
+    #     node1_index = nodes.index(n1)
+    #     node2_index = nodes.index(n2)
+    #     if not edge_type in edgetype2tensor1: edgetype2tensor1[edge_type] = []
+    #     if not edge_type in edgetype2tensor2: edgetype2tensor2[edge_type] = []
+    #     edgetype2tensor1[edge_type].append(node1_index)
+    #     edgetype2tensor2[edge_type].append(node2_index)
+    #     edge_types.add(edge_type)
         
-    def get_initial_embeddings(self, article_id):
+    # for edge_type in edge_types:
+    #     graph_data[(NODE, edge_type, NODE)] = (torch.tensor(edgetype2tensor1[edge_type]),
+    #                                            torch.tensor(edgetype2tensor2[edge_type]))
+
+    # # Finalize the graph
+    # G = dgl.heterograph(graph_data)
+    # assert(G.number_of_nodes() == len(nodes))
+
+    # return dgl.to_bidirected(G)
+
+    # def get_initial_embeddings(self, nodes, central_node_id, section_title):
+    #     ret_nodes, ret_embs = [], []
+    #     for n in nodes:
+    #         if is_concept_node(n):           ## Concept nodes ##
+    #             if n in self.cuid2embs:      # has defintion embedding
+    #                 emb = torch.tensor(self.cuid2embs[n]).to(self.device)
+    #                 ret_embs.append(emb)
+    #                 ret_nodes.append(n)
+    #             # else:                        # no definition embedding
+    #             #     print(f"### {n}")
+
+    #         else:                            ## Non-concept nodes ##
+    #             if n in semtypes:            # Semantic type node
+    #                 print(f"--- {n}" )
+    #             else:                        # titles, keywords, and section text
+    #                 if n == central_node_id: # sections text
+    #                     #ret_embs.append(get_sentence_embeddings(node_sents))
+    #                     ret_embs.append(get_sentence_embeddings([section_title], True)[0])
+    #                     ret_nodes.append(n)
+    #                 else:                    # titles and keywords
+    #                     embs = get_sentence_embeddings([n], True)
+    #                     ret_embs.append(embs[0]) 
+    #                     ret_nodes.append(n)                        
         
+    #     return ret_nodes, ret_embs
+
+
+# def mean_pooling(self, model_output, attention_mask):
+#     token_embeddings = model_output[0] #First element of model_output contains all token embeddings
+#     input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+#     return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+
+# def get_sentence_embeddings(self, sents, is_project=False):
+#     sents = [s for s in sents if s]
+#     encoded_input = scibert_tokenizer(sents, padding='max_length', truncation=True, return_tensors='pt', max_length=100).to(device)
+    
+#     # Compute token embeddings
+#     with torch.no_grad():
+#         model_output = scibert(**encoded_input)
+
+#     # Perform pooling. In this case, mean pooling
+#     pool = mean_pooling(model_output, encoded_input['attention_mask'])
+
+#     if is_project:
+#         m = nn.Linear(768, 50).to(device)
+#         return(m(pool))
+#     else:
+#         return pool
 
     
 
@@ -402,8 +501,7 @@ class BARTModel(TransformerModel):
         self.classification_heads = nn.ModuleDict()
         
         # if args.dual_graph_encoder:
-        #     self.graph_encoder = 
-
+        #     self.graph_encoder = GraphEncoder()
 
         if hasattr(self.encoder, "dictionary"):
             self.eos: int = self.encoder.dictionary.eos()
@@ -532,9 +630,12 @@ class BARTModel(TransformerModel):
             return_all_hiddens=return_all_hiddens
         )
 
+        print(encoder_out.shape)
+        
         # If dual encoding, encode the article graph and then update encoder_out
-        if args.dual_graph_encoder:
-            graph_encoder_out = self.graph_encoder()
+        # if args.dual_graph_encoder:
+        #     graph_encoder_out = self.graph_encoder.forward()
+        #     #encoder_out = 
             
 
         x, extra = self.decoder(
