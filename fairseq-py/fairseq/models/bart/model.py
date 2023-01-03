@@ -350,132 +350,211 @@ logger = logging.getLogger(__name__)
 #                     logger.info("Overwriting " + prefix + "classification_heads." + k)
 #                     state_dict[prefix + "classification_heads." + k] = v
 
-# class GATModel(nn.Module):
-#     def __init__(self, in_size, hid_size, heads):
-#         super().__init__()
-#         self.gat_layers = nn.ModuleList()
-#         # three-layer GAT
-#         self.gat_layers.append(dgl.nn.GATConv(in_size, hid_size, heads[0], activation=F.elu))
-#         self.gat_layers.append(dgl.nn.GATConv(hid_size*heads[0], hid_size, heads[1], residual=True, activation=F.elu))
-#         # self.gat_layers.append(dglnn.GATConv(hid_size*heads[1], out_size, heads[2], residual=True, activation=None))
 
-#     def forward(self, g, inputs):
-#         h = inputs
-#         for i, layer in enumerate(self.gat_layers):
+
+from transformers import AutoTokenizer, AutoModel
+import pickle
+import dgl
+import json
+import pickle
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+import numpy as np
+import random
+import re
+
+class GATModel(nn.Module):
+    def __init__(self, in_size, hid_size, heads):
+        super().__init__()
+        self.gat_layers = nn.ModuleList()
+        # three-layer GAT
+        self.gat_layers.append(dgl.nn.GATConv(in_size, hid_size, heads[0], activation=F.elu))
+        self.gat_layers.append(dgl.nn.GATConv(hid_size*heads[0], hid_size, heads[1], residual=True, activation=F.elu))
+        self.gat_layers.append(dgl.nn.GATConv(hid_size*heads[1], hid_size, heads[2], residual=True, activation=None))
+
+    def forward(self, g, inputs):
+        h = inputs
+        for i, layer in enumerate(self.gat_layers):
             
-#             h = layer(g, h)
-#             # if i == 2:  # last layer 
-#             #     h = h.mean(1)
-#             # else:       # other layer(s)
-#             h = h.flatten(1)
-#         return h
+            h = layer(g, h)
+            if i == 2:  # last layer 
+                h = h.mean(1)
+            else:       # other layer(s)
+                h = h.flatten(1)
+        return h
 
-# from transformers import AutoTokenizer, AutoModel
-# import pickle
-# import dgl
-# import json
-# import pickle
-# import torch
-# import torch.nn as nn
-# import torch.nn.functional as F
-# import torch.optim as optim
-# import numpy as np
-# import random
-# import re
+from enum import Enum
 
 
 ## CHECK ALL "SELF" references
-# class GraphEncoder():
-#     def __init__(self):
-            # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+class GraphEncoder():
+    def __init__(self):
+        dataset = "eLife"
+        self.scibert = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased')
+        self.scibert_tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
+        self.cuid2embs = pickle.load(open("/home/acp20tg/bart_ls/resources/my_umls_concept_all_selected_definitions_embeddings.pkl", 'rb'))
+        self.tuid2embs = pickle.load(open("/home/acp20tg/bart_ls/resources/my_semtype_definitions_embeddings.pkl", 'rb'))
+        # self.id2graph = pickle.load(open("/home/acp20tg/bart_ls/resources/eLife_graphs.pkl", 'rb'))
+        self.graphs = {
+            "train": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_fs/train_graphs.pkl", 'rb')),
+            "val": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_fs/val_graphs.pkl", 'rb')),
+            "test": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_fs/test_graphs.pkl", 'rb'))
+        }
+        self.GM = GATModel(50, 1024, heads=[4,4,4])
+        self.NodeType = Enum('NodeType', ['Document', "Section" 'Metadata', 'Concept', "Semtype"])
 
-            # self.scibert = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased').to(device)
-            # self.scibert_tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
-            #self.cui2embs = ..
-            #self.tui2embs = 
-        #         self.GM = GATModel(50, 256, heads=[4,4]).to(device)
+    def is_concept_node(self, node_id):
+        return re.match(r'^[C][0-9]{7}', node_id)
 
-#     def forward(self, article_id):
-#         return
+    def is_semtype_node(self, node_id):
+        return re.match(r'^[T][0-9]{4}', node_id)
 
-#     def get_initial_embeddings(self, article_id):
-#         return 
+    def get_initial_embeddings(self, aid, nodes, edges, device):
+        ret_nodes, ret_embs = [], []
+        has_title_edges = [e for e in edges if e[1] == "has_title"]
+        titles = [r[2] for r in has_title_edges]
+        # print(has_title_edges)
+        for n in nodes:
+            if self.is_concept_node(n):           ## Concept nodes ##
+                # if n in self.cuid2embs:      # has defintion embedding
+                emb = torch.tensor(self.cuid2embs[n]).to(device)
+                #print("cui ", emb.shape)
+                ret_embs.append(emb[0])
+                ret_nodes.append(n)
+            else:                            ## Non-concept nodes ##
+                # Semantic type node
+                if self.is_semtype_node(n):
+                    emb = torch.tensor(self.tuid2embs[n]).to(device)
+                    #print("tui ", emb.shape)
+                    ret_embs.append(emb[0])
+                    ret_nodes.append(n)
+                else:                        # titles, keywords, and section text
+                    if aid in n:
+                        if "_Abs" in n:
+                            title = "Abstract"
+                        else:  
+                            title_e = [e for e in has_title_edges if e[0] == n][0]
+                            title = title_e[2]
+                        if title.strip():
+                            emb = self.get_sentence_embeddings([title], device, True)[0]
+                            ret_embs.append(emb)
+                            ret_nodes.append(n)
+                    else:                    # titles and keywords
+                        if n not in titles:
+                            emb = self.get_sentence_embeddings([n], device, True)[0]
+                            ret_embs.append(emb)
+                            ret_nodes.append(n)                        
+            
+        return ret_nodes, ret_embs
 
-#     def get_graph(self, nodes, edges):
+    def get_node_type(self, node):
+        if self.is_concept_node(node):
+            return NodeType.Concept
 
-    # # Build DGL graph
-    # graph_data = {}
+        if self.is_semtype_node(node):
+            return NodeType.Semtype
 
-    # # Process edges
-    # edgetype2tensor1, edgetype2tensor2, edge_types = {}, {}, set()
-    # for n1, edge_type, n2 in edges:
-    #     node1_index = nodes.index(n1)
-    #     node2_index = nodes.index(n2)
-    #     if not edge_type in edgetype2tensor1: edgetype2tensor1[edge_type] = []
-    #     if not edge_type in edgetype2tensor2: edgetype2tensor2[edge_type] = []
-    #     edgetype2tensor1[edge_type].append(node1_index)
-    #     edgetype2tensor2[edge_type].append(node2_index)
-    #     edge_types.add(edge_type)
+        if node.startswith("elife-") or node.startswith("journal."):
+            if "_Abs" or "_Sec" in node:
+                return NodeType.Section
+            else:
+                return NodeType.Document
+
+        return NodeType.Metadata    
+
+
+    def get_graph(self, nodes, edges):
+        NODE = 'node'
+
+        # Build DGL graph
+        graph_data = {}
+
+        # edge_types = {}
+
+        # Process edges
+        edgetype2tensor1, edgetype2tensor2, edge_types = {}, {}, set()
+        for n1, edge_type, n2 in edges:
+            node1_index = nodes.index(n1)
+            node2_index = nodes.index(n2)
+            if not edge_type in edgetype2tensor1: edgetype2tensor1[edge_type] = []
+            if not edge_type in edgetype2tensor2: edgetype2tensor2[edge_type] = []
+            edgetype2tensor1[edge_type].append(node1_index)
+            edgetype2tensor2[edge_type].append(node2_index)
+            edge_types.add(edge_type)
+
+            # node1_type = self.get_node_type(n1)
+            # node2_type = self.get_node_type(n2)
+            # if (node1_type, edge_type, node2_type) in graph_data:
+            #     graph_embeddings[(node1_type, edge_type, node2_type)]
+
+        for edge_type in edge_types:
+            graph_data[(NODE, edge_type, NODE)] = (torch.tensor(edgetype2tensor1[edge_type]),
+                                                torch.tensor(edgetype2tensor2[edge_type]))
+
+
+        # Finalize the graph
+        G = dgl.heterograph(graph_data)
+        # print(G)
+
+        G = dgl.to_homogeneous(G)
+        G = dgl.add_self_loop(G)
+
+        # print(G)
+
+        #print(G.canonical_etypes)
+        assert(G.number_of_nodes() == len(nodes))
+        #print(G)
+        #G = dgl.to_bidirected(G)
+
+        #print(G)
+        return G
+
+
+    def mean_pooling(self, model_output, attention_mask):
+        token_embeddings = model_output[0] #First element of model_output contains all token embeddings
+        input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
+        return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
+
+    def get_sentence_embeddings(self, sents, device, is_project=False):
+        sents = [s for s in sents if s]
+        encoded_input = self.scibert_tokenizer(sents, padding='max_length', truncation=True, return_tensors='pt', max_length=100).to(device)
         
-    # for edge_type in edge_types:
-    #     graph_data[(NODE, edge_type, NODE)] = (torch.tensor(edgetype2tensor1[edge_type]),
-    #                                            torch.tensor(edgetype2tensor2[edge_type]))
+        # Compute token embeddings
+        with torch.no_grad():
+            model_output = self.scibert(**encoded_input)
 
-    # # Finalize the graph
-    # G = dgl.heterograph(graph_data)
-    # assert(G.number_of_nodes() == len(nodes))
+        # Perform pooling. In this case, mean pooling
+        pool = self.mean_pooling(model_output, encoded_input['attention_mask'])
 
-    # return dgl.to_bidirected(G)
+        if is_project:
+            m = nn.Linear(768, 50).to(device)
+            return(m(pool))
+        else:
+            return pool
 
-    # def get_initial_embeddings(self, nodes, central_node_id, section_title):
-    #     ret_nodes, ret_embs = [], []
-    #     for n in nodes:
-    #         if is_concept_node(n):           ## Concept nodes ##
-    #             if n in self.cuid2embs:      # has defintion embedding
-    #                 emb = torch.tensor(self.cuid2embs[n]).to(self.device)
-    #                 ret_embs.append(emb)
-    #                 ret_nodes.append(n)
-    #             # else:                        # no definition embedding
-    #             #     print(f"### {n}")
-
-    #         else:                            ## Non-concept nodes ##
-    #             if n in semtypes:            # Semantic type node
-    #                 print(f"--- {n}" )
-    #             else:                        # titles, keywords, and section text
-    #                 if n == central_node_id: # sections text
-    #                     #ret_embs.append(get_sentence_embeddings(node_sents))
-    #                     ret_embs.append(get_sentence_embeddings([section_title], True)[0])
-    #                     ret_nodes.append(n)
-    #                 else:                    # titles and keywords
-    #                     embs = get_sentence_embeddings([n], True)
-    #                     ret_embs.append(embs[0]) 
-    #                     ret_nodes.append(n)                        
+    def forward(self, idx, split, device):
         
-    #     return ret_nodes, ret_embs
+        graph_info = self.graphs[split][idx]
+        nodes = graph_info['nodes']
+        edges = graph_info['edges']
+        article_id = graph_info['id']
 
+        device = f"cuda:{device}"
+        self.scibert = self.scibert.to(device)
+        self.GM = self.GM.to(device)
+        
+        # get initial embeddings
+        final_nodes, embeddings = self.get_initial_embeddings(article_id, nodes, edges, device)
+        final_edges = [e for e in edges if (e[0] in final_nodes and e[2] in final_nodes)]
+        
+        embeddings = torch.stack(embeddings).to(device)
+        G = self.get_graph(final_nodes, final_edges).to(device)
 
-# def mean_pooling(self, model_output, attention_mask):
-#     token_embeddings = model_output[0] #First element of model_output contains all token embeddings
-#     input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-#     return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
-
-# def get_sentence_embeddings(self, sents, is_project=False):
-#     sents = [s for s in sents if s]
-#     encoded_input = scibert_tokenizer(sents, padding='max_length', truncation=True, return_tensors='pt', max_length=100).to(device)
-    
-#     # Compute token embeddings
-#     with torch.no_grad():
-#         model_output = scibert(**encoded_input)
-
-#     # Perform pooling. In this case, mean pooling
-#     pool = mean_pooling(model_output, encoded_input['attention_mask'])
-
-#     if is_project:
-#         m = nn.Linear(768, 50).to(device)
-#         return(m(pool))
-#     else:
-#         return pool
-
+        graph_embeddings = self.GM(G, embeddings)
+        
+        return graph_embeddings
     
 
 @register_model("bart")
@@ -500,8 +579,10 @@ class BARTModel(TransformerModel):
 
         self.classification_heads = nn.ModuleDict()
         
-        # if args.dual_graph_encoder:
-        #     self.graph_encoder = GraphEncoder()
+        if args.dual_graph_encoder:
+            self.graph_encoder = GraphEncoder()
+            self.graph_cross_attention = torch.nn.MultiheadAttention(1024, 4)
+
 
         if hasattr(self.encoder, "dictionary"):
             self.eos: int = self.encoder.dictionary.eos()
@@ -607,6 +688,8 @@ class BARTModel(TransformerModel):
 
     def forward(
         self,
+        split,
+        aids,
         src_tokens,
         src_lengths,
         prev_output_tokens,
@@ -623,6 +706,10 @@ class BARTModel(TransformerModel):
         if classification_head_name is not None:
             features_only = True
 
+        # print("IDs: ", aids)
+
+        # print("ARGS: ", self.args)
+
         encoder_out = self.encoder(
             src_tokens,
             src_lengths=src_lengths,
@@ -630,14 +717,33 @@ class BARTModel(TransformerModel):
             return_all_hiddens=return_all_hiddens
         )
 
-        print(encoder_out.shape)
-        
         # If dual encoding, encode the article graph and then update encoder_out
-        # if args.dual_graph_encoder:
-        #     graph_encoder_out = self.graph_encoder.forward()
-        #     #encoder_out = 
+        if self.args.dual_graph_encoder:
+            enc_output = encoder_out['encoder_out']
+            device = aids.get_device()
+            self.graph_cross_attention = self.graph_cross_attention.to(device)
+
+            graph_enc_out = []
+            for i, aid in enumerate(aids):
+                graph_out = self.graph_encoder.forward(aid, split, device)
+                # print(graph_out.shape)
+                # pad graph output to 1024
+                graph_out = torch.nn.functional.pad(graph_out, (0,0,0,1024-graph_out.shape[0]), "constant", 0)
+                graph_enc_out.append(graph_out)
             
 
+            # print("encoder", enc_output[0].shape)
+            graph_enc_out = torch.stack(graph_enc_out, dim=1).to(torch.float16)
+
+            # print("graph ", graph_enc_out.shape)
+
+            attn_output, attn_output_weights = self.graph_cross_attention(enc_output[0], graph_enc_out, graph_enc_out)
+
+
+            # print("Attn output: ", attn_output.shape)
+
+            encoder_out['encoder_out'] = [attn_output]
+            
         x, extra = self.decoder(
             prev_output_tokens,
             encoder_out=encoder_out,

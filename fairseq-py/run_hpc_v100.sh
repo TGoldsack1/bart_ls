@@ -17,8 +17,13 @@
 # module load GCC/9.5.0
 
 
-#module load cuDNN/8.0.4.30-CUDA-11.1.1
+# module load cuDNN/8.0.4.30-CUDA-11.1.1
 module load CUDAcore/11.1.1
+# module load CUDAcore/11.0.2
+
+# module load CUDA/10.1.243
+
+
 module load GCCcore/9.3.0
 module load GCC/9.3.0
 
@@ -28,5 +33,4 @@ module load Anaconda3/5.3.0
 source activate bart-ls
 
 # pip freeze
-
 bash scripts/summarization/my_ft_summ_v100.sh
