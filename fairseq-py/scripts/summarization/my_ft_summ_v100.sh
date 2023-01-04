@@ -15,7 +15,9 @@ DATA_BIN="/home/acp20tg/bart_ls/resources/${DATASET}_fs-bin"
 # TRY ADDDING --save-dir checkpoints/...
 # OUT_FILE="checkpoints/${DATASET}/controllable/all"
 # OUT_FILE="checkpoints/${DATASET}/graph_text"
-OUT_FILE="checkpoints/${DATASET}/dual_encode"
+OUT_FILE="/fastdata/acp20tg/bart_ls/checkpoints/${DATASET}/dual_encode"
+RESTORE_CHECK="${OUT_FILE}/checkpoint_last.pt" #  ../checkpoints/model_100k.pt
+
 
 # TOKENIZERS_PARALLELISM=false
 
@@ -58,6 +60,6 @@ TOKENIZERS_PARALLELISM=true CUDA_LAUNCH_BLOCKING=1 python train.py $DATA_BIN \
   --log-format json \
   --log-interval 10 \
   --custom-dict ../checkpoints/dict.txt \
-  --restore-file ../checkpoints/model_100k.pt \
+  --restore-file $RESTORE_CHECK \
   --dual_graph_encoder \
   --save-dir $OUT_FILE
