@@ -54,6 +54,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
         embed_tokens,
         no_encoder_attn=False,
         output_projection=None,
+        add_graph_attn=False,
     ):
         self.cfg = cfg
         super().__init__(dictionary)
@@ -115,7 +116,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
             self.layers = nn.ModuleList([])
         self.layers.extend(
             [
-                self.build_decoder_layer(cfg, no_encoder_attn)
+                self.build_decoder_layer(cfg, no_encoder_attn, add_graph_attn)
                 for _ in range(cfg.decoder.layers)
             ]
         )
@@ -183,8 +184,8 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
                 BaseLayer(cfg),
             )
 
-    def build_decoder_layer(self, cfg, no_encoder_attn=False):
-        layer = transformer_layer.TransformerDecoderLayerBase(cfg, no_encoder_attn)
+    def build_decoder_layer(self, cfg, no_encoder_attn=False, add_graph_attn=False):
+        layer = transformer_layer.TransformerDecoderLayerBase(cfg, no_encoder_attn, add_graph_attn)
         checkpoint = cfg.checkpoint_activations
         if checkpoint:
             offload_to_cpu = cfg.offload_activations
@@ -199,6 +200,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
         self,
         prev_output_tokens,
         encoder_out: Optional[Dict[str, List[Tensor]]] = None,
+        graph_encoder_out: Optional[List[Tensor]] = None,
         incremental_state: Optional[Dict[str, Dict[str, Optional[Tensor]]]] = None,
         features_only: bool = False,
         full_context_alignment: bool = False,
@@ -229,6 +231,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
         x, extra = self.extract_features(
             prev_output_tokens,
             encoder_out=encoder_out,
+            graph_encoder_out=graph_encoder_out,
             incremental_state=incremental_state,
             full_context_alignment=full_context_alignment,
             alignment_layer=alignment_layer,
@@ -243,6 +246,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
         self,
         prev_output_tokens,
         encoder_out: Optional[Dict[str, List[Tensor]]],
+        graph_encoder_out: Optional[List[Tensor]] = None,
         incremental_state: Optional[Dict[str, Dict[str, Optional[Tensor]]]] = None,
         full_context_alignment: bool = False,
         alignment_layer: Optional[int] = None,
@@ -251,6 +255,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
         return self.extract_features_scriptable(
             prev_output_tokens,
             encoder_out,
+            graph_encoder_out,
             incremental_state,
             full_context_alignment,
             alignment_layer,
@@ -267,6 +272,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
         self,
         prev_output_tokens,
         encoder_out: Optional[Dict[str, List[Tensor]]],
+        graph_encoder_out: Optional[List[Tensor]] = None,
         incremental_state: Optional[Dict[str, Dict[str, Optional[Tensor]]]] = None,
         full_context_alignment: bool = False,
         alignment_layer: Optional[int] = None,
@@ -304,6 +310,10 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
             ), f"Expected enc.shape == (t, {bs}, c) got {enc.shape}"
         if encoder_out is not None and len(encoder_out["encoder_padding_mask"]) > 0:
             padding_mask = encoder_out["encoder_padding_mask"][0]
+
+        # ADDED
+        if graph_encoder_out is not None and len(graph_encoder_out) > 0:
+            graph_enc = graph_encoder_out[0]
 
         # embed positions
         positions = None
@@ -359,6 +369,7 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
                 self_attn_padding_mask=self_attn_padding_mask,
                 need_attn=bool((idx == alignment_layer)),
                 need_head_weights=bool((idx == alignment_layer)),
+                graph_encoder_out=graph_enc,
             )
             inner_states.append(x)
             if layer_attn is not None and idx == alignment_layer:

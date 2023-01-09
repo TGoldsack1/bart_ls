@@ -200,7 +200,7 @@ class TransformerDecoderLayerBase(nn.Module):
     """
 
     def __init__(
-        self, cfg, no_encoder_attn=False, add_bias_kv=False, add_zero_attn=False
+        self, cfg, no_encoder_attn=False, add_bias_kv=False, add_zero_attn=False, add_graph_attn=False
     ):
         super().__init__()
         self.embed_dim = cfg.decoder.embed_dim
@@ -238,6 +238,14 @@ class TransformerDecoderLayerBase(nn.Module):
             self.encoder_attn = self.build_encoder_attention(self.embed_dim, cfg)
             self.encoder_attn_layer_norm = LayerNorm(self.embed_dim, export=cfg.export)
 
+        # ADDED
+        if add_graph_attn:
+            self.graph_attn = self.build_graph_attention(self.embed_dim, cfg)
+            self.graph_attn_layer_norm = LayerNorm(self.embed_dim, export=cfg.export)
+        else:
+            self.graph_attn = None
+            self.graph_attn_layer_norm = None
+
         self.fc1 = self.build_fc1(
             self.embed_dim,
             cfg.decoder.ffn_embed_dim,
@@ -261,6 +269,24 @@ class TransformerDecoderLayerBase(nn.Module):
 
     def build_fc2(self, input_dim, output_dim, q_noise, qn_block_size):
         return quant_noise(nn.Linear(input_dim, output_dim), q_noise, qn_block_size)
+
+    def build_graph_encoder_attention(
+        self, embed_dim, cfg, add_bias_kv=False, add_zero_attn=False
+    ):
+        return MultiheadAttention(
+            embed_dim,
+            cfg.decoder.attention_heads,
+            kdim=cfg.encoder.embed_dim,
+            vdim=cfg.encoder.embed_dim,
+            dropout=cfg.attention_dropout,
+            encoder_decoder_attention=True, # can also try with this false
+            q_noise=self.quant_noise,
+            qn_block_size=self.quant_noise_block_size,
+            use_xformers=cfg.use_xformers,
+            attention_name="graph_encoder_attention",
+            xformer_config=None if not cfg.use_xformers else cfg.xformer_config,
+        )
+
 
     def build_self_attention(
         self, embed_dim, cfg, add_bias_kv=False, add_zero_attn=False
@@ -312,6 +338,7 @@ class TransformerDecoderLayerBase(nn.Module):
         self_attn_padding_mask: Optional[torch.Tensor] = None,
         need_attn: bool = False,
         need_head_weights: bool = False,
+        graph_encoder_out: Optional[torch.Tensor] = None,
     ):
         """
         Args:
@@ -410,6 +437,37 @@ class TransformerDecoderLayerBase(nn.Module):
             x = self.residual_connection(x, residual)
             if not self.normalize_before:
                 x = self.encoder_attn_layer_norm(x)
+
+        # ADDED
+        if self.graph_encoder_attn is not None and graph_encoder_out is not None:
+            residual = x
+            if self.normalize_before:
+                x = self.graph_encoder_attn_layer_norm(x)
+            # if prev_graph_attn_state is not None:
+            #     prev_key, prev_value = prev_graph_attn_state[:2]
+            #     saved_state: Dict[str, Optional[Tensor]] = {
+            #         "prev_key": prev_key,
+            #         "prev_value": prev_value,
+            #     }
+            #     if len(prev_graph_attn_state) >= 3:
+            #         saved_state["prev_key_padding_mask"] = prev_graph_attn_state[2]
+            #     assert incremental_state is not None
+            #     self.graph_encoder_attn._set_input_buffer(incremental_state, saved_state)
+
+            x, attn = self.graph_encoder_attn(
+                query=x,
+                key=graph_encoder_out,
+                value=graph_encoder_out,
+                key_padding_mask=graph_encoder_padding_mask,
+                incremental_state=incremental_state,
+                static_kv=True,
+                need_weights=need_attn or (not self.training and self.need_attn),
+                need_head_weights=need_head_weights,
+            )
+            x = self.dropout_module(x)
+            x = self.residual_connection(x, residual)
+            if not self.normalize_before:
+                x = self.graph_encoder_attn_layer_norm(x)
 
         residual = x
         if self.normalize_before:
