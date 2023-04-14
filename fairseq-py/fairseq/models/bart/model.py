@@ -317,7 +317,7 @@ logger = logging.getLogger(__name__)
 #             embed_dim = state_dict["encoder.embed_tokens.weight"].size(1)
 
 #             new_lang_embed_to_add = torch.zeros(num_langids_to_add, embed_dim)
-#             nn.init.normal_(new_lang_embed_to_add, mean=0, std=embed_dim ** -0.5)
+#             nn.init.normal_(new_lang_embed_to_add, mean=0, std=embed_dim ** -self.graph_multiplier)
 #             new_lang_embed_to_add = new_lang_embed_to_add.to(
 #                 dtype=state_dict["encoder.embed_tokens.weight"].dtype,
 #             )
@@ -364,6 +364,8 @@ import torch.optim as optim
 import numpy as np
 import random
 import re
+import bz2
+
 
 class GATModel(nn.Module):
     def __init__(self, in_size, hid_size, heads):
@@ -387,82 +389,43 @@ class GATModel(nn.Module):
 
 from enum import Enum
 
-
 ## CHECK ALL "SELF" references
 class GraphEncoder():
     def __init__(self):
-        dataset = "eLife"
-        self.scibert = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased')
-        self.scibert_tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
-        self.cuid2embs = pickle.load(open("/home/acp20tg/bart_ls/resources/my_umls_concept_all_selected_definitions_embeddings.pkl", 'rb'))
-        self.tuid2embs = pickle.load(open("/home/acp20tg/bart_ls/resources/my_semtype_definitions_embeddings.pkl", 'rb'))
+        dataset = "PLOS" #"eLife"
+        # self.scibert = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased')
+        # self.scibert_tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
+        # self.cuid2embs = pickle.load(open("/home/acp20tg/bart_ls/resources/my_umls_concept_all_selected_definitions_embeddings.pkl", 'rb'))
+        # self.tuid2embs = pickle.load(open("/home/acp20tg/bart_ls/resources/my_semtype_definitions_embeddings.pkl", 'rb'))
         # self.id2graph = pickle.load(open("/home/acp20tg/bart_ls/resources/eLife_graphs.pkl", 'rb'))
+        # self.graphs = {
+        #     "train": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_train_graphs_with_features.pkl", 'rb')),
+        #     "val": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_val_graphs_with_features.pkl", 'rb')),
+        #     "test": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_test_graphs_with_features.pkl", 'rb'))
+        # }
+
+        if dataset == "eLife":
+            train_data = pickle.load(open(f"/root/bart_ls/resources/{dataset}_train_graphs_with_features.pkl", 'rb'))
+        else:
+            # ifile = bz2.BZ2File(f"/root/autodl-tmp/{dataset}_train_graphs_with_features.pkl",'rb')
+            # train_data = pickle.load(ifile)
+            # ifile.close()
+            # with open(f"/root/autodl-tmp/{dataset}_train_graphs_with_features.jsonl", 'rb') as in_d:
+            #     train_data = in_d.readlines()
+                # train_data = json.loads([l for l in train_data])
+            train_data = pickle.load(open(f"/root/autodl-tmp/{dataset}_train_graphs_with_features.pkl", 'rb'))
+            train_data = [json.loads(l) for l in train_data]
+
         self.graphs = {
-            "train": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_fs/train_graphs.pkl", 'rb')),
-            "val": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_fs/val_graphs.pkl", 'rb')),
-            "test": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_fs/test_graphs.pkl", 'rb'))
+            "train": train_data,
+            "val": pickle.load(open(f"/root/bart_ls/resources/{dataset}_val_graphs_with_features.pkl", 'rb')),
+            "test": pickle.load(open(f"/root/bart_ls/resources/{dataset}_test_graphs_with_features.pkl", 'rb'))
         }
+
+
         self.GM = GATModel(50, 1024, heads=[4,4,4])
-        self.NodeType = Enum('NodeType', ['Document', "Section" 'Metadata', 'Concept', "Semtype"])
+        # self.NodeType = Enum('NodeType', ['Document', "Section" 'Metadata', 'Concept', "Semtype"])
 
-    def is_concept_node(self, node_id):
-        return re.match(r'^[C][0-9]{7}', node_id)
-
-    def is_semtype_node(self, node_id):
-        return re.match(r'^[T][0-9]{4}', node_id)
-
-    def get_initial_embeddings(self, aid, nodes, edges, device):
-        ret_nodes, ret_embs = [], []
-        has_title_edges = [e for e in edges if e[1] == "has_title"]
-        titles = [r[2] for r in has_title_edges]
-        # print(has_title_edges)
-        for n in nodes:
-            if self.is_concept_node(n):           ## Concept nodes ##
-                # if n in self.cuid2embs:      # has defintion embedding
-                emb = torch.tensor(self.cuid2embs[n]).to(device)
-                #print("cui ", emb.shape)
-                ret_embs.append(emb[0])
-                ret_nodes.append(n)
-            else:                            ## Non-concept nodes ##
-                # Semantic type node
-                if self.is_semtype_node(n):
-                    emb = torch.tensor(self.tuid2embs[n]).to(device)
-                    #print("tui ", emb.shape)
-                    ret_embs.append(emb[0])
-                    ret_nodes.append(n)
-                else:                        # titles, keywords, and section text
-                    if aid in n:
-                        if "_Abs" in n:
-                            title = "Abstract"
-                        else:  
-                            title_e = [e for e in has_title_edges if e[0] == n][0]
-                            title = title_e[2]
-                        if title.strip():
-                            emb = self.get_sentence_embeddings([title], device, True)[0]
-                            ret_embs.append(emb)
-                            ret_nodes.append(n)
-                    else:                    # titles and keywords
-                        if n not in titles:
-                            emb = self.get_sentence_embeddings([n], device, True)[0]
-                            ret_embs.append(emb)
-                            ret_nodes.append(n)                        
-            
-        return ret_nodes, ret_embs
-
-    def get_node_type(self, node):
-        if self.is_concept_node(node):
-            return NodeType.Concept
-
-        if self.is_semtype_node(node):
-            return NodeType.Semtype
-
-        if node.startswith("elife-") or node.startswith("journal."):
-            if "_Abs" or "_Sec" in node:
-                return NodeType.Section
-            else:
-                return NodeType.Document
-
-        return NodeType.Metadata    
 
 
     def get_graph(self, nodes, edges):
@@ -493,7 +456,6 @@ class GraphEncoder():
             graph_data[(NODE, edge_type, NODE)] = (torch.tensor(edgetype2tensor1[edge_type]),
                                                 torch.tensor(edgetype2tensor2[edge_type]))
 
-
         # Finalize the graph
         G = dgl.heterograph(graph_data)
         # print(G)
@@ -512,45 +474,26 @@ class GraphEncoder():
         return G
 
 
-    def mean_pooling(self, model_output, attention_mask):
-        token_embeddings = model_output[0] #First element of model_output contains all token embeddings
-        input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-        return torch.sum(token_embeddings * input_mask_expanded, 1) / torch.clamp(input_mask_expanded.sum(1), min=1e-9)
-
-    def get_sentence_embeddings(self, sents, device, is_project=False):
-        sents = [s for s in sents if s]
-        encoded_input = self.scibert_tokenizer(sents, padding='max_length', truncation=True, return_tensors='pt', max_length=100).to(device)
-        
-        # Compute token embeddings
-        with torch.no_grad():
-            model_output = self.scibert(**encoded_input)
-
-        # Perform pooling. In this case, mean pooling
-        pool = self.mean_pooling(model_output, encoded_input['attention_mask'])
-
-        if is_project:
-            m = nn.Linear(768, 50).to(device)
-            return(m(pool))
-        else:
-            return pool
-
     def forward(self, idx, split, device):
         
         graph_info = self.graphs[split][idx]
         nodes = graph_info['nodes']
         edges = graph_info['edges']
+        embeddings = torch.tensor(graph_info['features']).to(device)
         article_id = graph_info['id']
 
         device = f"cuda:{device}"
-        self.scibert = self.scibert.to(device)
+        # self.scibert = self.scibert.to(device)
         self.GM = self.GM.to(device)
         
-        # get initial embeddings
-        final_nodes, embeddings = self.get_initial_embeddings(article_id, nodes, edges, device)
-        final_edges = [e for e in edges if (e[0] in final_nodes and e[2] in final_nodes)]
+        # # get initial embeddings
+        # final_nodes, embeddings = self.get_initial_embeddings(article_id, nodes, edges, device)
+        # final_edges = [e for e in edges if (e[0] in final_nodes and e[2] in final_nodes)]
         
-        embeddings = torch.stack(embeddings).to(device)
-        G = self.get_graph(final_nodes, final_edges).to(device)
+        # embeddings = torch.stack(embeddings).to(device)
+        #G = self.get_graph(final_nodes, final_edges).to(device)
+
+        G = self.get_graph(nodes, edges).to(device)
 
         graph_embeddings = self.GM(G, embeddings)
         
@@ -582,7 +525,7 @@ class BARTModel(TransformerModel):
         if args.dual_graph_encoder:
             self.graph_encoder = GraphEncoder()
             self.graph_cross_attention = torch.nn.MultiheadAttention(1024, 4)
-
+            self.graph_multiplier = 0.5 # self.graph_multiplier
 
         if hasattr(self.encoder, "dictionary"):
             self.eos: int = self.encoder.dictionary.eos()
@@ -709,6 +652,8 @@ class BARTModel(TransformerModel):
         # print("IDs: ", aids)
 
         # print("ARGS: ", self.args)
+        # print("Token embeddings: ", token_embeddings)
+        # print("Src tokens: ", src_tokens.shape)
 
         encoder_out = self.encoder(
             src_tokens,
@@ -719,7 +664,7 @@ class BARTModel(TransformerModel):
 
         # If dual encoding, encode the article graph and then update encoder_out
         if self.args.dual_graph_encoder:
-            enc_output = encoder_out['encoder_out']
+            enc_output = encoder_out['encoder_out'][0]
             device = aids.get_device()
             self.graph_cross_attention = self.graph_cross_attention.to(device)
 
@@ -731,18 +676,17 @@ class BARTModel(TransformerModel):
                 graph_out = torch.nn.functional.pad(graph_out, (0,0,0,1024-graph_out.shape[0]), "constant", 0)
                 graph_enc_out.append(graph_out)
             
-
-            # print("encoder", enc_output[0].shape)
             graph_enc_out = torch.stack(graph_enc_out, dim=1).to(torch.float16)
-
+            
             # print("graph ", graph_enc_out.shape)
+            
+            attn_output, attn_output_weights = self.graph_cross_attention(enc_output, graph_enc_out, graph_enc_out)
+            #attn_output, attn_output_weights = self.graph_cross_attention(graph_enc_out, enc_output[0], enc_output[0])
 
-            attn_output, attn_output_weights = self.graph_cross_attention(enc_output[0], graph_enc_out, graph_enc_out)
+            enc_output = enc_output + (self.graph_multiplier*attn_output)#(0.1*attn_output)
 
 
-            # print("Attn output: ", attn_output.shape)
-
-            encoder_out['encoder_out'] = [attn_output]
+            encoder_out['encoder_out'] = [enc_output]
             
         x, extra = self.decoder(
             prev_output_tokens,
@@ -899,7 +843,7 @@ class BARTModel(TransformerModel):
             embed_dim = state_dict["encoder.embed_tokens.weight"].size(1)
 
             new_lang_embed_to_add = torch.zeros(num_langids_to_add, embed_dim)
-            nn.init.normal_(new_lang_embed_to_add, mean=0, std=embed_dim ** -0.5)
+            nn.init.normal_(new_lang_embed_to_add, mean=0, std=embed_dim ** -self.graph_multiplier)
             new_lang_embed_to_add = new_lang_embed_to_add.to(
                 dtype=state_dict["encoder.embed_tokens.weight"].dtype,
             )

@@ -5,25 +5,31 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-DATASET="eLife"
-DATA_BIN="/home/acp20tg/bart_ls/resources/${DATASET}_fs-bin"
+DATASET="PLOS"
+# DATA_BIN="/home/acp20tg/bart_ls/resources/${DATASET}_fs-bin"
 # DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-graph_text-bin"
 # DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-controllable_all-bin"
 # DATA_BIN="/home/acp20tg/bart_ls/resources/${DATSET}_fs-graph_text-bin"
+
+DATA_BIN="/root/bart_ls/resources/${DATASET}_fs-bin"
 
 
 # TRY ADDDING --save-dir checkpoints/...
 # OUT_FILE="checkpoints/${DATASET}/controllable/all"
 # OUT_FILE="checkpoints/${DATASET}/graph_text"
-OUT_FILE="/fastdata/acp20tg/bart_ls/checkpoints/${DATASET}/dual_encode"
+#OUT_FILE="/fastdata/acp20tg/bart_ls/checkpoints/${DATASET}/dual_encode"
+
+OUT_FILE="/root/autodl-tmp/checkpoints/${DATASET}/dual_encode/50"
+
 RESTORE_CHECK="${OUT_FILE}/checkpoint_last.pt" #  ../checkpoints/model_100k.pt
-
-
+# RESTORE_CHECK="../checkpoints/model_100k.pt" 
 # TOKENIZERS_PARALLELISM=false
+
+# BATCH SIZE: # 2 for eLife, 4 for PLOS
 
 TOKENIZERS_PARALLELISM=true CUDA_LAUNCH_BLOCKING=1 python train.py $DATA_BIN \
   --task summarization \
-  --max-epoch 10 \
+  --max-epoch 20 \
   --arch "bart_large" \
   --use-xformers \
   --attention-name block_noglobal \
@@ -38,7 +44,7 @@ TOKENIZERS_PARALLELISM=true CUDA_LAUNCH_BLOCKING=1 python train.py $DATA_BIN \
   --max-source-positions 16384 \
   --max-target-positions 1024 \
   --update-freq 4 \
-  --batch-size 2 \
+  --batch-size 4 \
   --optimizer "adam" \
   --adam-betas "(0.9, 0.98)" \
   --clip-norm 0.1 \
@@ -51,7 +57,7 @@ TOKENIZERS_PARALLELISM=true CUDA_LAUNCH_BLOCKING=1 python train.py $DATA_BIN \
   --seed=3 \
   --memory-efficient-fp16 \
   --total-num-update 10000 \
-  --num-workers 1 \
+  --num-workers 4 \
   --skip-invalid-size-inputs-valid-test \
   --combine-val \
   --no-epoch-checkpoints \

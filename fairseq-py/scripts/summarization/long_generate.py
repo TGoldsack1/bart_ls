@@ -36,13 +36,16 @@ def main():
     parser.add_argument("--split", default='test', type=str)
     parser.add_argument("--skip-eval", action='store_true', default=False)
 
+    parser.add_argument("--dual_graph_encoder", action='store_true', default=False)
+
     args = parser.parse_args()
 
     models, cfg, task = checkpoint_utils.load_model_ensemble_and_task([args.model_dir])
     model = models[0]
 
-    print(f"Num of model parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad)}")
+    print(model)
 
+    print(f"Num of model parameters: {sum(p.numel() for p in model.parameters() if p.requires_grad)}")
 
     task.cfg.required_seq_len_multiple = 1024
     task.cfg.left_pad_source = False
@@ -76,7 +79,7 @@ def main():
         generate_args = dict(beam=4, max_len_b=350, lenpen=2.0, no_repeat_ngram_size=3, min_len=50)
     elif 'booksum' in args.data_dir:
         generate_args = dict(beam=4, max_len_b=320, lenpen=2.0, no_repeat_ngram_size=4, min_len=20)
-    elif "eLife" in args.data_dir or "controllable" in arg.data_dir: ## set this for controllable experiemtns as we try control length indirectly 
+    elif "eLife" in args.data_dir or "controllable" in args.data_dir: ## set this for controllable experiemtns as we try control length indirectly 
         generate_args = dict(beam=4, max_len_b=450, lenpen=2.0, no_repeat_ngram_size=4, min_len=50)
     else:
         generate_args = dict(beam=4, max_len_b=256, lenpen=2.0, no_repeat_ngram_size=4, min_len=50)
@@ -93,6 +96,7 @@ def main():
             batch_hypos = hub_interface.generate(
                 batch_sents,
                 skip_invalid_size_inputs=False,
+                # inference_step_args={"dual_graph_encoder": args.dual_graph_encoder},
                 **generate_args
             )
             batch_outputs = [hub_interface.decode(hypos[0]["tokens"]) for hypos in batch_hypos]

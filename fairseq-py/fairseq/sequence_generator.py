@@ -252,14 +252,43 @@ class SequenceGenerator(nn.Module):
         assert (
             self.min_len <= max_len
         ), "min_len cannot be larger than max_len, please adjust these!"
+        
+        aids = sample["id"]
+
+        # print(aids)
+        # print("has_graph_encoder: ", self.model.has_graph_encoder())
+        # print("has_encoder_combine_outs: ", self.model.has_encoder_combine_outs())
+        # print("has_decoder_graph_attn: ", self.model.has_decoder_graph_attn())
+        
         # compute the encoder output for each beam
         with torch.autograd.profiler.record_function("EnsembleModel: forward_encoder"):
             encoder_outs = self.model.forward_encoder(net_input)
+            
+            # print(len(encoder_outs))
+            # print(encoder_outs[0]['encoder_out'][0].shape)
 
+            if self.model.has_graph_encoder():
+                graph_encoder_out = self.model.forward_graph_enc(aids, encoder_outs[0])
+
+                # # If generating test set 
+                # print(graph_encoder_out)
+                # print("---")
+                # print(encoder_outs[0])
+                
+
+                if self.model.has_encoder_combine_outs():
+                    encoder_outs = [self.model.forward_encoder_graph_cross_attention(graph_encoder_out, encoder_outs[0])]
+                    
+                
         # placeholder of indices for bsz * beam_size to hold tokens and accumulative scores
         new_order = torch.arange(bsz).view(-1, 1).repeat(1, beam_size).view(-1)
         new_order = new_order.to(src_tokens.device).long()
+
         encoder_outs = self.model.reorder_encoder_out(encoder_outs, new_order)
+
+        if self.model.has_decoder_graph_attn():
+            graph_encoder_out = graph_encoder_out.index_select(1, new_order)
+
         # ensure encoder_outs is a List.
         assert encoder_outs is not None
 
@@ -337,6 +366,7 @@ class SequenceGenerator(nn.Module):
                     encoder_outs,
                     incremental_states,
                     self.temperature,
+                    graph_encoder_out if self.model.has_decoder_graph_attn() else None
                 )
 
             if self.lm_model is not None:
@@ -751,11 +781,66 @@ class EnsembleModel(nn.Module):
     def has_encoder(self):
         return hasattr(self.single_model, "encoder")
 
+  
+    def has_graph_encoder(self):
+        #return #hasattr(self.single_model, "graph_encoder")
+        return self.single_model.args.dual_graph_encoder or self.single_model.args.decoder_graph_attn
+
+    def has_encoder_combine_outs(self):
+        if hasattr(self.single_model.args, "dual_graph_encoder"):  
+            return self.single_model.args.dual_graph_encoder
+        else:
+            return False
+
+
+    def has_decoder_graph_attn(self):
+        if hasattr(self.single_model.args, "decoder_graph_attn"):
+            return self.single_model.args.decoder_graph_attn
+        else:
+            return False
+    
+
     def has_incremental_states(self):
         return self.has_incremental
 
     def max_decoder_positions(self):
         return min([m.max_decoder_positions() for m in self.models if hasattr(m, "max_decoder_positions")] + [sys.maxsize])
+
+    @torch.jit.export
+    def forward_graph_enc(self, aids, encoder_out):
+        enc_output = encoder_out['encoder_out'][0]
+
+        device = aids.get_device()
+        
+        graph_enc_out = []
+        for i, aid in enumerate(aids):
+
+            graph_out = self.single_model.graph_encoder.forward(aid, "test", device)
+            graph_out = torch.nn.functional.pad(graph_out, (0,0,0,1024-graph_out.shape[0]), "constant", 0)
+            graph_enc_out.append(graph_out)
+
+        graph_enc_out = torch.stack(graph_enc_out, dim=1)#.to(torch.float16)
+        
+        # print(enc_output)#.to(torch.float16))
+        # print("---")
+        # print(graph_enc_out)
+        return graph_enc_out
+
+    @torch.jit.export
+    def forward_encoder_graph_cross_attention(self, graph_enc_out, encoder_out):
+        enc_output = encoder_out['encoder_out'][0]
+
+        graph_enc_out = graph_enc_out#.to(torch.float16) # to half needed for training, but not test set generating
+
+        attn_output, attn_output_weights = self.single_model.graph_cross_attention(enc_output, graph_enc_out, graph_enc_out)
+        
+        # print("multiplier", self.single_model.graph_multiplier)
+        enc_output = enc_output + (self.single_model.graph_multiplier*attn_output)
+
+        encoder_out['encoder_out'] = [enc_output]
+
+        return encoder_out
+
 
     @torch.jit.export
     def forward_encoder(self, net_input: Dict[str, Tensor]):
@@ -770,6 +855,7 @@ class EnsembleModel(nn.Module):
         encoder_outs: List[Dict[str, List[Tensor]]],
         incremental_states: List[Dict[str, Dict[str, Optional[Tensor]]]],
         temperature: float = 1.0,
+        graph_encoder_out=None    
     ):
         log_probs = []
         avg_attn: Optional[Tensor] = None
@@ -781,12 +867,13 @@ class EnsembleModel(nn.Module):
             if self.has_incremental_states():
                 decoder_out = model.decoder.forward(
                     tokens,
-                    encoder_out=encoder_out,
+                    encoder_out=encoder_out, # dict
                     incremental_state=incremental_states[i],
+                    graph_encoder_out=graph_encoder_out
                 )
             else:
                 if hasattr(model, "decoder"):
-                    decoder_out = model.decoder.forward(tokens, encoder_out=encoder_out)
+                    decoder_out = model.decoder.forward(tokens, encoder_out=encoder_out, graph_encoder_out=graph_encoder_out)
                 else:
                     decoder_out = model.forward(tokens)
 

@@ -444,8 +444,8 @@ class SummarizationTask(FairseqTask):
         # )
 
         bpe_cfg = GPT2BPEConfig(
-            gpt2_encoder_json='/home/acp20tg/bart_ls/fairseq-py/gpt2_bpe/encoder.json',
-            gpt2_vocab_bpe='/home/acp20tg/bart_ls/fairseq-py/gpt2_bpe/vocab.bpe'
+            gpt2_encoder_json='/root/bart_ls/fairseq-py/gpt2_bpe/encoder.json',
+            gpt2_vocab_bpe='/root/bart_ls/fairseq-py/gpt2_bpe/vocab.bpe'
         )
         self.bpe = GPT2BPE(bpe_cfg)
 
