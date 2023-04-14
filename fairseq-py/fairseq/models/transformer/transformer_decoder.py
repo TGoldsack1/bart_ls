@@ -187,8 +187,12 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
             )
 
     def build_decoder_layer(self, cfg, no_encoder_attn=False, add_graph_attn=False):
+<<<<<<< HEAD
 
         layer = transformer_layer.TransformerDecoderLayerBase(cfg, no_encoder_attn=no_encoder_attn, add_graph_attn=add_graph_attn)
+=======
+        layer = transformer_layer.TransformerDecoderLayerBase(cfg, no_encoder_attn, add_graph_attn)
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
         checkpoint = cfg.checkpoint_activations
         if checkpoint:
             offload_to_cpu = cfg.offload_activations
@@ -315,10 +319,15 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
             padding_mask = encoder_out["encoder_padding_mask"][0]
 
         # ADDED
+<<<<<<< HEAD
         # print(graph_encoder_out)
         
         # if graph_encoder_out is not None and len(graph_encoder_out) > 0:
         #     graph_enc = graph_encoder_out[0]
+=======
+        if graph_encoder_out is not None and len(graph_encoder_out) > 0:
+            graph_enc = graph_encoder_out[0]
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
 
         # embed positions
         positions = None
@@ -374,7 +383,11 @@ class TransformerDecoderBase(FairseqIncrementalDecoder):
                 self_attn_padding_mask=self_attn_padding_mask,
                 need_attn=bool((idx == alignment_layer)),
                 need_head_weights=bool((idx == alignment_layer)),
+<<<<<<< HEAD
                 graph_encoder_out=graph_encoder_out,
+=======
+                graph_encoder_out=graph_enc,
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
             )
             inner_states.append(x)
             if layer_attn is not None and idx == alignment_layer:

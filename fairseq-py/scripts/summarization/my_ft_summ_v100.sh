@@ -17,15 +17,24 @@ DATA_BIN="/root/bart_ls/resources/${DATASET}_fs-bin"
 # TRY ADDDING --save-dir checkpoints/...
 # OUT_FILE="checkpoints/${DATASET}/controllable/all"
 # OUT_FILE="checkpoints/${DATASET}/graph_text"
+<<<<<<< HEAD
 #OUT_FILE="/fastdata/acp20tg/bart_ls/checkpoints/${DATASET}/dual_encode"
 
 OUT_FILE="/root/autodl-tmp/checkpoints/${DATASET}/dual_encode/50"
+=======
+OUT_FILE="/fastdata/acp20tg/bart_ls/checkpoints/${DATASET}/decoder_attend"
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
 
 RESTORE_CHECK="${OUT_FILE}/checkpoint_last.pt" #  ../checkpoints/model_100k.pt
 # RESTORE_CHECK="../checkpoints/model_100k.pt" 
 # TOKENIZERS_PARALLELISM=false
 
+<<<<<<< HEAD
 # BATCH SIZE: # 2 for eLife, 4 for PLOS
+=======
+#   --dual_graph_encoder \
+
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
 
 TOKENIZERS_PARALLELISM=true CUDA_LAUNCH_BLOCKING=1 python train.py $DATA_BIN \
   --task summarization \
@@ -66,6 +75,6 @@ TOKENIZERS_PARALLELISM=true CUDA_LAUNCH_BLOCKING=1 python train.py $DATA_BIN \
   --log-format json \
   --log-interval 10 \
   --custom-dict ../checkpoints/dict.txt \
-  --restore-file $RESTORE_CHECK \
-  --dual_graph_encoder \
+  --restore-file ../checkpoints/model_100k.pt \
+  --decoder_graph_attn \
   --save-dir $OUT_FILE

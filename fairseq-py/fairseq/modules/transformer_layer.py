@@ -240,12 +240,20 @@ class TransformerDecoderLayerBase(nn.Module):
 
         # ADDED
         if add_graph_attn:
+<<<<<<< HEAD
             # self.graph_encoder_attn = torch.nn.MultiheadAttention(1024, 4)
             self.graph_encoder_attn = self.build_graph_encoder_attention(self.embed_dim, cfg)
             self.graph_encoder_attn_layer_norm = LayerNorm(self.embed_dim, export=cfg.export)
         else:
             self.graph_encoder_attn = None
             self.graph_encoder_attn_layer_norm = None
+=======
+            self.graph_attn = self.build_graph_attention(self.embed_dim, cfg)
+            self.graph_attn_layer_norm = LayerNorm(self.embed_dim, export=cfg.export)
+        else:
+            self.graph_attn = None
+            self.graph_attn_layer_norm = None
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
 
         self.fc1 = self.build_fc1(
             self.embed_dim,
@@ -340,7 +348,10 @@ class TransformerDecoderLayerBase(nn.Module):
         need_attn: bool = False,
         need_head_weights: bool = False,
         graph_encoder_out: Optional[torch.Tensor] = None,
+<<<<<<< HEAD
         prev_graph_attn_state: Optional[List[torch.Tensor]] = None,
+=======
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
     ):
         """
         Args:
@@ -442,6 +453,7 @@ class TransformerDecoderLayerBase(nn.Module):
 
         # ADDED
         if self.graph_encoder_attn is not None and graph_encoder_out is not None:
+<<<<<<< HEAD
             graph_encoder_out = graph_encoder_out.to(torch.float16)
 
             graph_encoder_padding_mask = None
@@ -467,6 +479,21 @@ class TransformerDecoderLayerBase(nn.Module):
 
             # print("x ", x.shape)
             # print("graph_encoder_out ", graph_encoder_out.shape)
+=======
+            residual = x
+            if self.normalize_before:
+                x = self.graph_encoder_attn_layer_norm(x)
+            # if prev_graph_attn_state is not None:
+            #     prev_key, prev_value = prev_graph_attn_state[:2]
+            #     saved_state: Dict[str, Optional[Tensor]] = {
+            #         "prev_key": prev_key,
+            #         "prev_value": prev_value,
+            #     }
+            #     if len(prev_graph_attn_state) >= 3:
+            #         saved_state["prev_key_padding_mask"] = prev_graph_attn_state[2]
+            #     assert incremental_state is not None
+            #     self.graph_encoder_attn._set_input_buffer(incremental_state, saved_state)
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
 
             x, attn = self.graph_encoder_attn(
                 query=x,
@@ -480,6 +507,7 @@ class TransformerDecoderLayerBase(nn.Module):
             )
             x = self.dropout_module(x)
             x = self.residual_connection(x, residual)
+<<<<<<< HEAD
 
             # print(x)
             # print(graph_encoder_out)
@@ -487,6 +515,8 @@ class TransformerDecoderLayerBase(nn.Module):
             # device = x.get_device()
             # self.graph_encoder_attn = self.graph_encoder_attn.to(device)
             # x, attn = self.graph_encoder_attn(x, graph_encoder_out, graph_encoder_out)
+=======
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
             if not self.normalize_before:
                 x = self.graph_encoder_attn_layer_norm(x)
 

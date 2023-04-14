@@ -392,7 +392,11 @@ from enum import Enum
 ## CHECK ALL "SELF" references
 class GraphEncoder():
     def __init__(self):
+<<<<<<< HEAD
         dataset = "PLOS" #"eLife"
+=======
+        dataset = "eLife"
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
         # self.scibert = AutoModel.from_pretrained('allenai/scibert_scivocab_uncased')
         # self.scibert_tokenizer = AutoTokenizer.from_pretrained('allenai/scibert_scivocab_uncased')
         # self.cuid2embs = pickle.load(open("/home/acp20tg/bart_ls/resources/my_umls_concept_all_selected_definitions_embeddings.pkl", 'rb'))
@@ -417,12 +421,19 @@ class GraphEncoder():
             train_data = [json.loads(l) for l in train_data]
 
         self.graphs = {
+<<<<<<< HEAD
             "train": train_data,
             "val": pickle.load(open(f"/root/bart_ls/resources/{dataset}_val_graphs_with_features.pkl", 'rb')),
             "test": pickle.load(open(f"/root/bart_ls/resources/{dataset}_test_graphs_with_features.pkl", 'rb'))
         }
 
 
+=======
+            "train": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_train_graphs_with_features.pkl", 'rb')),
+            "val": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_val_graphs_with_features.pkl", 'rb')),
+            "test": pickle.load(open(f"/home/acp20tg/bart_ls/resources/{dataset}_test_graphs_with_features.pkl", 'rb'))
+        }
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
         self.GM = GATModel(50, 1024, heads=[4,4,4])
         # self.NodeType = Enum('NodeType', ['Document', "Section" 'Metadata', 'Concept', "Semtype"])
 
@@ -479,7 +490,11 @@ class GraphEncoder():
         graph_info = self.graphs[split][idx]
         nodes = graph_info['nodes']
         edges = graph_info['edges']
+<<<<<<< HEAD
         embeddings = torch.tensor(graph_info['features']).to(device)
+=======
+        embeddings = torch.tensor(graph_info['features'])
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
         article_id = graph_info['id']
 
         device = f"cuda:{device}"
@@ -522,10 +537,16 @@ class BARTModel(TransformerModel):
 
         self.classification_heads = nn.ModuleDict()
         
-        if args.dual_graph_encoder:
+        if args.decoder_graph_attn or args.encoder_graph_attn:
             self.graph_encoder = GraphEncoder()
+<<<<<<< HEAD
             self.graph_cross_attention = torch.nn.MultiheadAttention(1024, 4)
             self.graph_multiplier = 0.5 # self.graph_multiplier
+=======
+
+        if args.dual_graph_encoder:
+            self.graph_cross_attention = torch.nn.MultiheadAttention(1024, 4)
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
 
         if hasattr(self.encoder, "dictionary"):
             self.eos: int = self.encoder.dictionary.eos()
@@ -590,7 +611,7 @@ class BARTModel(TransformerModel):
         args.use_xformers = False
 
         return super().build_decoder(
-            TransformerConfig.from_namespace(args), tgt_dict, embed_tokens
+            TransformerConfig.from_namespace(args), tgt_dict, embed_tokens, add_graph_attn=args.decoder_graph_attn
         )
 
     @classmethod
@@ -658,13 +679,18 @@ class BARTModel(TransformerModel):
         encoder_out = self.encoder(
             src_tokens,
             src_lengths=src_lengths,
-            token_embeddings=token_embeddings, # if token representation updating, somehow use this
+            token_embeddings=token_embeddings, # if token representation updating, somehow use this # 50606 (vocab) 1024 (embed dim)
             return_all_hiddens=return_all_hiddens
         )
 
         # If dual encoding, encode the article graph and then update encoder_out
+<<<<<<< HEAD
         if self.args.dual_graph_encoder:
             enc_output = encoder_out['encoder_out'][0]
+=======
+        if self.args.dual_graph_encoder or self.args.decoder_graph_attn:
+            enc_output = encoder_out['encoder_out']
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
             device = aids.get_device()
             self.graph_cross_attention = self.graph_cross_attention.to(device)
 
@@ -678,6 +704,7 @@ class BARTModel(TransformerModel):
             
             graph_enc_out = torch.stack(graph_enc_out, dim=1).to(torch.float16)
             
+<<<<<<< HEAD
             # print("graph ", graph_enc_out.shape)
             
             attn_output, attn_output_weights = self.graph_cross_attention(enc_output, graph_enc_out, graph_enc_out)
@@ -688,9 +715,19 @@ class BARTModel(TransformerModel):
 
             encoder_out['encoder_out'] = [enc_output]
             
+=======
+        if self.args.dual_graph_encoder:
+            attn_output, attn_output_weights = self.graph_cross_attention(enc_output, graph_enc_out, graph_enc_out)
+
+            enc_output = enc_output + (0.1*attn_output)
+
+            encoder_out['encoder_out'] = [enc_output]
+
+>>>>>>> 752d23686cc478e1dc18d38fa708d42cb0b05cb2
         x, extra = self.decoder(
             prev_output_tokens,
             encoder_out=encoder_out,
+            graph_encoder_out=graph_enc_out if self.args.decoder_graph_attn else None,
             features_only=features_only,
             alignment_layer=alignment_layer,
             alignment_heads=alignment_heads,
